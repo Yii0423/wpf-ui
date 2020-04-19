@@ -1,0 +1,94 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:diy="clr-namespace:wpf_ui.Extends.DiyControls">
+
+    <!-- #region 引用配置 -->
+
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="/Style/Setting.xaml"/>
+    </ResourceDictionary.MergedDictionaries>
+
+    <!-- #endregion -->
+
+    <!-- #region 按钮 -->
+
+    <!-- 原始按钮-->
+    <Style x:Key="BtnPrimary" TargetType="{x:Type diy:DiyButton}">
+        <Setter Property="Cursor" Value="Hand"/>
+        <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+        <Setter Property="BorderBrush" Value="{StaticResource BrushCold}"/>
+        <Setter Property="BorderThickness" Value="{StaticResource BorderThicknessDefault}"/>
+        <Setter Property="Background" Value="{StaticResource BrushPrimary}"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type diy:DiyButton}">
+                    <Grid>
+                        <Border x:Name="border" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}"
+                                CornerRadius="{TemplateBinding CornerRadius}" Opacity="0.9">
+                            <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                        </Border>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="Cursor" Value="Hand" />
+                                <Condition Property="IsMouseOver" Value="True" />
+                            </MultiTrigger.Conditions>
+                            <MultiTrigger.Setters>
+                                <Setter TargetName="border" Property="Opacity" Value="0.8"/>
+                                <Setter TargetName="border" Property="BorderBrush" Value="{DynamicResource BrushDefault}"/>
+                            </MultiTrigger.Setters>
+                        </MultiTrigger>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="Cursor" Value="Hand" />
+                                <Condition Property="IsPressed" Value="True" />
+                            </MultiTrigger.Conditions>
+                            <MultiTrigger.Setters>
+                                <Setter TargetName="border" Property="Opacity" Value="1"/>
+                            </MultiTrigger.Setters>
+                        </MultiTrigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- 默认按钮 -->
+    <Style x:Key="BtnDefault" BasedOn="{StaticResource BtnPrimary}" TargetType="{x:Type diy:DiyButton}">
+        <Setter Property="Foreground" Value="{StaticResource BrushPrimary}"/>
+        <Setter Property="Background" Value="{StaticResource BrushDefault}"/>
+        <Setter Property="BorderThickness" Value="0"/>
+    </Style>
+
+    <!-- 百搭按钮 -->
+    <Style x:Key="BtnNormal" BasedOn="{StaticResource BtnPrimary}" TargetType="{x:Type diy:DiyButton}">
+        <Setter Property="Foreground" Value="{StaticResource BrushPrimary}"/>
+        <Setter Property="Background" Value="{StaticResource BrushNormal}"/>
+        <Setter Property="BorderThickness" Value="0"/>
+    </Style>
+
+    <!-- 暖色按钮 -->
+    <Style x:Key="BtnWarm" BasedOn="{StaticResource BtnPrimary}" TargetType="{x:Type diy:DiyButton}">
+        <Setter Property="Foreground" Value="{StaticResource BrushPrimary}"/>
+        <Setter Property="Background" Value="{StaticResource BrushWarm}"/>
+        <Setter Property="BorderThickness" Value="0"/>
+    </Style>
+
+    <!-- 警告按钮 -->
+    <Style x:Key="BtnDanger" BasedOn="{StaticResource BtnPrimary}" TargetType="{x:Type diy:DiyButton}">
+        <Setter Property="Foreground" Value="{StaticResource BrushPrimary}"/>
+        <Setter Property="Background" Value="{StaticResource BrushDanger}"/>
+        <Setter Property="BorderThickness" Value="0"/>
+    </Style>
+
+    <!-- 禁用按钮 -->
+    <Style x:Key="BtnDisabled" BasedOn="{StaticResource BtnPrimary}" TargetType="{x:Type diy:DiyButton}">
+        <Setter Property="Foreground" Value="{StaticResource BrushCold}"/>
+        <Setter Property="Cursor" Value="No"/>
+        <Setter Property="Background" Value="{StaticResource BrushDisabled}"/>
+    </Style>
+
+    <!-- #endregion -->
+
+</ResourceDictionary>
