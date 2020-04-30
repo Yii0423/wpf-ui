@@ -1,0 +1,51 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <!-- #region 引用配置 -->
+
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="/Style/Setting.xaml"/>
+    </ResourceDictionary.MergedDictionaries>
+
+    <!-- #endregion -->
+
+    <!-- #region 表单区域 -->
+
+    <!-- 原始表单区域 -->
+    <Style x:Key="BdFormPrimary" TargetType="{x:Type Border}">
+        <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+        <Setter Property="BorderBrush" Value="{StaticResource BrushCold}"/>
+        <Setter Property="BorderThickness" Value="1,3,1,1"/>
+        <Setter Property="CornerRadius" Value="2,2,0,0"/>
+    </Style>
+
+    <!-- 默认表单区域 -->
+    <Style x:Key="BdFormDefault" BasedOn="{StaticResource BdFormPrimary}" TargetType="{x:Type Border}">
+        <Setter Property="BorderBrush" Value="{StaticResource BrushDefault}"/>
+    </Style>
+
+    <!-- 百搭表单区域 -->
+    <Style x:Key="BdFormNormal" BasedOn="{StaticResource BdFormPrimary}" TargetType="{x:Type Border}">
+        <Setter Property="BorderBrush" Value="{StaticResource BrushNormal}"/>
+    </Style>
+
+    <!-- 暖色表单区域 -->
+    <Style x:Key="BdFormWarm" BasedOn="{StaticResource BdFormPrimary}" TargetType="{x:Type Border}">
+        <Setter Property="BorderBrush" Value="{StaticResource BrushWarm}"/>
+    </Style>
+
+    <!-- 警告表单区域 -->
+    <Style x:Key="BdFormDanger" BasedOn="{StaticResource BdFormPrimary}" TargetType="{x:Type Border}">
+        <Setter Property="BorderBrush" Value="{StaticResource BrushDanger}"/>
+    </Style>
+
+    <!-- 禁用表单区域 -->
+    <Style x:Key="BdFormDisabled" BasedOn="{StaticResource BdFormPrimary}" TargetType="{x:Type Border}">
+        <Setter Property="BorderBrush" Value="{StaticResource BrushCold}"/>
+        <Setter Property="Background" Value="{StaticResource BrushDisabled}"/>
+        <Setter Property="Cursor" Value="No"/>
+    </Style>
+
+    <!-- endregion -->
+
+</ResourceDictionary>

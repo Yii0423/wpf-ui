@@ -18,6 +18,12 @@
     <Color x:Key="ColorDisabled">#FBFBFB</Color>
     <!-- 冷淡 -->
     <Color x:Key="ColorCold">#C9C9C9</Color>
+    <!-- 选中状态色 -->
+    <Color x:Key="ColorChecked">#5FB878</Color>
+    <!-- 菜单色 -->
+    <Color x:Key="ColorMenu">#393D49</Color>
+    <!-- 菜单选中状态色 -->
+    <Color x:Key="ColorMenuChecked">#2d313c</Color>
 
     <!-- #endregion -->
 
@@ -37,6 +43,13 @@
     <SolidColorBrush x:Key="BrushDisabled" Color="{DynamicResource ColorDisabled}"/>
     <!-- 冷淡 -->
     <SolidColorBrush x:Key="BrushCold" Color="{DynamicResource ColorCold}"/>
+    <!-- 选中状态色 -->
+    <SolidColorBrush x:Key="BrushChecked" Color="{DynamicResource ColorChecked}"/>
+    <!-- 菜单色 -->
+    <SolidColorBrush x:Key="BrushMenu" Color="{DynamicResource ColorMenu}"/>
+    <!-- 菜单选中状态色 -->
+    <SolidColorBrush x:Key="BrushMenuChecked" Color="{DynamicResource ColorMenuChecked}"/>
+
 
     <!-- #endregion -->
 
@@ -50,6 +63,8 @@
     <Thickness x:Key="BorderThicknessDefault">1,1,1,1</Thickness>
     <!-- 默认圆角尺寸 -->
     <CornerRadius x:Key="CornerRadiusDefault">4,4,4,4</CornerRadius>
+    <!-- 默认水印不透明度 -->
+    <system:Double x:Key="WaterMarkOpacityDefault">0.5</system:Double>
 
     <!-- #endregion -->
 

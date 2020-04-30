@@ -8,6 +8,8 @@ namespace wpf_ui.Extends.DiyControls
     /// </summary>
     public class DiyButton : Button
     {
+        #region 圆角
+
         public CornerRadius CornerRadius
         {
             get { return (CornerRadius)GetValue(CornerRadiusProperty); }
@@ -17,5 +19,6 @@ namespace wpf_ui.Extends.DiyControls
         public static readonly DependencyProperty CornerRadiusProperty =
             DependencyProperty.Register("CornerRadius", typeof(CornerRadius), typeof(DiyButton), new PropertyMetadata(new CornerRadius(0)));
 
+        #endregion
     }
 }
