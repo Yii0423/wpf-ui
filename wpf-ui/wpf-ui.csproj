@@ -73,6 +73,8 @@
     <Compile Include="Extends\Common\Helper.cs" />
     <Compile Include="Extends\DiyControls\DiyButton.cs" />
     <Compile Include="Extends\DiyControls\DiyPopup.cs" />
+    <Compile Include="Extends\DiyControls\DiyProgressbar.cs" />
+    <Compile Include="Extends\DiyControls\DiyTabitem.cs" />
     <Compile Include="Extends\DiyControls\DiyTextbox.cs" />
     <Compile Include="Extends\Ucs\UcMenuLeft.xaml.cs">
       <DependentUpon>UcMenuLeft.xaml</DependentUpon>
@@ -112,11 +114,19 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Style\Progressbar.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Style\Scrollbar.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Style\Setting.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Style\Tabcontrol.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -160,7 +170,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Extends\Converts\" />
+    <Folder Include="Extends\Converters\" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Content\Images\logo.png" />

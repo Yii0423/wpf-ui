@@ -15,6 +15,7 @@
     <Style TargetType="{x:Type RadioButton}">
         <Setter Property="Cursor" Value="Hand"/>
         <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+        <Setter Property="SnapsToDevicePixels" Value="True"/>
         <Setter Property="Height" Value="20"/>
         <Setter Property="Template">
             <Setter.Value>
@@ -67,6 +68,7 @@
     <Style TargetType="{x:Type CheckBox}">
         <Setter Property="Cursor" Value="Hand"/>
         <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+        <Setter Property="SnapsToDevicePixels" Value="True"/>
         <Setter Property="Height" Value="20"/>
         <Setter Property="Template">
             <Setter.Value>
@@ -127,6 +129,7 @@
     <Style x:Key="CkbSpecial" TargetType="{x:Type CheckBox}">
         <Setter Property="Cursor" Value="Hand"/>
         <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+        <Setter Property="SnapsToDevicePixels" Value="True"/>
         <Setter Property="Height" Value="24"/>
         <Setter Property="Foreground" Value="White"/>
         <Setter Property="Template">
@@ -188,6 +191,7 @@
     <Style x:Key="CkbOnOff" TargetType="{x:Type CheckBox}">
         <Setter Property="Cursor" Value="Hand"/>
         <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+        <Setter Property="SnapsToDevicePixels" Value="True"/>
         <Setter Property="Height" Value="20"/>
         <Setter Property="Template">
             <Setter.Value>

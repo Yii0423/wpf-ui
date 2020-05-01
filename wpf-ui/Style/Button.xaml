@@ -12,7 +12,7 @@
 
     <!-- #region 按钮 -->
 
-    <!-- 原始按钮-->
+    <!-- 原始按钮 -->
     <Style x:Key="BtnPrimary" TargetType="{x:Type diy:DiyButton}">
         <Setter Property="Cursor" Value="Hand"/>
         <Setter Property="FocusVisualStyle" Value="{x:Null}"/>

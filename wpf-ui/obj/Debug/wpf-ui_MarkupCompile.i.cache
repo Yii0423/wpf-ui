@@ -10,11 +10,11 @@ none
 false
 DEBUG;TRACE
 E:\Demo\C#\wpf-ui\wpf-ui\App.xaml
-52146463889
+17-324426154
 
-71281434874
+14-45366157
 13-1142990016
-MainWindow.xaml;Style\Button.xaml;Style\Icon.xaml;Style\Main.xaml;Style\Setting.xaml;
+Extends\Ucs\UcMenuLeft.xaml;Extends\Ucs\UcMenuTop.xaml;MainWindow.xaml;Style\Border.xaml;Style\Button.xaml;Style\Combobox.xaml;Style\Icon.xaml;Style\Menu.xaml;Style\Popup.xaml;Style\Main.xaml;Style\Progressbar.xaml;Style\Scrollbar.xaml;Style\Setting.xaml;Style\Tabcontrol.xaml;Style\Textbox.xaml;Style\Togglebutton.xaml;Style\Tooltip.xaml;
 
 True
 

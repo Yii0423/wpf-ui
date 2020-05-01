@@ -149,7 +149,7 @@ namespace wpf_ui.Extends.Ucs
 
             #region  添加菜单
 
-            Canvas canvas = new Canvas { Visibility = Visibility.Collapsed, Opacity = 1 };
+            Canvas canvas = new Canvas { Visibility = Visibility.Collapsed };
             if (item.IsTop) canvas.HorizontalAlignment = HorizontalAlignment.Left;
 
             StackPanel panel = new StackPanel();

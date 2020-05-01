@@ -113,5 +113,51 @@
 
         <!-- #endregion -->
 
+        <!-- #region 选项卡 -->
+
+        <TabControl HorizontalAlignment="Left" Height="70" Margin="75,285,0,0" VerticalAlignment="Top" Width="975">
+            <diy:DiyTabitem Header="网站设置网站设置网站设置网站设置">
+                <Grid>
+                    <Label Content="123"/>
+                </Grid>
+            </diy:DiyTabitem>
+            <diy:DiyTabitem Header="用户管理">
+                <Grid>
+                    <Label Content="456"/>
+                </Grid>
+            </diy:DiyTabitem>
+            <diy:DiyTabitem Header="权限分配"/>
+            <diy:DiyTabitem Header="商品管理"/>
+            <diy:DiyTabitem Header="订单管理"/>
+        </TabControl>
+
+        <TabControl HorizontalAlignment="Left" Height="70" Margin="75,360,0,0" VerticalAlignment="Top" Width="975">
+            <diy:DiyTabitem Header="网站设置" Style="{StaticResource TiPithy}">
+                <Grid>
+                    <Label Content="123"/>
+                </Grid>
+            </diy:DiyTabitem>
+            <diy:DiyTabitem Header="用户管理" Style="{StaticResource TiPithy}">
+                <Grid>
+                    <Label Content="456"/>
+                </Grid>
+            </diy:DiyTabitem>
+            <diy:DiyTabitem Header="权限分配" Style="{StaticResource TiPithy}"/>
+            <diy:DiyTabitem Header="商品管理" Style="{StaticResource TiPithy}"/>
+            <diy:DiyTabitem Header="订单管理" Style="{StaticResource TiPithy}"/>
+        </TabControl>
+
+        <!-- #endregion -->
+
+        <!-- #region 进度条 -->
+
+        <diy:DiyProgressbar Value="50" HorizontalAlignment="Left" Margin="75,435,0,0" VerticalAlignment="Top" Width="975"/>
+        <diy:DiyProgressbar Value="88" HorizontalAlignment="Left" Margin="75,450,0,0" VerticalAlignment="Top" Width="975"
+                            Background="{StaticResource BrushWarm}" ShowMode="In" Height="16"/>
+        <diy:DiyProgressbar Value="22" HorizontalAlignment="Left" Margin="75,500,0,0" VerticalAlignment="Top" Width="975"
+                            Background="{StaticResource BrushDanger}" ShowMode="Top" Height="5"/>
+
+        <!-- #endregion -->
+
     </Grid>
 </Window>

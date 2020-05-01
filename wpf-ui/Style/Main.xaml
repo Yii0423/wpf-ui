@@ -10,5 +10,7 @@
         <ResourceDictionary Source="/Style/Togglebutton.xaml"/>
         <ResourceDictionary Source="/Style/Combobox.xaml"/>
         <ResourceDictionary Source="/Style/Menu.xaml"/>
+        <ResourceDictionary Source="/Style/Tabcontrol.xaml"/>
+        <ResourceDictionary Source="/Style/Progressbar.xaml"/>
     </ResourceDictionary.MergedDictionaries>
 </ResourceDictionary>
