@@ -1,163 +1,25 @@
-﻿<Window
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+﻿<Window xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:diy="clr-namespace:wpf_ui.Extends.DiyControls"
         xmlns:Ucs="clr-namespace:wpf_ui.Extends.Ucs" x:Class="wpf_ui.MainWindow"
-        mc:Ignorable="d"
-        Title="控件库" Height="700" Width="1200" WindowStartupLocation="CenterScreen"
-        Loaded="Window_Loaded">
+        mc:Ignorable="d" 
+        d:DesignHeight="768" d:DesignWidth="1366" MinHeight="768" MinWidth="1366"
+        Height="768" Width="1366"
+        Title="后台管理程序" WindowStartupLocation="CenterScreen"
+        AllowsTransparency="True" WindowStyle="None" BorderThickness="7">
+    <Window.Effect>
+        <DropShadowEffect ShadowDepth="1" BlurRadius="6" Direction="270" Opacity="0.8"/>
+    </Window.Effect>
     <Grid>
-
-        <!-- #region 按钮 -->
-
-        <diy:DiyButton Content="原始按钮" HorizontalAlignment="Left" Margin="75,75,0,0" VerticalAlignment="Top" Width="100" Style="{DynamicResource BtnPrimary}"/>
-        <diy:DiyButton Content="默认按钮" HorizontalAlignment="Left" Margin="180,75,0,0" VerticalAlignment="Top" Width="100" Style="{DynamicResource BtnDefault}"/>
-        <diy:DiyButton Content="百搭按钮" HorizontalAlignment="Left" Margin="285,75,0,0" VerticalAlignment="Top" Width="100" Style="{DynamicResource BtnNormal}"/>
-        <diy:DiyButton Content="暖色按钮" HorizontalAlignment="Left" Margin="390,75,0,0" VerticalAlignment="Top" Width="100" Style="{DynamicResource BtnWarm}"/>
-        <diy:DiyButton Content="警告按钮" HorizontalAlignment="Left" Margin="495,75,0,0" VerticalAlignment="Top" Width="100" Style="{DynamicResource BtnDanger}"/>
-        <diy:DiyButton Content="禁用按钮" HorizontalAlignment="Left" Margin="600,75,0,0" VerticalAlignment="Top" Width="100" Style="{DynamicResource BtnDisabled}"/>
-        <diy:DiyButton Content="原" HorizontalAlignment="Left" Margin="705,75,0,0" VerticalAlignment="Top" Width="30" CornerRadius="15"
-                       Style="{DynamicResource BtnPrimary}"/>
-        <diy:DiyButton Content="默" HorizontalAlignment="Left" Margin="740,75,0,0" VerticalAlignment="Top" Width="30" CornerRadius="15"
-                       Style="{DynamicResource BtnDefault}"/>
-        <diy:DiyButton HorizontalAlignment="Left" Margin="775,75,0,0" VerticalAlignment="Top" Width="30" CornerRadius="15"
-                       Style="{DynamicResource BtnPrimary}">
-            <Path Style="{DynamicResource Icon}" Data="{DynamicResource Icon-Search}" Fill="Black"/>
-        </diy:DiyButton>
-        <diy:DiyButton HorizontalAlignment="Left" Margin="810,75,0,0" VerticalAlignment="Top" Width="30" CornerRadius="15"
-                       Style="{DynamicResource BtnDefault}">
-            <Path Style="{DynamicResource Icon}" Data="{DynamicResource Icon-Music}"/>
-        </diy:DiyButton>
-        <diy:DiyButton Content="圆角按钮" HorizontalAlignment="Left" Margin="845,75,0,0" VerticalAlignment="Top" Width="100" CornerRadius="3"
-                       Style="{DynamicResource BtnPrimary}"/>
-        <diy:DiyButton x:Name="BtnTest" HorizontalAlignment="Left" Margin="950,75,0,0" VerticalAlignment="Top" Width="100"
-                       Style="{DynamicResource BtnNormal}" Click="BtnTest_Click">
-            <StackPanel Orientation="Horizontal">
-                <Path Style="{DynamicResource Icon}" Data="{DynamicResource Icon-Music}"/>
-                <TextBlock Text=" 悬浮弹窗"/>
-            </StackPanel>
-        </diy:DiyButton>
-
-        <!-- #endregion -->
-
-        <!-- #region 文本框 -->
-
-        <diy:DiyTextbox HorizontalAlignment="Left" Margin="75,110,0,0" VerticalAlignment="Top" Width="100" 
-                        Style="{DynamicResource TbPrimary}" WaterMark="原始文本框"/>
-        <diy:DiyTextbox HorizontalAlignment="Left" Margin="180,110,0,0" VerticalAlignment="Top" Width="100" 
-                        Style="{DynamicResource TbDefault}" WaterMark="默认文本框"/>
-        <diy:DiyTextbox HorizontalAlignment="Left" Margin="285,110,0,0" VerticalAlignment="Top" Width="100" 
-                        Style="{DynamicResource TbNormal}" WaterMark="百搭文本框"/>
-        <diy:DiyTextbox HorizontalAlignment="Left" Margin="390,110,0,0" VerticalAlignment="Top" Width="100" 
-                        Style="{DynamicResource TbWarm}" WaterMark="暖色文本框"/>
-        <diy:DiyTextbox HorizontalAlignment="Left" Margin="495,110,0,0" VerticalAlignment="Top" Width="100" 
-                        Style="{DynamicResource TbDanger}" WaterMark="警告文本框"/>
-        <diy:DiyTextbox HorizontalAlignment="Left" Margin="600,110,0,0" VerticalAlignment="Top" Width="100" 
-                        Style="{DynamicResource TbDisabled}" WaterMark="禁用文本框"/>
-        <diy:DiyTextbox HorizontalAlignment="Left" Margin="705,110,0,0" VerticalAlignment="Top" Width="135" 
-                        Style="{DynamicResource TbPrimary}" WaterMark="圆角文本框" CornerRadius="3"/>
-        <diy:DiyTextbox HorizontalAlignment="Left" Margin="845,110,0,0" VerticalAlignment="Top" Width="205" 
-                        Style="{DynamicResource TbPrimary}" WaterMark="带图标的文本框" Icon="{DynamicResource Icon-Music}"/>
-        <diy:DiyTextbox HorizontalAlignment="Left" Margin="75,145,0,0" VerticalAlignment="Top" Width="975" Height="100" VerticalContentAlignment="Top"
-            Style="{DynamicResource TbPrimary}" WaterMark="原始文本框" TextWrapping="Wrap"/>
-
-        <!-- #endregion -->
-
-        <!-- #region 悬浮弹窗 -->
-
-        <Popup x:Name="pop1" StaysOpen="False" PopupAnimation="Fade"  PlacementTarget="{Binding ElementName=BtnTest}" 
-               Placement="Right" AllowsTransparency="True">
-            <diy:DiyPopup Style="{StaticResource PopupPrimary}" ShowPlace="Right">
-                <StackPanel Orientation="Horizontal">
-                    <diy:DiyButton Content="修改" HorizontalAlignment="Left" VerticalAlignment="Top" Width="50" Height="20"
-                                   Style="{DynamicResource BtnWarm}"/>
-                    <diy:DiyButton Content="删除" HorizontalAlignment="Left" VerticalAlignment="Top" Width="50" Height="20" Margin="5,0,0,0"
-                                   Style="{DynamicResource BtnDanger}"/>
-                </StackPanel>
-            </diy:DiyPopup>
-        </Popup>
-
-        <!-- #endregion -->
-
-        <!-- #region 单选框/复选框/下拉框 -->
-
-        <RadioButton Content="选项一" HorizontalAlignment="Left" Margin="75,250,0,0" VerticalAlignment="Top" GroupName="1" IsChecked="True"/>
-        <RadioButton Content="选项二" HorizontalAlignment="Left" Margin="139,250,0,0" VerticalAlignment="Top" GroupName="1"/>
-        <RadioButton Content="选项三" HorizontalAlignment="Left" Margin="203,250,0,0" VerticalAlignment="Top" GroupName="1"/>
-
-        <CheckBox Content="选项一" HorizontalAlignment="Left" Margin="285,250,0,0" VerticalAlignment="Top" IsChecked="True"/>
-        <CheckBox Content="选项二" HorizontalAlignment="Left" Margin="349,250,0,0" VerticalAlignment="Top" IsChecked="{x:Null}"/>
-        <CheckBox Content="选项三" HorizontalAlignment="Left" Margin="413,250,0,0" VerticalAlignment="Top"/>
-        <CheckBox Content="特殊" HorizontalAlignment="Left" Margin="509,248,0,0" VerticalAlignment="Top" Style="{DynamicResource CkbSpecial}"/>
-        <CheckBox Content="开关" HorizontalAlignment="Left" Margin="600,250,0,0" VerticalAlignment="Top" Style="{DynamicResource CkbOnOff}"/>
-
-        <ComboBox HorizontalAlignment="Left" Margin="845,250,0,0" VerticalAlignment="Top" Width="205">
-            <ComboBoxItem Content="下面是选项组一" IsEnabled="False"/>
-            <ComboBoxItem Content="选项二"/>
-            <ComboBoxItem Content="选项三"/>
-            <ComboBoxItem Content="选项四"/>
-            <ComboBoxItem Content="下面是选项组二" IsEnabled="False"/>
-            <ComboBoxItem Content="选项六"/>
-            <ComboBoxItem Content="选项七"/>
-            <ComboBoxItem Content="选项八"/>
-        </ComboBox>
-
-        <!-- #endregion -->
-
-        <!-- #region 顶部菜单/侧边菜单 -->
-
-        <Ucs:UcMenuTop x:Name="MenuTop" Height="60" Margin="75,10,10,0" VerticalAlignment="Top"/>
-        <Ucs:UcMenuLeft x:Name="MenuLeft" Width="60" Margin="10,10,0,10" HorizontalAlignment="Left"/>
-
-        <!-- #endregion -->
-
-        <!-- #region 选项卡 -->
-
-        <TabControl HorizontalAlignment="Left" Height="70" Margin="75,285,0,0" VerticalAlignment="Top" Width="975">
-            <diy:DiyTabitem Header="网站设置网站设置网站设置网站设置">
-                <Grid>
-                    <Label Content="123"/>
-                </Grid>
-            </diy:DiyTabitem>
-            <diy:DiyTabitem Header="用户管理">
-                <Grid>
-                    <Label Content="456"/>
-                </Grid>
-            </diy:DiyTabitem>
-            <diy:DiyTabitem Header="权限分配"/>
-            <diy:DiyTabitem Header="商品管理"/>
-            <diy:DiyTabitem Header="订单管理"/>
-        </TabControl>
-
-        <TabControl HorizontalAlignment="Left" Height="70" Margin="75,360,0,0" VerticalAlignment="Top" Width="975">
-            <diy:DiyTabitem Header="网站设置" Style="{StaticResource TiPithy}">
-                <Grid>
-                    <Label Content="123"/>
-                </Grid>
-            </diy:DiyTabitem>
-            <diy:DiyTabitem Header="用户管理" Style="{StaticResource TiPithy}">
-                <Grid>
-                    <Label Content="456"/>
-                </Grid>
-            </diy:DiyTabitem>
-            <diy:DiyTabitem Header="权限分配" Style="{StaticResource TiPithy}"/>
-            <diy:DiyTabitem Header="商品管理" Style="{StaticResource TiPithy}"/>
-            <diy:DiyTabitem Header="订单管理" Style="{StaticResource TiPithy}"/>
-        </TabControl>
-
-        <!-- #endregion -->
-
-        <!-- #region 进度条 -->
-
-        <diy:DiyProgressbar Value="50" HorizontalAlignment="Left" Margin="75,435,0,0" VerticalAlignment="Top" Width="975"/>
-        <diy:DiyProgressbar Value="88" HorizontalAlignment="Left" Margin="75,450,0,0" VerticalAlignment="Top" Width="975"
-                            Background="{StaticResource BrushWarm}" ShowMode="In" Height="16"/>
-        <diy:DiyProgressbar Value="22" HorizontalAlignment="Left" Margin="75,500,0,0" VerticalAlignment="Top" Width="975"
-                            Background="{StaticResource BrushDanger}" ShowMode="Top" Height="5"/>
-
-        <!-- #endregion -->
-
+        <!-- 顶部菜单 -->
+        <Ucs:UcMenuTop x:Name="MenuTop" Margin="70,5,5,0" Height="50" VerticalAlignment="Top" MiFontColor="Black"
+                       BgColor="{StaticResource BrushPrimary}" IsSearchTbShow="True"/>
+        <!-- 侧边菜单 -->
+        <Ucs:UcMenuLeft x:Name="MenuLeft" Width="60" Margin="5,5,0,5" HorizontalAlignment="Left" Background="Red"/>
+        <!-- Tab -->
+        <Ucs:UcTab Height="40" Margin="65,55,0,0" VerticalAlignment="Top"/>
+        <!-- 内容区域 -->
+        <Frame x:Name="FrmMain" Margin="70,100,5,5"/>
     </Grid>
 </Window>

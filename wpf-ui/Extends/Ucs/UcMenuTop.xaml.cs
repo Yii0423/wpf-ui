@@ -7,6 +7,7 @@ using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Media.Effects;
 using wpf_ui.Extends.Common;
+using wpf_ui.Extends.DiyControls;
 
 namespace wpf_ui.Extends.Ucs
 {
@@ -31,9 +32,29 @@ namespace wpf_ui.Extends.Ucs
         public ImageSource Logo { get; set; }
 
         /// <summary>
+        /// 指示Logo是否显示
+        /// </summary>
+        public bool IsLogoShow { get; set; }
+
+        /// <summary>
         /// 圆角
         /// </summary>
         public CornerRadius CornerRadius { get; set; } = new CornerRadius(0);
+
+        /// <summary>
+        /// 背景色
+        /// </summary>
+        public Brush BgColor { get; set; }
+
+        /// <summary>
+        /// 菜单标题字体颜色(设置为黑色则为顶部选中状态)
+        /// </summary>
+        public Brush MiFontColor { get; set; }
+
+        /// <summary>
+        /// 是否显示搜索框
+        /// </summary>
+        public bool IsSearchTbShow { get; set; }
 
         /// <summary>
         /// 标识淡入动画是否正在执行中(避免反复累加导致子菜单位置下移)
@@ -53,8 +74,14 @@ namespace wpf_ui.Extends.Ucs
         /// </summary>
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
-            //加载Logo
+            //指示Logo是否显示
+            if (IsLogoShow) ImgLogo.Visibility = Visibility.Visible;
+
+            //Logo
             if (Logo != null) ImgLogo.Source = Logo;
+
+            //背景色
+            if (BgColor != null) BdMain.Background = BgColor;
 
             //点击Logo返回首页
             ImgLogo.MouseLeftButtonUp += delegate
@@ -82,7 +109,25 @@ namespace wpf_ui.Extends.Ucs
                 MenuTopItem item = ItemSources[i];
 
                 RadioButton rdb = new RadioButton();
-                rdb.SetResourceReference(StyleProperty, "MiTopParentPrimary");
+
+                //菜单项标题字体颜色
+                if (MiFontColor != null) rdb.Foreground = MiFontColor;
+                if (MiFontColor != Brushes.White)
+                {
+                    MtiChecked.VerticalAlignment = VerticalAlignment.Top;
+                    MtiChecked.Height = 3;
+                    MtiChecked.Background = MiFontColor;
+                    rdb.SetResourceReference(StyleProperty, "MiTopParentPrimaryWithoutChecked");
+                    GrdMain.Margin = new Thickness(0);
+                }
+                else rdb.SetResourceReference(StyleProperty, "MiTopParentPrimary");
+
+                //菜单项若居右则在外层加Grid再添加
+                if (item.IsRight)
+                {
+                    rdb.HorizontalAlignment = HorizontalAlignment.Right;
+                    DockPanel.SetDock(rdb, Dock.Right);
+                }
 
                 //绑定顶部菜单子项鼠标事件
                 rdb.MouseEnter += Mtip_MouseEnter;
@@ -95,7 +140,23 @@ namespace wpf_ui.Extends.Ucs
                     //添加标记用以显示下拉标志
                     rdb.Tag = "1";
                 }
-                else rdb.Content = item.Title;
+                else
+                {
+                    if (item.Title.Contains("Icon-"))
+                    {
+                        System.Windows.Shapes.Path path = new System.Windows.Shapes.Path
+                        {
+                            Width = 16,
+                            Height = 16,
+                            Data = FindResource(item.Title) as Geometry
+                        };
+                        path.SetResourceReference(StyleProperty, "Icon");
+                        //菜单标题字体颜色
+                        if (MiFontColor != null) path.Fill = MiFontColor;
+                        rdb.Content = path;
+                    }
+                    else rdb.Content = item.Title;
+                }
 
                 //若链接不为空则绑定导航事件
                 if (!string.IsNullOrWhiteSpace(item.Url))
@@ -108,6 +169,22 @@ namespace wpf_ui.Extends.Ucs
                     rdb.IsChecked = true;
                     MtiChecked.Width = rdb.ActualWidth;
                 }
+            }
+            //是否显示搜索框
+            if (IsSearchTbShow)
+            {
+                DiyTextbox diyTb = new DiyTextbox
+                {
+                    Width = 200,
+                    HorizontalAlignment = HorizontalAlignment.Left,
+                    BorderThickness = new Thickness(0),
+                    WaterMark = "输入关键词搜索..."
+                };
+                diyTb.SetResourceReference(StyleProperty, "TbPrimary");
+                DockPanel.SetDock(diyTb, Dock.Left);
+                diyTb.MouseEnter += Mtip_MouseEnter;
+                diyTb.MouseLeave += Mtip_MouseLeave;
+                SpMain.Children.Add(diyTb);
             }
         }
 
@@ -166,11 +243,13 @@ namespace wpf_ui.Extends.Ucs
 
                 //若链接不为空则绑定导航事件
                 if (!string.IsNullOrWhiteSpace(itemc.Url))
+                {
                     rdbc.Click += (sender, e) =>
                     {
                         FrmMain?.Navigate(new Uri($"{itemc.Url}.xaml", UriKind.Relative));
                         e.Handled = true;
                     };
+                }
 
                 //子级菜单项不为空则添加子级菜单
                 if (item.ChildItem.Count > 0) LoadChildMenu(itemc, rdbc);
@@ -210,7 +289,7 @@ namespace wpf_ui.Extends.Ucs
         /// </summary>
         private void Mtip_MouseEnter(object sender, MouseEventArgs e)
         {
-            RadioButton radioButton = sender as RadioButton;
+            Control radioButton = sender as Control;
             Point point = radioButton.TranslatePoint(new Point(0, 0), SpMain);
             MtiChecked.Margin = new Thickness(point.X, MtiChecked.Margin.Top, MtiChecked.Margin.Right, MtiChecked.Margin.Bottom);
             MtiChecked.Width = radioButton.ActualWidth;
@@ -231,7 +310,7 @@ namespace wpf_ui.Extends.Ucs
             if (radioButton.FindChild<Canvas>() is Canvas childMenu)
             {
                 //设置子菜单显示位置
-                childMenu.Margin = new Thickness(-20 - (100 - radioButton.ActualWidth) / 2, 60, 0, 0);
+                childMenu.Margin = new Thickness(-20 - (100 - radioButton.ActualWidth) / 2, Height, 0, 0);
                 childMenu.Visibility = Visibility.Visible;
 
                 //子菜单淡入动画
@@ -256,7 +335,7 @@ namespace wpf_ui.Extends.Ucs
         /// </summary>
         private void Mtip_MouseLeave(object sender, MouseEventArgs e)
         {
-            RadioButton radioButton = sender as RadioButton;
+            Control radioButton = sender as Control;
             if (radioButton.FindChild<Canvas>() is Canvas childMenu)
             {
                 childMenu.Visibility = Visibility.Collapsed;
@@ -300,6 +379,10 @@ namespace wpf_ui.Extends.Ucs
         /// 链接
         /// </summary>
         public string Url { get; set; }
+        /// <summary>
+        /// 是否居右显示
+        /// </summary>
+        public bool IsRight { get; set; }
         /// <summary>
         /// 菜单子项
         /// </summary>

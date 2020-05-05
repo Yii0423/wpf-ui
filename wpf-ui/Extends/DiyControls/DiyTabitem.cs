@@ -20,6 +20,8 @@ namespace wpf_ui.Extends.DiyControls
             Loaded += InitializeEvent;
         }
 
+        #region 事件
+
         /// <summary>
         /// 加载样式
         /// </summary>
@@ -39,5 +41,7 @@ namespace wpf_ui.Extends.DiyControls
                 btnClose.FindParent<TabControl>()?.Items.Remove(this);
             };
         }
+
+        #endregion
     }
 }

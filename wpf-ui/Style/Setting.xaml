@@ -4,6 +4,8 @@
 
     <!-- #region 颜色 -->
 
+    <!-- 默认字体颜色 -->
+    <Color x:Key="ColorFont">#BBBBBB</Color>
     <!-- 原始 -->
     <Color x:Key="ColorPrimary">#FFFFFF</Color>
     <!-- 默认 -->
@@ -23,12 +25,14 @@
     <!-- 菜单色 -->
     <Color x:Key="ColorMenu">#393D49</Color>
     <!-- 菜单选中状态色 -->
-    <Color x:Key="ColorMenuChecked">#2d313c</Color>
+    <Color x:Key="ColorMenuChecked">#2D313C</Color>
 
     <!-- #endregion -->
 
     <!-- #region 颜色(画刷转换) -->
 
+    <!-- 默认字体颜色 -->
+    <SolidColorBrush x:Key="BrushFont" Color="{DynamicResource ColorFont}"/>
     <!-- 原始 -->
     <SolidColorBrush x:Key="BrushPrimary" Color="{DynamicResource ColorPrimary}"/>
     <!-- 默认 -->
@@ -50,7 +54,6 @@
     <!-- 菜单选中状态色 -->
     <SolidColorBrush x:Key="BrushMenuChecked" Color="{DynamicResource ColorMenuChecked}"/>
 
-
     <!-- #endregion -->
 
     <!-- #region 数值(字号/圆角) -->
@@ -65,6 +68,15 @@
     <CornerRadius x:Key="CornerRadiusDefault">4,4,4,4</CornerRadius>
     <!-- 默认水印不透明度 -->
     <system:Double x:Key="WaterMarkOpacityDefault">0.5</system:Double>
+
+    <!-- #endregion -->
+
+    <!-- #region 基础设置 -->
+
+    <Style BasedOn="{x:Null}" TargetType="{x:Type Window}">
+        <Setter Property="FontSize" Value="{StaticResource FontSizeDefault}"></Setter>
+        <Setter Property="Foreground" Value="{DynamicResource BrushFont}"></Setter>
+    </Style>
 
     <!-- #endregion -->
 

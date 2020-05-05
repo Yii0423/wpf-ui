@@ -107,7 +107,10 @@ namespace wpf_ui.Extends.Ucs
 
                 //若链接不为空则绑定导航事件
                 if (!string.IsNullOrWhiteSpace(item.Url))
-                    rdb.Click += delegate { FrmMain?.Navigate(new Uri($"{item.Url}.xaml", UriKind.Relative)); };
+                    rdb.Click += delegate
+                    {
+                        FrmMain?.Navigate(new Uri($"/View/{item.Url}.xaml", UriKind.Relative));
+                    };
 
                 SpMain.Children.Add(rdb);
 

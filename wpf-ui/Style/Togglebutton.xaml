@@ -174,13 +174,6 @@
                                 <Setter TargetName="path" Property="Visibility" Value="Visible"/>
                             </MultiTrigger.Setters>
                         </MultiTrigger>
-                        <!--<EventTrigger RoutedEvent="Checked">
-                            <BeginStoryboard>
-                                <Storyboard>
-                                    <DoubleAnimation Storyboard.TargetName="bd" Storyboard.TargetProperty="Opacity" From="0" To="1" Duration="0:0:0.25"/>
-                                </Storyboard>
-                            </BeginStoryboard>
-                        </EventTrigger>-->
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>

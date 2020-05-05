@@ -1,0 +1,25 @@
+﻿<UserControl x:Class="wpf_ui.Extends.Ucs.UcTab"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" d:DesignHeight="40" d:DesignWidth="800"
+             Loaded="UserControl_Loaded">
+    <Grid>
+        <Border Background="{StaticResource BrushPrimary}" BorderBrush="{StaticResource BrushCold}" BorderThickness="0,0.5">
+            <Border.Effect>
+                <DropShadowEffect ShadowDepth="1" BlurRadius="1" Opacity="0.1"/>
+            </Border.Effect>
+            <StackPanel Orientation="Horizontal">
+                <RadioButton Style="{StaticResource RdbTab}" Margin="0.5,0,0,0">
+                    <RadioButton.Content>
+                        <Path Style="{StaticResource Icon}" Fill="Black" Data="{StaticResource Icon-Home}" Width="30"/>
+                    </RadioButton.Content>
+                </RadioButton>
+                <RadioButton Style="{StaticResource RdbTab}" Margin="0.5,0,0,0" Content="客户列表"/>
+                <RadioButton Style="{StaticResource RdbTab}" Margin="0.5,0,0,0" Content="活动"/>
+                <RadioButton Style="{StaticResource RdbTab}" Content="测试多字数用的"/>
+            </StackPanel>
+        </Border>
+    </Grid>
+</UserControl>

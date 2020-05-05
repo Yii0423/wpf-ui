@@ -13,21 +13,8 @@ namespace wpf_ui.Extends.DiyControls
         {
             Loaded += delegate
             {
-                new Thread(() =>
-                {
-                    double startValue = 0, endValue = 0;
-                    Dispatcher.Invoke(() => { endValue = Value; });
-                    while (startValue < 100)
-                    {
-                        startValue++;
-                        Dispatcher.Invoke(() =>
-                        {
-                            Value = startValue * endValue / 100;
-                            Percentage = $"{(int)Value}%";
-                        });
-                        Thread.Sleep(5);
-                    }
-                }).Start();
+                InitWeight();
+                LoadAnimate();
             };
         }
 
@@ -44,6 +31,58 @@ namespace wpf_ui.Extends.DiyControls
 
         #endregion
 
+        #region 圆形进度条的进度值
+
+        public double CircularPercentage
+        {
+            get { return (double)GetValue(CircularPercentageProperty); }
+            private set { SetValue(CircularPercentageProperty, value); }
+        }
+
+        public static readonly DependencyProperty CircularPercentageProperty =
+            DependencyProperty.Register("CircularPercentage", typeof(double), typeof(DiyProgressbar), new PropertyMetadata(0d));
+
+        #endregion
+
+        #region 圆形进度条的粗度(跟宽度相等时则为扇形)
+
+        public double CircularWeight
+        {
+            get { return (double)GetValue(CircularWeightProperty); }
+            set { SetValue(CircularWeightProperty, value); }
+        }
+
+        public static readonly DependencyProperty CircularWeightProperty =
+            DependencyProperty.Register("CircularWeight", typeof(double), typeof(DiyProgressbar), new PropertyMetadata(0d));
+
+        #endregion
+
+        #region 根据圆形进度条的粗度同步的Arc粗度
+
+        public double ArcWeight
+        {
+            get { return (double)GetValue(ArcWeightProperty); }
+            private set { SetValue(ArcWeightProperty, value); }
+        }
+
+        public static readonly DependencyProperty ArcWeightProperty =
+            DependencyProperty.Register("ArcWeight", typeof(double), typeof(DiyProgressbar), new PropertyMetadata(0d));
+
+        #endregion
+
+        #region 是否为扇形进度条(跟宽度相等时则为True)
+
+        public bool IsFanShaped
+        {
+            get { return (bool)GetValue(IsFanShapedProperty); }
+            set { SetValue(IsFanShapedProperty, value); }
+        }
+
+        public static readonly DependencyProperty IsFanShapedProperty =
+            DependencyProperty.Register("IsFanShaped", typeof(bool), typeof(DiyProgressbar), new PropertyMetadata(false));
+
+        #endregion
+
         #region 百分比数值显示方式
 
         public ShowMode ShowMode
@@ -54,6 +93,43 @@ namespace wpf_ui.Extends.DiyControls
 
         public static readonly DependencyProperty ShowModeProperty =
             DependencyProperty.Register("ShowMode", typeof(ShowMode), typeof(DiyProgressbar), new PropertyMetadata(ShowMode.No));
+
+        #endregion
+
+        #region 事件
+
+        /// <summary>
+        /// 根据圆形进度条的粗度同步Arc粗度
+        /// </summary>
+        private void InitWeight()
+        {
+            if (CircularWeight > ActualWidth) CircularWeight = ActualWidth;
+            IsFanShaped = CircularWeight == ActualWidth;
+            ArcWeight = CircularWeight / ActualWidth * 2;
+        }
+
+        /// <summary>
+        /// 加载动画
+        /// </summary>
+        private void LoadAnimate()
+        {
+            new Thread(() =>
+            {
+                double startValue = 0, endValue = 0;
+                Dispatcher.Invoke(() => { endValue = Value; });
+                while (startValue < 100)
+                {
+                    startValue++;
+                    Dispatcher.Invoke(() =>
+                    {
+                        Value = startValue * endValue / 100;
+                        Percentage = $"{(int)Value}%";
+                        CircularPercentage = Value * 3.6;
+                    });
+                    Thread.Sleep(5);
+                }
+            }).Start();
+        }
 
         #endregion
     }

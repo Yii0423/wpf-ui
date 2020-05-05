@@ -34,6 +34,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.Expression.Drawing, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Extends\Dlls\Microsoft.Expression.Drawing.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
@@ -54,11 +58,25 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Extends\Ucs\UcTab.xaml.cs">
+      <DependentUpon>UcTab.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Index.xaml.cs">
+      <DependentUpon>Index.xaml</DependentUpon>
+    </Compile>
+    <Page Include="Extends\Ucs\UcAccordion.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Extends\Ucs\UcMenuLeft.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Extends\Ucs\UcMenuTop.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Extends\Ucs\UcTab.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -71,11 +89,15 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Extends\Common\Helper.cs" />
+    <Compile Include="Extends\Common\Win32.cs" />
     <Compile Include="Extends\DiyControls\DiyButton.cs" />
     <Compile Include="Extends\DiyControls\DiyPopup.cs" />
     <Compile Include="Extends\DiyControls\DiyProgressbar.cs" />
     <Compile Include="Extends\DiyControls\DiyTabitem.cs" />
     <Compile Include="Extends\DiyControls\DiyTextbox.cs" />
+    <Compile Include="Extends\Ucs\UcAccordion.xaml.cs">
+      <DependentUpon>UcAccordion.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Extends\Ucs\UcMenuLeft.xaml.cs">
       <DependentUpon>UcMenuLeft.xaml</DependentUpon>
     </Compile>
@@ -142,6 +164,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\Index.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -171,9 +197,14 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Extends\Converters\" />
+    <Folder Include="Model\" />
+    <Folder Include="ViewModel\" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Content\Images\logo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Extends\Dlls\Microsoft.Expression.Drawing.dll" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

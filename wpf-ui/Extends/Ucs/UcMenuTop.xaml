@@ -3,21 +3,21 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             mc:Ignorable="d" d:DesignHeight="60" d:DesignWidth="800" 
+             mc:Ignorable="d" d:DesignHeight="60" d:DesignWidth="1000" 
              UseLayoutRounding="True" Loaded="UserControl_Loaded">
     <Grid>
         <Border x:Name="BdMain" Background="{StaticResource BrushMenu}"/>
-        <StackPanel Orientation="Horizontal">
+        <DockPanel>
             <!-- Logo -->
             <Image x:Name="ImgLogo" Source="/wpf-ui;component/Content/Images/logo.png" Height="40" Margin="20,0,0,0" 
-                   Cursor="Hand" RenderOptions.BitmapScalingMode="HighQuality"/>
-            <Grid Margin="20,0,0,0">
+                   Cursor="Hand" RenderOptions.BitmapScalingMode="HighQuality" Visibility="Collapsed"/>
+            <Grid x:Name="GrdMain" Margin="20,0,0,0">
                 <!-- 标识选中状态 -->
                 <Label x:Name="MtiChecked" VerticalAlignment="Bottom" HorizontalAlignment="Left" Height="8" IsHitTestVisible="False"
                        Background="{StaticResource BrushChecked}" Opacity="0"/>
                 <!-- 一级菜单 -->
-                <StackPanel x:Name="SpMain" Orientation="Horizontal"/>
+                <DockPanel x:Name="SpMain"/>
             </Grid>
-        </StackPanel>
+        </DockPanel>
     </Grid>
 </UserControl>

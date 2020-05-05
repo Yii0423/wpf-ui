@@ -1,0 +1,49 @@
+﻿<UserControl x:Class="wpf_ui.Extends.Ucs.UcAccordion"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" d:DesignHeight="450" d:DesignWidth="800">
+    <Grid>
+        <Border BorderThickness="1,1,1,0" BorderBrush="Black">
+            <StackPanel>
+                <Label VerticalAlignment="Top" Padding="5,10" VerticalContentAlignment="Center" Background="{StaticResource BrushCold}"
+               BorderBrush="Black" BorderThickness="0,0,0,1" FontSize="14">
+                    <StackPanel Orientation="Horizontal">
+                        <Path Style="{StaticResource Icon}" Data="{StaticResource Icon-Chevron-Down}" Fill="Black"/>
+                        <TextBlock Text="杜甫" Margin="5,0,0,0"/>
+                    </StackPanel>
+                </Label>
+                <Label VerticalAlignment="Top" Background="{StaticResource BrushPrimary}" BorderBrush="Black" BorderThickness="0,0,0,1" Padding="5,10">
+                    <TextBlock TextWrapping="Wrap">
+                    杜甫的思想核心是儒家的仁政思想，他有“致君尧舜上，再使风俗淳”的宏伟抱负。杜甫虽然在世时名声并不显赫，但后来声名远播，对中国文学和日本文学都产生了深远的影响。杜甫共有约1500首诗歌被保留了下来，大多集于《杜工部集》。
+                    </TextBlock>
+                </Label>
+                <Label VerticalAlignment="Top" Padding="5,10" VerticalContentAlignment="Center" Background="{StaticResource BrushCold}"
+               BorderBrush="Black" BorderThickness="0,0,0,1" FontSize="14">
+                    <StackPanel Orientation="Horizontal">
+                        <Path Style="{StaticResource Icon}" Data="{StaticResource Icon-Chevron-Down}" Fill="Black"/>
+                        <TextBlock Text="李清照" Margin="5,0,0,0"/>
+                    </StackPanel>
+                </Label>
+                <Label VerticalAlignment="Top" Background="{StaticResource BrushPrimary}" BorderBrush="Black" BorderThickness="0,0,0,1" Padding="5,10">
+                    <TextBlock TextWrapping="Wrap">
+                    李清照出生于书香门第，早期生活优裕，其父李格非藏书甚富，她小时候就在良好的家庭环境中打下文学基础。出嫁后与夫赵明诚共同致力于书画金石的搜集整理。金兵入据中原时，流寓南方，境遇孤苦。所作词，前期多写其悠闲生活，后期多悲叹身世，情调感伤。形式上善用白描手法，自辟途径，语言清丽。
+                    </TextBlock>
+                </Label>
+                <Label VerticalAlignment="Top" Padding="5,10" VerticalContentAlignment="Center" Background="{StaticResource BrushCold}"
+               BorderBrush="Black" BorderThickness="0,0,0,1" FontSize="14">
+                    <StackPanel Orientation="Horizontal">
+                        <Path Style="{StaticResource Icon}" Data="{StaticResource Icon-Chevron-Down}" Fill="Black"/>
+                        <TextBlock Text="鲁迅" Margin="5,0,0,0"/>
+                    </StackPanel>
+                </Label>
+                <Label VerticalAlignment="Top" Background="{StaticResource BrushPrimary}" BorderBrush="Black" BorderThickness="0,0,0,1" Padding="5,10">
+                    <TextBlock TextWrapping="Wrap">
+                    鲁迅一生在文学创作、文学批评、思想研究、文学史研究、翻译、美术理论引进、基础科学介绍和古籍校勘与研究等多个领域具有重大贡献。他对于五四运动以后的中国社会思想文化发展具有重大影响，蜚声世界文坛，尤其在韩国、日本思想文化领域有极其重要的地位和影响，被誉为“二十世纪东亚文化地图上占最大领土的作家”。
+                    </TextBlock>
+                </Label>
+            </StackPanel>
+        </Border>
+    </Grid>
+</UserControl>
