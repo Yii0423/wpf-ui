@@ -22,16 +22,11 @@ namespace wpf_ui.Extends.Common
             if (root == null) return null;
             DependencyObject d = VisualTreeHelper.GetParent(root);
             if (d == null) return null;
-            if (!(d is T childType)
-                || ((d is FrameworkElement) && !string.IsNullOrWhiteSpace(name) && (d as FrameworkElement).Name != name))
+            if (!(d is T childType) || (d is FrameworkElement element) && !string.IsNullOrWhiteSpace(name) && element.Name != name)
             {
-
                 return FindParent<T>(d, name);
             }
-            else
-            {
-                return childType;
-            }
+            return childType;
         }
 
         /// <summary>
@@ -48,8 +43,7 @@ namespace wpf_ui.Extends.Common
             for (int j = 0; j < VisualTreeHelper.GetChildrenCount(root); j++)
             {
                 DependencyObject d = VisualTreeHelper.GetChild(root, j);
-                if (!(d is T childType)
-                    || ((d is FrameworkElement) && !string.IsNullOrWhiteSpace(name) && (d as FrameworkElement).Name != name))
+                if (!(d is T childType) || d is FrameworkElement element && !string.IsNullOrWhiteSpace(name) && element.Name != name)
                 {
                     founded = FindChild<T>(d, name);
                     if (founded != null) break;
@@ -87,7 +81,7 @@ namespace wpf_ui.Extends.Common
                         }
                         catch (Exception)
                         {
-
+                            // ignored
                         }
                     }
                 }

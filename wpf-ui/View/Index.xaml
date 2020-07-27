@@ -1,15 +1,19 @@
-﻿<Page x:Class="wpf_ui.View.Index"
+﻿<Page
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      xmlns:local="clr-namespace:wpf_ui.View"
-      mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
-      Title="Index">
-
+      xmlns:ucs="clr-namespace:wpf_ui.Extends.Ucs" x:Class="wpf_ui.View.Index"
+      mc:Ignorable="d" d:DesignHeight="450" Background="{StaticResource BrushBackground}"
+      Loaded="Index_OnLoaded">
     <Grid>
-        <Label x:Name="label" Content="首页测试" HorizontalAlignment="Left" Margin="186,150,0,0" VerticalAlignment="Top"/>
-
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
+        </Grid.ColumnDefinitions>
+        <ucs:UcCard x:Name="Card1" Height="240" Margin="10,10,5,0" VerticalAlignment="Top"/>
+        <ucs:UcCard x:Name="Card2" Height="240" Margin="5,10,5,0" VerticalAlignment="Top" Grid.Column="1"/>
+        <ucs:UcCard x:Name="Card3" Height="240" Margin="5,10,10,0" VerticalAlignment="Top" Grid.Column="2"/>
     </Grid>
 </Page>

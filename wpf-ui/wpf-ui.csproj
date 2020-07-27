@@ -59,13 +59,21 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Extends\DiyControls\DiyRadioButton.cs" />
+    <Compile Include="Extends\Ucs\UcCard.xaml.cs">
+      <DependentUpon>UcCard.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Extends\Ucs\UcTab.xaml.cs">
       <DependentUpon>UcTab.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Model\MenuItem.cs" />
     <Compile Include="View\Index.xaml.cs">
       <DependentUpon>Index.xaml</DependentUpon>
     </Compile>
     <Page Include="Extends\Ucs\UcAccordion.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Extends\Ucs\UcCard.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -122,6 +130,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Style\Icon.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Style\Label.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -198,7 +210,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Extends\Converters\" />
-    <Folder Include="Model\" />
     <Folder Include="ViewModel\" />
   </ItemGroup>
   <ItemGroup>

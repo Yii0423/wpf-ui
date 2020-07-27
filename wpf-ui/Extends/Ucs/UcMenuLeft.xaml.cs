@@ -7,6 +7,7 @@ using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Media.Effects;
 using wpf_ui.Extends.Common;
+using wpf_ui.Model;
 
 namespace wpf_ui.Extends.Ucs
 {
@@ -18,7 +19,7 @@ namespace wpf_ui.Extends.Ucs
         /// <summary>
         /// 顶部菜单集合
         /// </summary>
-        public List<MenuTopItem> ItemSources { get; set; } = new List<MenuTopItem>();
+        public List<MMenuItem> ItemSources { get; set; } = new List<MMenuItem>();
 
         /// <summary>
         /// 指定Frame窗体
@@ -73,7 +74,7 @@ namespace wpf_ui.Extends.Ucs
             //加载顶部菜单子项
             for (int i = 0; i < ItemSources.Count; i++)
             {
-                MenuTopItem item = ItemSources[i];
+                MMenuItem item = ItemSources[i];
 
                 RadioButton rdb = new RadioButton();
                 rdb.SetResourceReference(StyleProperty, "MiLeftParentPrimary");
@@ -129,7 +130,7 @@ namespace wpf_ui.Extends.Ucs
         /// </summary>
         /// <param name="item">父级菜单项</param>
         /// <param name="rdb">父级控件</param>
-        private void LoadChildMenu(MenuTopItem item, RadioButton rdb)
+        private void LoadChildMenu(MMenuItem item, RadioButton rdb)
         {
             Grid grid = new Grid();
 
@@ -256,11 +257,11 @@ namespace wpf_ui.Extends.Ucs
 
                 if (!_isDo)
                 {
-                    ThicknessAnimation _ani = new ThicknessAnimation(
+                    ThicknessAnimation ani = new ThicknessAnimation(
                         new Thickness(childMenu.Margin.Left, childMenu.Margin.Top + 30, childMenu.Margin.Right, childMenu.Margin.Bottom),
                         childMenu.Margin, new Duration(TimeSpan.FromSeconds(0.2)));
-                    _ani.Completed += delegate { _isDo = false; };
-                    childMenu.BeginAnimation(MarginProperty, _ani);
+                    ani.Completed += delegate { _isDo = false; };
+                    childMenu.BeginAnimation(MarginProperty, ani);
                     //标识动画执行中
                     _isDo = true;
                 }

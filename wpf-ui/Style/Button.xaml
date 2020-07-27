@@ -91,6 +91,106 @@
         <Setter Property="Background" Value="{StaticResource BrushDisabled}"/>
     </Style>
 
+    <!-- 卡片1菜单子项 -->
+    <Style x:Key="BtnCard1" TargetType="{x:Type diy:DiyButton}">
+        <Setter Property="Cursor" Value="Hand"/>
+        <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+        <Setter Property="BorderBrush" Value="{StaticResource BrushCold}"/>
+        <Setter Property="BorderThickness" Value="{StaticResource BorderThicknessDefault}"/>
+        <Setter Property="Background" Value="{StaticResource BrushBackground}"/>
+        <Setter Property="RenderTransformOrigin" Value="0.5,0.5"/>
+        <Setter Property="Width" Value="120"/>
+        <Setter Property="Height" Value="85"/>
+        <Setter Property="Margin" Value="10,0,0,10"/>
+        <Setter Property="VerticalContentAlignment" Value="Top"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type diy:DiyButton}">
+                    <Grid>
+                        <Border x:Name="border" Background="{TemplateBinding Background}" Width="{TemplateBinding Width}" 
+                                Height="60" Opacity="0.9">
+                            <Path Style="{DynamicResource Icon}" Data="{TemplateBinding Icon}" Fill="{StaticResource BrushMenu}" 
+                                  Width="36" Height="30"/>
+                        </Border>
+                        <TextBlock VerticalAlignment="Bottom" HorizontalAlignment="Center" Margin="0,0,0,-10" FontSize="14">
+                            <ContentPresenter/>
+                        </TextBlock>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="Cursor" Value="Hand"/>
+                                <Condition Property="IsMouseOver" Value="True"/>
+                            </MultiTrigger.Conditions>
+                            <MultiTrigger.Setters>
+                                <Setter TargetName="border" Property="Opacity" Value="0.8"/>
+                                <Setter TargetName="border" Property="BorderBrush" Value="{DynamicResource BrushDefault}"/>
+                            </MultiTrigger.Setters>
+                        </MultiTrigger>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="Cursor" Value="Hand"/>
+                                <Condition Property="IsPressed" Value="True"/>
+                            </MultiTrigger.Conditions>
+                            <MultiTrigger.Setters>
+                                <Setter TargetName="border" Property="Opacity" Value="1"/>
+                            </MultiTrigger.Setters>
+                        </MultiTrigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- 卡片2菜单子项 -->
+    <Style x:Key="BtnCard2" TargetType="{x:Type diy:DiyButton}">
+        <Setter Property="Cursor" Value="Hand"/>
+        <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+        <Setter Property="Background" Value="{StaticResource BrushBackground}"/>
+        <Setter Property="RenderTransformOrigin" Value="0.5,0.5"/>
+        <Setter Property="Width" Value="120"/>
+        <Setter Property="Height" Value="85"/>
+        <Setter Property="Margin" Value="10,10,0,0"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <Setter Property="Foreground" Value="{StaticResource BrushChecked}"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type diy:DiyButton}">
+                    <Border x:Name="border" Background="{TemplateBinding Background}" Padding="20,12">
+                        <StackPanel>
+                            <TextBlock HorizontalAlignment="Left" Foreground="{StaticResource BrushFont}">
+                                <ContentPresenter/>
+                            </TextBlock>
+                            <TextBlock Margin="0,5,0,0" Text="{TemplateBinding SubTitle}" HorizontalAlignment="Left" FontSize="32"
+                                       Foreground="{TemplateBinding Foreground}"/>
+                        </StackPanel>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="Cursor" Value="Hand"/>
+                                <Condition Property="IsMouseOver" Value="True"/>
+                            </MultiTrigger.Conditions>
+                            <MultiTrigger.Setters>
+                                <Setter TargetName="border" Property="Opacity" Value="0.8"/>
+                                <Setter TargetName="border" Property="BorderBrush" Value="{DynamicResource BrushDefault}"/>
+                            </MultiTrigger.Setters>
+                        </MultiTrigger>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="Cursor" Value="Hand"/>
+                                <Condition Property="IsPressed" Value="True"/>
+                            </MultiTrigger.Conditions>
+                            <MultiTrigger.Setters>
+                                <Setter TargetName="border" Property="Opacity" Value="1"/>
+                            </MultiTrigger.Setters>
+                        </MultiTrigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
     <!-- #endregion -->
 
 </ResourceDictionary>

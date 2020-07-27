@@ -13,11 +13,11 @@
     </Window.Effect>
     <Grid>
         <!-- 顶部菜单 -->
-        <ucs:UcMenuTop x:Name="MenuTop" Margin="70,5,5,0" Height="50" VerticalAlignment="Top" MiFontColor="Black"
+        <ucs:UcMenuTop x:Name="MenuTop" Margin="60,0,0,0" Height="50" VerticalAlignment="Top" MiFontColor="Black"
                        BgColor="{StaticResource BrushPrimary}" IsSearchTbShow="True"/>
         <!-- 侧边菜单 -->
-        <ucs:UcMenuLeft x:Name="MenuLeft" Width="60" Margin="5,5,0,5" HorizontalAlignment="Left" Background="Red"/>
+        <ucs:UcMenuLeft x:Name="MenuLeft" Width="60" HorizontalAlignment="Left" Background="Red"/>
         <!-- 内容区域 -->
-        <Frame x:Name="FrmMain" Margin="70,60,5,5"/>
+        <Frame x:Name="FrmMain" Margin="60,50,0,0"/>
     </Grid>
 </Window>

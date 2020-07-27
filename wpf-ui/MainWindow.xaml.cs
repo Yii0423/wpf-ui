@@ -7,7 +7,7 @@ using System.Windows.Input;
 using System.Windows.Interop;
 using System.Windows.Media;
 using wpf_ui.Extends.Common;
-using wpf_ui.Extends.Ucs;
+using wpf_ui.Model;
 
 namespace wpf_ui
 {
@@ -59,78 +59,78 @@ namespace wpf_ui
             //侧边菜单绑定Frame
             MenuLeft.FrmMain = FrmMain;
             //顶部菜单数据源
-            MenuTop.ItemSources = new List<MenuTopItem>
+            MenuTop.ItemSources = new List<MMenuItem>
             {
-                new MenuTopItem {Title = "Icon-Indent-Right", IsTop = true},
-                new MenuTopItem {Title = "Icon-Globe", IsTop = true},
-                new MenuTopItem {Title = "Icon-Repeat", IsTop = true},
-                new MenuTopItem {Title = "Icon-Ellipsis-Vertical", IsTop = true, IsRight = true},
-                new MenuTopItem
+                new MMenuItem {Title = "Icon-Indent-Right", IsTop = true},
+                new MMenuItem {Title = "Icon-Globe", IsTop = true},
+                new MMenuItem {Title = "Icon-Repeat", IsTop = true},
+                new MMenuItem {Title = "Icon-Ellipsis-Vertical", IsTop = true, IsRight = true},
+                new MMenuItem
                 {
-                    Title = "超级管理员", IsTop = true, IsRight = true, ChildItem = new List<MenuTopItem>
+                    Title = "超级管理员", IsTop = true, IsRight = true, ChildItem = new List<MMenuItem>
                     {
-                        new MenuTopItem {Title = "基本资料"},
-                        new MenuTopItem {Title = "修改密码"},
-                        new MenuTopItem {Title = "退出"}
+                        new MMenuItem {Title = "基本资料"},
+                        new MMenuItem {Title = "修改密码"},
+                        new MMenuItem {Title = "退出"}
                     }
                 },
-                new MenuTopItem {Title = "Icon-Tag", IsTop = true, IsRight = true},
-                new MenuTopItem {Title = "Icon-Dashboard", IsTop = true, IsRight = true},
-                new MenuTopItem {Title = "Icon-Bell", IsTop = true, IsRight = true}
+                new MMenuItem {Title = "Icon-Tag", IsTop = true, IsRight = true},
+                new MMenuItem {Title = "Icon-Dashboard", IsTop = true, IsRight = true},
+                new MMenuItem {Title = "Icon-Bell", IsTop = true, IsRight = true}
             };
             //侧边菜单数据源
-            MenuLeft.ItemSources = new List<MenuTopItem>
+            MenuLeft.ItemSources = new List<MMenuItem>
             {
-                new MenuTopItem
+                new MMenuItem
                 {
-                    Title = "Icon-Home", IsTop = true, Url = "Index", ChildItem = new List<MenuTopItem>
+                    Title = "Icon-Home", IsTop = true, Url = "Index", ChildItem = new List<MMenuItem>
                     {
-                        new MenuTopItem {Title = "移动模块"},
-                        new MenuTopItem
+                        new MMenuItem {Title = "移动模块"},
+                        new MMenuItem
                         {
-                            Title = "后台模块", ChildItem = new List<MenuTopItem>
+                            Title = "后台模块", ChildItem = new List<MMenuItem>
                             {
-                                new MenuTopItem {Title = "后台顶部"},
-                                new MenuTopItem {Title = "后台左侧"},
-                                new MenuTopItem {Title = "后台下方"}
+                                new MMenuItem {Title = "后台顶部"},
+                                new MMenuItem {Title = "后台左侧"},
+                                new MMenuItem {Title = "后台下方"}
                             }
                         }
                     }
                 },
-                new MenuTopItem {Title = "Icon-Music", IsTop = true},
-                new MenuTopItem
+                new MMenuItem {Title = "Icon-Music", IsTop = true},
+                new MMenuItem
                 {
-                    Title = "Icon-Calendar", IsTop = true, ChildItem = new List<MenuTopItem>
+                    Title = "Icon-Calendar", IsTop = true, ChildItem = new List<MMenuItem>
                     {
-                        new MenuTopItem {Title = "移动模块"},
-                        new MenuTopItem
+                        new MMenuItem {Title = "移动模块"},
+                        new MMenuItem
                         {
-                            Title = "后台模块", ChildItem = new List<MenuTopItem>
+                            Title = "后台模块", ChildItem = new List<MMenuItem>
                             {
-                                new MenuTopItem {Title = "后台顶部"},
-                                new MenuTopItem {Title = "后台左侧"},
-                                new MenuTopItem
+                                new MMenuItem {Title = "后台顶部"},
+                                new MMenuItem {Title = "后台左侧"},
+                                new MMenuItem
                                 {
-                                    Title = "后台下方", ChildItem = new List<MenuTopItem>
+                                    Title = "后台下方", ChildItem = new List<MMenuItem>
                                     {
-                                        new MenuTopItem {Title = "后台顶部"},
-                                        new MenuTopItem {Title = "后台左侧"},
-                                        new MenuTopItem {Title = "后台下方", Url = "Index"}
+                                        new MMenuItem {Title = "后台顶部"},
+                                        new MMenuItem {Title = "后台左侧"},
+                                        new MMenuItem {Title = "后台下方", Url = "Index"}
                                     }
                                 }
                             }
                         },
-                        new MenuTopItem {Title = "电商平台"}
+                        new MMenuItem {Title = "电商平台"}
                     }
                 },
-                new MenuTopItem {Title = "Icon-Rss", IsTop = true},
-                new MenuTopItem
+                new MMenuItem {Title = "Icon-Rss", IsTop = true},
+                new MMenuItem
                 {
-                    Title = "Icon-Plane", IsTop = true, ChildItem = new List<MenuTopItem>
+                    Title = "Icon-Plane", IsTop = true, ChildItem = new List<MMenuItem>
                     {
-                        new MenuTopItem {Title = "后台顶部"},
-                        new MenuTopItem {Title = "后台左侧"},
-                        new MenuTopItem {Title = "后台下方"}
+                        new MMenuItem {Title = "后台顶部"},
+                        new MMenuItem {Title = "后台左侧"},
+                        new MMenuItem {Title = "后台下方"}
                     }
                 }
             };

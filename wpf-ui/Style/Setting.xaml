@@ -26,6 +26,8 @@
     <Color x:Key="ColorMenu">#393D49</Color>
     <!-- 菜单选中状态色 -->
     <Color x:Key="ColorMenuChecked">#2D313C</Color>
+    <!-- 界面底色 -->
+    <Color x:Key="ColorBackground">#F2F2F2</Color>
 
     <!-- #endregion -->
 
@@ -53,6 +55,8 @@
     <SolidColorBrush x:Key="BrushMenu" Color="{DynamicResource ColorMenu}"/>
     <!-- 菜单选中状态色 -->
     <SolidColorBrush x:Key="BrushMenuChecked" Color="{DynamicResource ColorMenuChecked}"/>
+    <!-- 界面底色 -->
+    <SolidColorBrush x:Key="BrushBackground" Color="{DynamicResource ColorBackground}"/>
 
     <!-- #endregion -->
 
@@ -75,10 +79,16 @@
 
     <!-- #endregion -->
 
+    <!-- #region 字体 -->
+
+    <FontFamily x:Key="FontFamilyDefault">Microsoft YaHei,Consolas</FontFamily>
+
+    <!-- #endregion -->
+
     <!-- #region 基础设置 -->
 
     <Style BasedOn="{x:Null}" TargetType="{x:Type Window}">
-        <Setter Property="FontFamily" Value="Microsoft YaHei,Consolas"></Setter>
+        <Setter Property="FontFamily" Value="{StaticResource FontFamilyDefault}"></Setter>
         <Setter Property="FontSize" Value="{StaticResource FontSizeDefault}"></Setter>
         <Setter Property="Foreground" Value="{DynamicResource BrushFont}"></Setter>
     </Style>

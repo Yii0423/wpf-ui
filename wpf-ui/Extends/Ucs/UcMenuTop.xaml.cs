@@ -8,6 +8,7 @@ using System.Windows.Media.Animation;
 using System.Windows.Media.Effects;
 using wpf_ui.Extends.Common;
 using wpf_ui.Extends.DiyControls;
+using wpf_ui.Model;
 
 namespace wpf_ui.Extends.Ucs
 {
@@ -19,7 +20,7 @@ namespace wpf_ui.Extends.Ucs
         /// <summary>
         /// 顶部菜单集合
         /// </summary>
-        public List<MenuTopItem> ItemSources { get; set; } = new List<MenuTopItem>();
+        public List<MMenuItem> ItemSources { get; set; } = new List<MMenuItem>();
 
         /// <summary>
         /// 指定Frame窗体
@@ -106,7 +107,7 @@ namespace wpf_ui.Extends.Ucs
             //加载顶部菜单子项
             for (int i = 0; i < ItemSources.Count; i++)
             {
-                MenuTopItem item = ItemSources[i];
+                MMenuItem item = ItemSources[i];
 
                 RadioButton rdb = new RadioButton();
 
@@ -193,7 +194,7 @@ namespace wpf_ui.Extends.Ucs
         /// </summary>
         /// <param name="item">父级菜单项</param>
         /// <param name="rdb">父级控件</param>
-        private void LoadChildMenu(MenuTopItem item, RadioButton rdb)
+        private void LoadChildMenu(MMenuItem item, RadioButton rdb)
         {
             Grid grid = new Grid();
 
@@ -229,11 +230,8 @@ namespace wpf_ui.Extends.Ucs
                 Opacity = 0.8
             };
 
-            for (int i = 0; i < item.ChildItem.Count; i++)
+            foreach (var itemc in item.ChildItem)
             {
-                //菜单子项
-                MenuTopItem itemc = item.ChildItem[i];
-
                 RadioButton rdbc = new RadioButton();
                 rdbc.SetResourceReference(StyleProperty, "MiTopChildPrimary");
 
@@ -244,9 +242,10 @@ namespace wpf_ui.Extends.Ucs
                 //若链接不为空则绑定导航事件
                 if (!string.IsNullOrWhiteSpace(itemc.Url))
                 {
+                    var itemc1 = itemc;
                     rdbc.Click += (sender, e) =>
                     {
-                        FrmMain?.Navigate(new Uri($"{itemc.Url}.xaml", UriKind.Relative));
+                        FrmMain?.Navigate(new Uri($"{itemc1.Url}.xaml", UriKind.Relative));
                         e.Handled = true;
                     };
                 }
@@ -364,32 +363,5 @@ namespace wpf_ui.Extends.Ucs
             RadioButton radioButton = sender as RadioButton;
             if (radioButton.FindChild<Canvas>() is Canvas childMenu) childMenu.Visibility = Visibility.Collapsed;
         }
-    }
-
-    /// <summary>
-    /// 顶部菜单项
-    /// </summary>
-    public class MenuTopItem
-    {
-        /// <summary>
-        /// 标题
-        /// </summary>
-        public string Title { get; set; }
-        /// <summary>
-        /// 链接
-        /// </summary>
-        public string Url { get; set; }
-        /// <summary>
-        /// 是否居右显示
-        /// </summary>
-        public bool IsRight { get; set; }
-        /// <summary>
-        /// 菜单子项
-        /// </summary>
-        public List<MenuTopItem> ChildItem { get; set; } = new List<MenuTopItem>();
-        /// <summary>
-        /// 是否为顶级菜单
-        /// </summary>
-        public bool IsTop { get; set; }
     }
 }

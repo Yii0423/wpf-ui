@@ -5,6 +5,7 @@
         <ResourceDictionary Source="/Style/Border.xaml"/>
         <ResourceDictionary Source="/Style/Popup.xaml"/>
         <ResourceDictionary Source="/Style/Scrollbar.xaml"/>
+        <ResourceDictionary Source="/Style/Label.xaml"/>
         <ResourceDictionary Source="/Style/Button.xaml"/>
         <ResourceDictionary Source="/Style/Textbox.xaml"/>
         <ResourceDictionary Source="/Style/Togglebutton.xaml"/>
