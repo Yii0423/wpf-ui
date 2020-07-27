@@ -107,10 +107,12 @@ namespace wpf_ui.Extends.Ucs
 
                 //若链接不为空则绑定导航事件
                 if (!string.IsNullOrWhiteSpace(item.Url))
+                {
                     rdb.Click += delegate
                     {
                         FrmMain?.Navigate(new Uri($"/View/{item.Url}.xaml", UriKind.Relative));
                     };
+                }
 
                 SpMain.Children.Add(rdb);
 
@@ -125,7 +127,7 @@ namespace wpf_ui.Extends.Ucs
         /// <summary>
         /// 加载子级菜单
         /// </summary>
-        /// <param name="items">父级菜单项</param>
+        /// <param name="item">父级菜单项</param>
         /// <param name="rdb">父级控件</param>
         private void LoadChildMenu(MenuTopItem item, RadioButton rdb)
         {
@@ -174,11 +176,8 @@ namespace wpf_ui.Extends.Ucs
                 Opacity = 0.8
             };
 
-            for (int i = 0; i < item.ChildItem.Count; i++)
+            foreach (var itemc in item.ChildItem)
             {
-                //菜单子项
-                MenuTopItem itemc = item.ChildItem[i];
-
                 RadioButton rdbc = new RadioButton();
                 rdbc.SetResourceReference(StyleProperty, "MiLeftChildPrimary");
 
@@ -188,11 +187,14 @@ namespace wpf_ui.Extends.Ucs
 
                 //若链接不为空则绑定导航事件
                 if (!string.IsNullOrWhiteSpace(itemc.Url))
+                {
+                    var itemc1 = itemc;
                     rdbc.Click += (sender, e) =>
                     {
-                        FrmMain?.Navigate(new Uri($"{itemc.Url}.xaml", UriKind.Relative));
+                        FrmMain?.Navigate(new Uri($"/View/{itemc1.Url}.xaml", UriKind.Relative));
                         e.Handled = true;
                     };
+                }
 
                 //子级菜单项不为空则添加子级菜单
                 if (item.ChildItem.Count > 0) LoadChildMenu(itemc, rdbc);
@@ -232,7 +234,7 @@ namespace wpf_ui.Extends.Ucs
         /// </summary>
         private void Mtip_MouseEnter(object sender, MouseEventArgs e)
         {
-            RadioButton radioButton = sender as RadioButton;
+            if (!(sender is RadioButton radioButton)) return;
             Point point = radioButton.TranslatePoint(new Point(0, 0), SpMain);
             MtiChecked.Margin = new Thickness(MtiChecked.Margin.Left, point.Y, MtiChecked.Margin.Right, MtiChecked.Margin.Bottom);
             MtiChecked.Height = radioButton.ActualHeight;

@@ -2,7 +2,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:Ucs="clr-namespace:wpf_ui.Extends.Ucs" x:Class="wpf_ui.MainWindow"
+        xmlns:ucs="clr-namespace:wpf_ui.Extends.Ucs" x:Class="wpf_ui.MainWindow"
         mc:Ignorable="d" 
         d:DesignHeight="768" d:DesignWidth="1366" MinHeight="768" MinWidth="1366"
         Height="768" Width="1366"
@@ -13,13 +13,11 @@
     </Window.Effect>
     <Grid>
         <!-- 顶部菜单 -->
-        <Ucs:UcMenuTop x:Name="MenuTop" Margin="70,5,5,0" Height="50" VerticalAlignment="Top" MiFontColor="Black"
+        <ucs:UcMenuTop x:Name="MenuTop" Margin="70,5,5,0" Height="50" VerticalAlignment="Top" MiFontColor="Black"
                        BgColor="{StaticResource BrushPrimary}" IsSearchTbShow="True"/>
         <!-- 侧边菜单 -->
-        <Ucs:UcMenuLeft x:Name="MenuLeft" Width="60" Margin="5,5,0,5" HorizontalAlignment="Left" Background="Red"/>
-        <!-- Tab -->
-        <Ucs:UcTab Height="40" Margin="65,55,0,0" VerticalAlignment="Top"/>
+        <ucs:UcMenuLeft x:Name="MenuLeft" Width="60" Margin="5,5,0,5" HorizontalAlignment="Left" Background="Red"/>
         <!-- 内容区域 -->
-        <Frame x:Name="FrmMain" Margin="70,100,5,5"/>
+        <Frame x:Name="FrmMain" Margin="70,60,5,5"/>
     </Grid>
 </Window>

@@ -35,8 +35,8 @@ namespace wpf_ui.Extends.DiyControls
 
         public double CircularPercentage
         {
-            get { return (double)GetValue(CircularPercentageProperty); }
-            private set { SetValue(CircularPercentageProperty, value); }
+            get => (double)GetValue(CircularPercentageProperty);
+            private set => SetValue(CircularPercentageProperty, value);
         }
 
         public static readonly DependencyProperty CircularPercentageProperty =
@@ -48,8 +48,8 @@ namespace wpf_ui.Extends.DiyControls
 
         public double CircularWeight
         {
-            get { return (double)GetValue(CircularWeightProperty); }
-            set { SetValue(CircularWeightProperty, value); }
+            get => (double)GetValue(CircularWeightProperty);
+            set => SetValue(CircularWeightProperty, value);
         }
 
         public static readonly DependencyProperty CircularWeightProperty =
@@ -61,8 +61,8 @@ namespace wpf_ui.Extends.DiyControls
 
         public double ArcWeight
         {
-            get { return (double)GetValue(ArcWeightProperty); }
-            private set { SetValue(ArcWeightProperty, value); }
+            get => (double)GetValue(ArcWeightProperty);
+            private set => SetValue(ArcWeightProperty, value);
         }
 
         public static readonly DependencyProperty ArcWeightProperty =
@@ -74,8 +74,8 @@ namespace wpf_ui.Extends.DiyControls
 
         public bool IsFanShaped
         {
-            get { return (bool)GetValue(IsFanShapedProperty); }
-            set { SetValue(IsFanShapedProperty, value); }
+            get => (bool)GetValue(IsFanShapedProperty);
+            set => SetValue(IsFanShapedProperty, value);
         }
 
         public static readonly DependencyProperty IsFanShapedProperty =
@@ -87,8 +87,8 @@ namespace wpf_ui.Extends.DiyControls
 
         public ShowMode ShowMode
         {
-            get { return (ShowMode)GetValue(ShowModeProperty); }
-            set { SetValue(ShowModeProperty, value); }
+            get => (ShowMode)GetValue(ShowModeProperty);
+            set => SetValue(ShowModeProperty, value);
         }
 
         public static readonly DependencyProperty ShowModeProperty =
@@ -104,7 +104,7 @@ namespace wpf_ui.Extends.DiyControls
         private void InitWeight()
         {
             if (CircularWeight > ActualWidth) CircularWeight = ActualWidth;
-            IsFanShaped = CircularWeight == ActualWidth;
+            IsFanShaped = CircularWeight.Equals(ActualWidth);
             ArcWeight = CircularWeight / ActualWidth * 2;
         }
 
@@ -120,9 +120,10 @@ namespace wpf_ui.Extends.DiyControls
                 while (startValue < 100)
                 {
                     startValue++;
+                    var value = startValue;
                     Dispatcher.Invoke(() =>
                     {
-                        Value = startValue * endValue / 100;
+                        Value = value * endValue / 100;
                         Percentage = $"{(int)Value}%";
                         CircularPercentage = Value * 3.6;
                     });

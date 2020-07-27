@@ -107,7 +107,6 @@
 
     <!-- 禁用文本框 -->
     <Style x:Key="TbDisabled" BasedOn="{StaticResource TbPrimary}" TargetType="{x:Type diy:DiyTextbox}">
-        <Setter Property="BorderBrush" Value="{StaticResource BrushCold}"/>
         <Setter Property="Cursor" Value="No"/>
         <Setter Property="IsReadOnly" Value="True"/>
     </Style>

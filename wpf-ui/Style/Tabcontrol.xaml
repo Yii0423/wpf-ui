@@ -42,7 +42,6 @@
 
     <!-- 原始选项卡头 -->
     <Style x:Key="TiPrimary" TargetType="{x:Type diy:DiyTabitem}">
-        <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
         <Setter Property="SnapsToDevicePixels" Value="True"/>
         <Setter Property="Header" Value="{Binding Name}" />
         <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
@@ -114,7 +113,7 @@
     </Style>
 
     <!-- 特殊复单选框(用于TabControl项) -->
-    <Style x:Key="RdbTab" TargetType="{x:Type RadioButton}">
+    <Style x:Key="RdbTab" TargetType="{x:Type diy:DiyRadioButton}">
         <Setter Property="Cursor" Value="Hand"/>
         <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
         <Setter Property="SnapsToDevicePixels" Value="True"/>
@@ -123,31 +122,39 @@
         <Setter Property="Height" Value="40"/>
         <Setter Property="Template">
             <Setter.Value>
-                <ControlTemplate TargetType="{x:Type RadioButton}">
+                <ControlTemplate TargetType="{x:Type diy:DiyRadioButton}">
                     <Grid>
-                        <Border x:Name="bd" Padding="15,0" Background="Transparent"
-                                BorderBrush="{StaticResource BrushCold}" BorderThickness="0,0,0.5,0">
+                        <Border x:Name="bd" Padding="15,0" Background="Transparent">
                             <StackPanel Orientation="Horizontal">
                                 <ContentPresenter VerticalAlignment="Center"/>
                                 <!-- 关闭按钮 -->
                                 <diy:DiyButton x:Name="BtnClose" Style="{DynamicResource BtnPrimary}" Width="14" Height="14" BorderThickness="0"
-                                               Margin="10,0,0,0">
+                                               Margin="10,0,0,0" Background="Transparent">
                                     <diy:DiyButton.Content>
-                                        <Path Style="{DynamicResource Icon}" Data="{DynamicResource Icon-Remove}" Fill="{StaticResource BrushCold}"/>
+                                        <Path x:Name="iconClose" Style="{DynamicResource Icon}" Data="{DynamicResource Icon-Remove}" 
+                                              Fill="{StaticResource BrushCold}"/>
                                     </diy:DiyButton.Content>
                                 </diy:DiyButton>
                             </StackPanel>
                         </Border>
-                        <Label x:Name="lbl" VerticalAlignment="Top" Height="3" Background="Black"
-                               Visibility="Collapsed"/>
+                        <Label x:Name="lbl" VerticalAlignment="Top" Height="{StaticResource TopMenuCheckedDefault}" Background="Black" Visibility="Collapsed"/>
                     </Grid>
                     <ControlTemplate.Triggers>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="ShowCloseButton" Value="False"/>
+                            </MultiTrigger.Conditions>
+                            <MultiTrigger.Setters>
+                                <Setter TargetName="BtnClose" Property="Visibility" Value="Collapsed"/>
+                            </MultiTrigger.Setters>
+                        </MultiTrigger>
                         <MultiTrigger>
                             <MultiTrigger.Conditions>
                                 <Condition Property="IsMouseOver" Value="True"/>
                             </MultiTrigger.Conditions>
                             <MultiTrigger.Setters>
                                 <Setter TargetName="bd" Property="Background" Value="#EEE"/>
+                                <Setter TargetName="iconClose" Property="Fill" Value="{StaticResource BrushDanger}"/>
                             </MultiTrigger.Setters>
                         </MultiTrigger>
                         <MultiTrigger>

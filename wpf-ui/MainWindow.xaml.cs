@@ -19,17 +19,17 @@ namespace wpf_ui
         /// <summary>
         /// 窗体阴影宽度
         /// </summary>
-        private readonly int customBorderThickness = 7;
+        private const int CustomBorderThickness = 7;
 
         /// <summary>
-        /// Corner width used in HitTest
+        /// 尺寸可调节感应区的宽度
         /// </summary>
-        private readonly int cornerWidth = 8;
+        private const int CornerWidth = 8;
 
         /// <summary>
-        /// Mouse point used by HitTest
+        /// 调节尺寸时鼠标的坐标
         /// </summary>
-        private Point mousePoint = new Point();
+        private Point _mousePoint;
 
         /// <summary>
         /// 构造函数
@@ -61,55 +61,77 @@ namespace wpf_ui
             //顶部菜单数据源
             MenuTop.ItemSources = new List<MenuTopItem>
             {
-                new MenuTopItem { Title = "Icon-Indent-Right", IsTop = true },
-                new MenuTopItem { Title = "Icon-Globe", IsTop = true },
-                new MenuTopItem { Title = "Icon-Repeat", IsTop = true },
-                new MenuTopItem { Title = "Icon-Ellipsis-Vertical", IsTop = true, IsRight = true },
-                new MenuTopItem { Title = "超级管理员", IsTop = true, IsRight = true, ChildItem = new List<MenuTopItem>{
-                                new MenuTopItem { Title = "基本资料" },
-                                new MenuTopItem { Title = "修改密码" },
-                                new MenuTopItem { Title = "退出" }
-                            } },
-                new MenuTopItem { Title = "Icon-Tag", IsTop = true, IsRight = true },
-                new MenuTopItem { Title = "Icon-Dashboard", IsTop = true, IsRight = true },
-                new MenuTopItem { Title = "Icon-Bell", IsTop = true, IsRight = true }
+                new MenuTopItem {Title = "Icon-Indent-Right", IsTop = true},
+                new MenuTopItem {Title = "Icon-Globe", IsTop = true},
+                new MenuTopItem {Title = "Icon-Repeat", IsTop = true},
+                new MenuTopItem {Title = "Icon-Ellipsis-Vertical", IsTop = true, IsRight = true},
+                new MenuTopItem
+                {
+                    Title = "超级管理员", IsTop = true, IsRight = true, ChildItem = new List<MenuTopItem>
+                    {
+                        new MenuTopItem {Title = "基本资料"},
+                        new MenuTopItem {Title = "修改密码"},
+                        new MenuTopItem {Title = "退出"}
+                    }
+                },
+                new MenuTopItem {Title = "Icon-Tag", IsTop = true, IsRight = true},
+                new MenuTopItem {Title = "Icon-Dashboard", IsTop = true, IsRight = true},
+                new MenuTopItem {Title = "Icon-Bell", IsTop = true, IsRight = true}
             };
             //侧边菜单数据源
             MenuLeft.ItemSources = new List<MenuTopItem>
             {
-                new MenuTopItem { Title = "Icon-Home", IsTop = true, Url = "Index", ChildItem = new List<MenuTopItem>{
-                        new MenuTopItem { Title = "移动模块" },
-                        new MenuTopItem { Title = "后台模块", ChildItem = new List<MenuTopItem>{
-                                new MenuTopItem { Title = "后台顶部" },
-                                new MenuTopItem { Title = "后台左侧" },
-                                new MenuTopItem { Title = "后台下方" }
+                new MenuTopItem
+                {
+                    Title = "Icon-Home", IsTop = true, Url = "Index", ChildItem = new List<MenuTopItem>
+                    {
+                        new MenuTopItem {Title = "移动模块"},
+                        new MenuTopItem
+                        {
+                            Title = "后台模块", ChildItem = new List<MenuTopItem>
+                            {
+                                new MenuTopItem {Title = "后台顶部"},
+                                new MenuTopItem {Title = "后台左侧"},
+                                new MenuTopItem {Title = "后台下方"}
                             }
-                         }
+                        }
                     }
                 },
-                new MenuTopItem { Title = "Icon-Music", IsTop = true },
-                new MenuTopItem { Title = "Icon-Calendar", IsTop = true, ChildItem = new List<MenuTopItem>{
-                        new MenuTopItem { Title = "移动模块" },
-                        new MenuTopItem { Title = "后台模块", ChildItem = new List<MenuTopItem>{
-                                new MenuTopItem { Title = "后台顶部" },
-                                new MenuTopItem { Title = "后台左侧" },
-                                new MenuTopItem { Title = "后台下方", ChildItem = new List<MenuTopItem>{
-                                new MenuTopItem { Title = "后台顶部" },
-                                new MenuTopItem { Title = "后台左侧" },
-                                new MenuTopItem { Title = "后台下方" }
-                            }
+                new MenuTopItem {Title = "Icon-Music", IsTop = true},
+                new MenuTopItem
+                {
+                    Title = "Icon-Calendar", IsTop = true, ChildItem = new List<MenuTopItem>
+                    {
+                        new MenuTopItem {Title = "移动模块"},
+                        new MenuTopItem
+                        {
+                            Title = "后台模块", ChildItem = new List<MenuTopItem>
+                            {
+                                new MenuTopItem {Title = "后台顶部"},
+                                new MenuTopItem {Title = "后台左侧"},
+                                new MenuTopItem
+                                {
+                                    Title = "后台下方", ChildItem = new List<MenuTopItem>
+                                    {
+                                        new MenuTopItem {Title = "后台顶部"},
+                                        new MenuTopItem {Title = "后台左侧"},
+                                        new MenuTopItem {Title = "后台下方", Url = "Index"}
+                                    }
                                 }
                             }
                         },
-                        new MenuTopItem { Title = "电商平台" }
+                        new MenuTopItem {Title = "电商平台"}
                     }
                 },
-                new MenuTopItem { Title = "Icon-Rss", IsTop = true },
-                new MenuTopItem { Title = "Icon-Plane", IsTop = true, ChildItem = new List<MenuTopItem>{
-                                new MenuTopItem { Title = "后台顶部" },
-                                new MenuTopItem { Title = "后台左侧" },
-                                new MenuTopItem { Title = "后台下方" }
-                            }
+                new MenuTopItem {Title = "Icon-Rss", IsTop = true},
+                new MenuTopItem
+                {
+                    Title = "Icon-Plane", IsTop = true, ChildItem = new List<MenuTopItem>
+                    {
+                        new MenuTopItem {Title = "后台顶部"},
+                        new MenuTopItem {Title = "后台左侧"},
+                        new MenuTopItem {Title = "后台下方"}
+                    }
                 }
             };
         }
@@ -131,8 +153,7 @@ namespace wpf_ui
         /// </summary>
         private void MainWindow_StateChanged(object sender, EventArgs e)
         {
-            if (WindowState == WindowState.Maximized) BorderThickness = new Thickness(0);
-            else BorderThickness = new Thickness(customBorderThickness);
+            BorderThickness = WindowState == WindowState.Maximized ? new Thickness(0) : new Thickness(CustomBorderThickness);
         }
 
         /// <summary>
@@ -142,17 +163,13 @@ namespace wpf_ui
         {
             if (e.ClickCount == 2)
             {
-                if (WindowState == WindowState.Maximized) WindowState = WindowState.Normal;
-                else WindowState = WindowState.Maximized;
+                WindowState = WindowState == WindowState.Maximized ? WindowState.Normal : WindowState.Maximized;
             }
             else
             {
-                if (e.OriginalSource is Grid || e.OriginalSource is Border || e.OriginalSource is Window)
-                {
-                    WindowInteropHelper wih = new WindowInteropHelper(this);
-                    Win32.SendMessage(wih.Handle, Win32.WM_NCLBUTTONDOWN, (int)Win32.HitTest.HTCAPTION, 0);
-                    return;
-                }
+                if (!(e.OriginalSource is Grid) && !(e.OriginalSource is Border) && !(e.OriginalSource is Window)) return;
+                WindowInteropHelper wih = new WindowInteropHelper(this);
+                Win32.SendMessage(wih.Handle, Win32.WM_NCLBUTTONDOWN, (int)Win32.HitTest.HTCAPTION, 0);
             }
         }
 
@@ -171,7 +188,7 @@ namespace wpf_ui
         {
             HwndSource source = HwndSource.FromHwnd(new WindowInteropHelper(this).Handle);
             if (source == null) throw new Exception("Cannot get HwndSource instance.");
-            source.AddHook(new HwndSourceHook(this.WndProc));
+            source.AddHook(WndProc);
         }
 
         private IntPtr WndProc(IntPtr hwnd, int msg, IntPtr wParam, IntPtr lParam, ref bool handled)
@@ -183,63 +200,61 @@ namespace wpf_ui
                     handled = true;
                     break;
                 case Win32.WM_NCHITTEST: // WM_NCHITTEST message
-                    return WmNCHitTest(lParam, ref handled);
+                    return WmNcHitTest(lParam, ref handled);
             }
             return IntPtr.Zero;
         }
 
-        private IntPtr WmNCHitTest(IntPtr lParam, ref bool handled)
+        private IntPtr WmNcHitTest(IntPtr lParam, ref bool handled)
         {
             // Update cursor point
             // The low-order word specifies the x-coordinate of the cursor.
             // #define GET_X_LPARAM(lp) ((int)(short)LOWORD(lp))
-            this.mousePoint.X = (int)(short)(lParam.ToInt32() & 0xFFFF);
+            _mousePoint.X = (int)(short)(lParam.ToInt32() & 0xFFFF);
             // The high-order word specifies the y-coordinate of the cursor.
             // #define GET_Y_LPARAM(lp) ((int)(short)HIWORD(lp))
-            this.mousePoint.Y = (int)(short)(lParam.ToInt32() >> 16);
+            _mousePoint.Y = (int)(short)(lParam.ToInt32() >> 16);
             // Do hit test
             handled = true;
-            if (Math.Abs(this.mousePoint.Y - this.Top) <= this.cornerWidth
-                && Math.Abs(this.mousePoint.X - this.Left) <= this.cornerWidth)
+            if (Math.Abs(_mousePoint.Y - Top) <= CornerWidth
+                && Math.Abs(_mousePoint.X - Left) <= CornerWidth)
             { // Top-Left
                 return new IntPtr((int)Win32.HitTest.HTTOPLEFT);
             }
-            else if (Math.Abs(this.ActualHeight + this.Top - this.mousePoint.Y) <= this.cornerWidth
-                && Math.Abs(this.mousePoint.X - this.Left) <= this.cornerWidth)
+
+            if (Math.Abs(ActualHeight + Top - _mousePoint.Y) <= CornerWidth
+                && Math.Abs(_mousePoint.X - Left) <= CornerWidth)
             { // Bottom-Left
                 return new IntPtr((int)Win32.HitTest.HTBOTTOMLEFT);
             }
-            else if (Math.Abs(this.mousePoint.Y - this.Top) <= this.cornerWidth
-                && Math.Abs(this.ActualWidth + this.Left - this.mousePoint.X) <= this.cornerWidth)
+            if (Math.Abs(_mousePoint.Y - Top) <= CornerWidth
+                && Math.Abs(ActualWidth + Left - _mousePoint.X) <= CornerWidth)
             { // Top-Right
                 return new IntPtr((int)Win32.HitTest.HTTOPRIGHT);
             }
-            else if (Math.Abs(this.ActualWidth + this.Left - this.mousePoint.X) <= this.cornerWidth
-                && Math.Abs(this.ActualHeight + this.Top - this.mousePoint.Y) <= this.cornerWidth)
+            if (Math.Abs(ActualWidth + Left - _mousePoint.X) <= CornerWidth
+                && Math.Abs(ActualHeight + Top - _mousePoint.Y) <= CornerWidth)
             { // Bottom-Right
                 return new IntPtr((int)Win32.HitTest.HTBOTTOMRIGHT);
             }
-            else if (Math.Abs(this.mousePoint.X - this.Left) <= this.customBorderThickness)
+            if (Math.Abs(_mousePoint.X - Left) <= CustomBorderThickness)
             { // Left
                 return new IntPtr((int)Win32.HitTest.HTLEFT);
             }
-            else if (Math.Abs(this.ActualWidth + this.Left - this.mousePoint.X) <= this.customBorderThickness)
+            if (Math.Abs(ActualWidth + Left - _mousePoint.X) <= CustomBorderThickness)
             { // Right
                 return new IntPtr((int)Win32.HitTest.HTRIGHT);
             }
-            else if (Math.Abs(this.mousePoint.Y - this.Top) <= this.customBorderThickness)
+            if (Math.Abs(_mousePoint.Y - Top) <= CustomBorderThickness)
             { // Top
                 return new IntPtr((int)Win32.HitTest.HTTOP);
             }
-            else if (Math.Abs(this.ActualHeight + this.Top - this.mousePoint.Y) <= this.customBorderThickness)
+            if (Math.Abs(ActualHeight + Top - _mousePoint.Y) <= CustomBorderThickness)
             { // Bottom
                 return new IntPtr((int)Win32.HitTest.HTBOTTOM);
             }
-            else
-            {
-                handled = false;
-                return IntPtr.Zero;
-            }
+            handled = false;
+            return IntPtr.Zero;
         }
 
         private void WmGetMinMaxInfo(IntPtr hwnd, IntPtr lParam)

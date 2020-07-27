@@ -115,7 +115,7 @@ namespace wpf_ui.Extends.Ucs
                 if (MiFontColor != Brushes.White)
                 {
                     MtiChecked.VerticalAlignment = VerticalAlignment.Top;
-                    MtiChecked.Height = 3;
+                    MtiChecked.Height = (double)FindResource("TopMenuCheckedDefault");
                     MtiChecked.Background = MiFontColor;
                     rdb.SetResourceReference(StyleProperty, "MiTopParentPrimaryWithoutChecked");
                     GrdMain.Margin = new Thickness(0);
@@ -191,7 +191,7 @@ namespace wpf_ui.Extends.Ucs
         /// <summary>
         /// 加载子级菜单
         /// </summary>
-        /// <param name="items">父级菜单项</param>
+        /// <param name="item">父级菜单项</param>
         /// <param name="rdb">父级控件</param>
         private void LoadChildMenu(MenuTopItem item, RadioButton rdb)
         {
@@ -289,7 +289,7 @@ namespace wpf_ui.Extends.Ucs
         /// </summary>
         private void Mtip_MouseEnter(object sender, MouseEventArgs e)
         {
-            Control radioButton = sender as Control;
+            if (!(sender is Control radioButton)) return;
             Point point = radioButton.TranslatePoint(new Point(0, 0), SpMain);
             MtiChecked.Margin = new Thickness(point.X, MtiChecked.Margin.Top, MtiChecked.Margin.Right, MtiChecked.Margin.Bottom);
             MtiChecked.Width = radioButton.ActualWidth;
@@ -319,11 +319,11 @@ namespace wpf_ui.Extends.Ucs
 
                 if (!_isDo)
                 {
-                    ThicknessAnimation _ani = new ThicknessAnimation(
+                    ThicknessAnimation ani = new ThicknessAnimation(
                         new Thickness(childMenu.Margin.Left, childMenu.Margin.Top + 30, childMenu.Margin.Right, childMenu.Margin.Bottom),
                         childMenu.Margin, new Duration(TimeSpan.FromSeconds(0.2)));
-                    _ani.Completed += delegate { _isDo = false; };
-                    childMenu.BeginAnimation(MarginProperty, _ani);
+                    ani.Completed += delegate { _isDo = false; };
+                    childMenu.BeginAnimation(MarginProperty, ani);
                     //标识动画执行中
                     _isDo = true;
                 }

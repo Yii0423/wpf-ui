@@ -31,7 +31,7 @@
                                 </Path.RenderTransform>
                             </Path>
                         </StackPanel>
-                        <Label x:Name="lbl" VerticalAlignment="Bottom" HorizontalAlignment="Left" Height="8" IsHitTestVisible="False"
+                        <Label x:Name="lbl" VerticalAlignment="Bottom" HorizontalAlignment="Left" Height="{StaticResource LeftMenuCheckedDefault}" IsHitTestVisible="False"
                                Width="{Binding RelativeSource={RelativeSource FindAncestor,AncestorType={x:Type Grid},AncestorLevel=1},Path=ActualWidth}"
                                Visibility="Collapsed" Background="{StaticResource BrushChecked}"/>
                     </Grid>

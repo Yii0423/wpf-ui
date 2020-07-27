@@ -13,7 +13,7 @@
                    Cursor="Hand" RenderOptions.BitmapScalingMode="HighQuality" Visibility="Collapsed"/>
             <Grid x:Name="GrdMain" Margin="20,0,0,0">
                 <!-- 标识选中状态 -->
-                <Label x:Name="MtiChecked" VerticalAlignment="Bottom" HorizontalAlignment="Left" Height="8" IsHitTestVisible="False"
+                <Label x:Name="MtiChecked" VerticalAlignment="Bottom" HorizontalAlignment="Left" Height="{StaticResource LeftMenuCheckedDefault}" IsHitTestVisible="False"
                        Background="{StaticResource BrushChecked}" Opacity="0"/>
                 <!-- 一级菜单 -->
                 <DockPanel x:Name="SpMain"/>

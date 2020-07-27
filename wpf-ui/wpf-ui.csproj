@@ -58,6 +58,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Extends\DiyControls\DiyRadioButton.cs" />
     <Compile Include="Extends\Ucs\UcTab.xaml.cs">
       <DependentUpon>UcTab.xaml</DependentUpon>
     </Compile>

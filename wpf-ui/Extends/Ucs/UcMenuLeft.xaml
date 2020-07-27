@@ -19,7 +19,7 @@
                 <!-- 一级菜单 -->
                 <StackPanel x:Name="SpMain"/>
                 <!-- 标识选中状态 -->
-                <Label x:Name="MtiChecked" VerticalAlignment="Top" HorizontalAlignment="Left" Width="8" IsHitTestVisible="False"
+                <Label x:Name="MtiChecked" VerticalAlignment="Top" HorizontalAlignment="Left" Width="{StaticResource LeftMenuCheckedDefault}" IsHitTestVisible="False"
                        Background="{StaticResource BrushChecked}" Opacity="0"/>
             </Grid>
         </StackPanel>

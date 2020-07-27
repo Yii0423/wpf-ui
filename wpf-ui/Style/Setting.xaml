@@ -68,12 +68,17 @@
     <CornerRadius x:Key="CornerRadiusDefault">4,4,4,4</CornerRadius>
     <!-- 默认水印不透明度 -->
     <system:Double x:Key="WaterMarkOpacityDefault">0.5</system:Double>
+    <!-- 默认侧边菜单选中条宽度 -->
+    <system:Double x:Key="LeftMenuCheckedDefault">8</system:Double>
+    <!-- 默认顶部菜单选中条宽度 -->
+    <system:Double x:Key="TopMenuCheckedDefault">2</system:Double>
 
     <!-- #endregion -->
 
     <!-- #region 基础设置 -->
 
     <Style BasedOn="{x:Null}" TargetType="{x:Type Window}">
+        <Setter Property="FontFamily" Value="Microsoft YaHei,Consolas"></Setter>
         <Setter Property="FontSize" Value="{StaticResource FontSizeDefault}"></Setter>
         <Setter Property="Foreground" Value="{DynamicResource BrushFont}"></Setter>
     </Style>
