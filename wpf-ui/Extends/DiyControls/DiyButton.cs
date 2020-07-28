@@ -47,5 +47,18 @@ namespace wpf_ui.Extends.DiyControls
             DependencyProperty.Register("SubTitle", typeof(string), typeof(DiyButton), new PropertyMetadata(""));
 
         #endregion
+
+        #region 链接
+
+        public string Url
+        {
+            get => (string)GetValue(UrlProperty);
+            set => SetValue(UrlProperty, value);
+        }
+
+        public static readonly DependencyProperty UrlProperty =
+            DependencyProperty.Register("Url", typeof(string), typeof(DiyButton), new PropertyMetadata(""));
+
+        #endregion
     }
 }

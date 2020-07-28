@@ -23,7 +23,7 @@
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type diy:DiyProgressbar}">
                     <Grid>
-                        <Border Name="PART_Track" Background="{StaticResource BrushCold}"/>
+                        <Border Name="PART_Track" Background="{StaticResource BrushTableBoder}"/>
                         <Border x:Name="PART_Indicator" HorizontalAlignment="Left" Background="{TemplateBinding Background}">
                             <Grid>
                                 <TextBlock x:Name="in" Text="{TemplateBinding Percentage}" HorizontalAlignment="Center" VerticalAlignment="Center"

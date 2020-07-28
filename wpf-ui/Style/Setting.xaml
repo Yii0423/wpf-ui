@@ -28,6 +28,8 @@
     <Color x:Key="ColorMenuChecked">#2D313C</Color>
     <!-- 界面底色 -->
     <Color x:Key="ColorBackground">#F2F2F2</Color>
+    <!-- 表格边框色 -->
+    <Color x:Key="ColorTableBoder">#E6E6E6</Color>
 
     <!-- #endregion -->
 
@@ -57,6 +59,8 @@
     <SolidColorBrush x:Key="BrushMenuChecked" Color="{DynamicResource ColorMenuChecked}"/>
     <!-- 界面底色 -->
     <SolidColorBrush x:Key="BrushBackground" Color="{DynamicResource ColorBackground}"/>
+    <!-- 表格边框色 -->
+    <SolidColorBrush x:Key="BrushTableBoder" Color="{DynamicResource ColorTableBoder}"/>
 
     <!-- #endregion -->
 
@@ -88,9 +92,13 @@
     <!-- #region 基础设置 -->
 
     <Style BasedOn="{x:Null}" TargetType="{x:Type Window}">
-        <Setter Property="FontFamily" Value="{StaticResource FontFamilyDefault}"></Setter>
-        <Setter Property="FontSize" Value="{StaticResource FontSizeDefault}"></Setter>
-        <Setter Property="Foreground" Value="{DynamicResource BrushFont}"></Setter>
+        <Setter Property="FontFamily" Value="{StaticResource FontFamilyDefault}"/>
+        <Setter Property="FontSize" Value="{StaticResource FontSizeDefault}"/>
+        <Setter Property="Foreground" Value="{DynamicResource BrushFont}"/>
+    </Style>
+
+    <Style BasedOn="{x:Null}" TargetType="{x:Type Border}">
+        <Setter Property="SnapsToDevicePixels" Value="True"/>
     </Style>
 
     <!-- #endregion -->

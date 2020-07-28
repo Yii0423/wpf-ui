@@ -163,6 +163,9 @@ namespace wpf_ui.Extends.Ucs
                 if (!string.IsNullOrWhiteSpace(item.Url))
                     rdb.Click += delegate { FrmMain?.Navigate(new Uri($"{item.Url}.xaml", UriKind.Relative)); };
 
+                //是否显示徽章
+                if (item.IsHasNew) rdb.Tag = "-1";
+
                 SpMain.Children.Add(rdb);
 
                 if (i == 0)

@@ -13,6 +13,7 @@
 
     <!-- 原始提示 -->
     <Style TargetType="{x:Type ToolTip}">
+        <Setter Property="SnapsToDevicePixels" Value="True"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate>
@@ -26,6 +27,7 @@
 
     <!-- 带阴影的提示 -->
     <Style x:Key="TtpShadow" TargetType="{x:Type ToolTip}">
+        <Setter Property="SnapsToDevicePixels" Value="True"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate>

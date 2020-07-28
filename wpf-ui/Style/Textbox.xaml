@@ -14,6 +14,7 @@
 
     <!-- 原始文本框 -->
     <Style x:Key="TbPrimary" TargetType="{x:Type diy:DiyTextbox}">
+        <Setter Property="SnapsToDevicePixels" Value="True"/>
         <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
         <Setter Property="Cursor" Value="IBeam"/>
         <Setter Property="BorderBrush" Value="{StaticResource BrushCold}"/>

@@ -4,6 +4,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
+using System.Windows.Threading;
 using wpf_ui.Extends.DiyControls;
 using wpf_ui.Model;
 
@@ -33,6 +34,21 @@ namespace wpf_ui.Extends.Ucs
         /// 每页显示菜单子项数
         /// </summary>
         public int MenuItemCount { get; set; }
+
+        /// <summary>
+        /// 自动切换选中项
+        /// </summary>
+        public bool AutoChange { get; set; }
+
+        /// <summary>
+        /// 上次选中的卡片页索引
+        /// </summary>
+        private int _oldCheckedIndex = -1;
+
+        /// <summary>
+        /// 自动切换用的定时器
+        /// </summary>
+        private DispatcherTimer _timer;
 
         /// <summary>
         /// 构造函数
@@ -84,27 +100,28 @@ namespace wpf_ui.Extends.Ucs
                 {
                     curDiyButton.Icon = FindResource(item.Icon) as Geometry;
                 }
-                curDiyButton.SetResourceReference(StyleProperty, ControlStyle);
+                curDiyButton.SetResourceReference(StyleProperty, string.IsNullOrWhiteSpace(item.Style) ? ControlStyle : item.Style);
                 if (item.IsTop) curDiyButton.Foreground = FindResource("BrushDanger") as Brush;
-                curDiyButton.Width = (ActualWidth - (Convert.ToInt32(MenuItemCount / 2) + 1) * 10) / Convert.ToInt32(MenuItemCount / 2);
+                curDiyButton.Width = (ActualWidth - (MenuItemCount / 2 + 1) * 10) / (MenuItemCount / 2 == 0 ? 1 : MenuItemCount / 2);
                 curWrapPanel?.Children.Add(curDiyButton);
             }
             //右上角缩略切换按钮
             if (ItemSources.Count <= MenuItemCount) return;
             int allPage = ItemSources.Count / MenuItemCount;
-            for (int i = 0; i < allPage + 1; i++)
+            int remainder = ItemSources.Count % MenuItemCount;
+            for (int i = remainder == 0 ? 1 : 0; i < allPage + 1; i++)
             {
-                DiyRadioButton diyRadioButton = new DiyRadioButton
+                RadioButton radioButton = new RadioButton
                 {
                     HorizontalAlignment = HorizontalAlignment.Right,
                     Margin = i == allPage ? new Thickness(0) : new Thickness(5, 0, 0, 0),
                     IsChecked = i == allPage
                 };
-                diyRadioButton.SetResourceReference(StyleProperty, "RbCard");
-                DockPanel.SetDock(diyRadioButton, Dock.Right);
+                radioButton.SetResourceReference(StyleProperty, "RbCard");
+                DockPanel.SetDock(radioButton, Dock.Right);
                 int i1 = i;
                 bool isDo = false;//避免动画重复执行
-                diyRadioButton.MouseEnter += delegate
+                radioButton.Checked += delegate
                 {
                     if (isDo) return;
                     ThicknessAnimation da = new ThicknessAnimation
@@ -115,15 +132,51 @@ namespace wpf_ui.Extends.Ucs
                     };
                     da.Completed += delegate
                     {
-                        diyRadioButton.IsChecked = true;
+                        radioButton.IsChecked = true;
+                        _oldCheckedIndex = i1;
                         isDo = false;
                     };
                     SpMain.BeginAnimation(MarginProperty, da);
                     isDo = true;
                 };
-                DpMain.Children.Add(diyRadioButton);
+                radioButton.MouseEnter += delegate { radioButton.IsChecked = true; };
+                DpMain.Children.Add(radioButton);
             }
-            SpMain.Margin = new Thickness(0);
+            //是否开启自动切换
+            if (AutoChange && _timer == null) SetTimer();
+            //尺寸变化后重新定位当前卡片页
+            if (DpMain.Children.Count == 0 || _oldCheckedIndex == -1) return;
+            ThicknessAnimation da2 = new ThicknessAnimation
+            {
+                From = SpMain.Margin,
+                To = new Thickness(-ActualWidth * (allPage - _oldCheckedIndex), 0, 0, 0),
+                Duration = TimeSpan.FromSeconds(0.001)
+            };
+            da2.Completed += delegate
+            {
+                //选中卡片右上角当前页标志
+                if (!(DpMain.Children[_oldCheckedIndex] is RadioButton radioButton)) return;
+                radioButton.IsChecked = true;
+            };
+            SpMain.BeginAnimation(MarginProperty, da2);
+        }
+
+        /// <summary>
+        /// 设置定时器
+        /// </summary>
+        private void SetTimer()
+        {
+            if (DpMain.Children.Count <= 1) return;
+            int index = DpMain.Children.Count - 2;
+            _timer = new DispatcherTimer { Interval = TimeSpan.FromSeconds(3) };
+            _timer.Tick += delegate
+            {
+                if (index < 0) index = DpMain.Children.Count - 1;
+                if (!(DpMain.Children[index] is RadioButton radioButton)) return;
+                radioButton.IsChecked = true;
+                index--;
+            };
+            _timer.Start();
         }
     }
 }

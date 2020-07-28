@@ -6,12 +6,8 @@
              mc:Ignorable="d" d:DesignHeight="60" d:DesignWidth="1000" 
              UseLayoutRounding="True" Loaded="UserControl_Loaded">
     <Grid>
-        <Border x:Name="BdMain" Background="{StaticResource BrushMenu}">
-            <Border.Effect>
-                <DropShadowEffect ShadowDepth="1" Opacity="0.1"/>
-            </Border.Effect>
-        </Border>
-        <DockPanel>
+        <Border x:Name="BdMain" Background="{StaticResource BrushMenu}"/>
+            <DockPanel>
             <!-- Logo -->
             <Image x:Name="ImgLogo" Source="/wpf-ui;component/Content/Images/logo.png" Height="40" Margin="20,0,0,0" 
                    Cursor="Hand" RenderOptions.BitmapScalingMode="HighQuality" Visibility="Collapsed"/>

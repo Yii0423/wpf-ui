@@ -12,6 +12,7 @@
     <!-- #region 全局样式 -->
 
     <Style BasedOn="{x:Null}" TargetType="{x:Type Label}">
+        <Setter Property="SnapsToDevicePixels" Value="True"/>
         <Setter Property="FontFamily" Value="{StaticResource FontFamilyDefault}"/>
         <Setter Property="FontSize" Value="{StaticResource FontSizeDefault}"/>
         <Setter Property="VerticalContentAlignment" Value="Center"/>

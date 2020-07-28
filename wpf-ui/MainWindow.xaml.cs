@@ -47,6 +47,7 @@ namespace wpf_ui
         private void MainWindow_Loaded(object sender, RoutedEventArgs e)
         {
             InitData();
+            SetFrameWidth();
         }
 
         /// <summary>
@@ -62,7 +63,7 @@ namespace wpf_ui
             MenuTop.ItemSources = new List<MMenuItem>
             {
                 new MMenuItem {Title = "Icon-Indent-Right", IsTop = true},
-                new MMenuItem {Title = "Icon-Globe", IsTop = true},
+                new MMenuItem {Title = "Icon-Globe", IsTop = true, IsHasNew = true},
                 new MMenuItem {Title = "Icon-Repeat", IsTop = true},
                 new MMenuItem {Title = "Icon-Ellipsis-Vertical", IsTop = true, IsRight = true},
                 new MMenuItem
@@ -76,7 +77,7 @@ namespace wpf_ui
                 },
                 new MMenuItem {Title = "Icon-Tag", IsTop = true, IsRight = true},
                 new MMenuItem {Title = "Icon-Dashboard", IsTop = true, IsRight = true},
-                new MMenuItem {Title = "Icon-Bell", IsTop = true, IsRight = true}
+                new MMenuItem {Title = "Icon-Bell", IsTop = true, IsRight = true, IsHasNew = true}
             };
             //侧边菜单数据源
             MenuLeft.ItemSources = new List<MMenuItem>
@@ -146,10 +147,19 @@ namespace wpf_ui
             SourceInitialized += MainWindow_SourceInitialized;
             StateChanged += MainWindow_StateChanged;
             FrmMain.Navigated += FrmMain_Navigated;
+            SizeChanged += MainWindow_SizeChanged;
         }
 
         /// <summary>
-        /// 窗体尺寸改变事件
+        /// 窗体尺寸改变后事件
+        /// </summary>
+        private void MainWindow_SizeChanged(object sender, SizeChangedEventArgs e)
+        {
+            SetFrameWidth();
+        }
+
+        /// <summary>
+        /// 窗体尺寸改变前事件
         /// </summary>
         private void MainWindow_StateChanged(object sender, EventArgs e)
         {
@@ -180,6 +190,15 @@ namespace wpf_ui
         {
             if (!FrmMain.CanGoBack) return;
             FrmMain.RemoveBackEntry();
+        }
+
+        /// <summary>
+        /// 设置Frame最大宽度
+        /// </summary>
+        private void SetFrameWidth()
+        {
+            if (!(FrmMain.Parent is ScrollViewer scrollViewer)) return;
+            FrmMain.Width = scrollViewer.ActualWidth;
         }
 
         #region 窗体状态切换/窗体拖动/窗体尺寸拖动变化

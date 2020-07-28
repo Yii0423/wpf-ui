@@ -4,7 +4,9 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:ucs="clr-namespace:wpf_ui.Extends.Ucs" x:Class="wpf_ui.View.Index"
-      mc:Ignorable="d" d:DesignHeight="450" Background="{StaticResource BrushBackground}"
+      mc:Ignorable="d" xmlns:diy="clr-namespace:wpf_ui.Extends.DiyControls"
+      xmlns:oxyplot="clr-namespace:OxyPlot.Wpf;assembly=OxyPlot.Wpf"
+      d:DesignWidth="1200" Background="{StaticResource BrushBackground}"
       Loaded="Index_OnLoaded">
     <Grid>
         <Grid.ColumnDefinitions>
@@ -14,6 +16,237 @@
         </Grid.ColumnDefinitions>
         <ucs:UcCard x:Name="Card1" Height="240" Margin="10,10,5,0" VerticalAlignment="Top"/>
         <ucs:UcCard x:Name="Card2" Height="240" Margin="5,10,5,0" VerticalAlignment="Top" Grid.Column="1"/>
-        <ucs:UcCard x:Name="Card3" Height="240" Margin="5,10,10,0" VerticalAlignment="Top" Grid.Column="2"/>
+        <Grid Height="240" Margin="5,10,10,0" VerticalAlignment="Top" Grid.Column="2">
+            <Border Background="{StaticResource BrushPrimary}" CornerRadius="1">
+                <Border.Effect>
+                    <DropShadowEffect ShadowDepth="1" Opacity="0.1"/>
+                </Border.Effect>
+            </Border>
+            <Label Content="版本信息" VerticalAlignment="Top" Height="40" VerticalContentAlignment="Center" Padding="10,0,0,0"/>
+            <Grid Margin="0,40,0,0">
+                <Border BorderBrush="{StaticResource BrushBackground}" BorderThickness="0,1,0,0" Padding="10">
+                    <Border BorderBrush="{StaticResource BrushTableBoder}" BorderThickness="0,0,1,1">
+                        <diy:DiyTable RowCount="4" ColCount="2">
+                            <Border MinWidth="1">
+                                <Label Content="当前版本" HorizontalContentAlignment="Right"/>
+                            </Border>
+                            <Border MinWidth="2">
+                                <StackPanel Orientation="Horizontal">
+                                    <Label Content="v1.4.0 pro"/>
+                                    <Button Content="日志" Style="{StaticResource BtnHyperlink}"/>
+                                    <Button Content="检查更新" Style="{StaticResource BtnHyperlink}"/>
+                                </StackPanel>
+                            </Border>
+                            <Border>
+                                <Label Content="基于框架" HorizontalContentAlignment="Right"/>
+                            </Border>
+                            <Border>
+                                <StackPanel Orientation="Horizontal">
+                                    <Label Content="layui-v2.5.6"/>
+                                </StackPanel>
+                            </Border>
+                            <Border>
+                                <Label Content="主要特色" HorizontalContentAlignment="Right"/>
+                            </Border>
+                            <Border>
+                                <StackPanel Orientation="Horizontal">
+                                    <Label Content="单页面 / 响应式 / 清爽 / 极简"/>
+                                </StackPanel>
+                            </Border>
+                            <Border>
+                                <Label Content="获取渠道" HorizontalContentAlignment="Right"/>
+                            </Border>
+                            <Border>
+                                <StackPanel Orientation="Horizontal">
+                                    <diy:DiyButton Style="{StaticResource BtnDanger}" Content="获取授权" Width="100" Margin="5,0,0,0"/>
+                                    <diy:DiyButton Style="{StaticResource BtnDefault}" Content="立即下载" Width="100" Margin="5,0,0,0"/>
+                                </StackPanel>
+                            </Border>
+                        </diy:DiyTable>
+                    </Border>
+                </Border>
+            </Grid>
+        </Grid>
+        <Grid Height="400" Margin="10,260,5,10" VerticalAlignment="Top" ColumnSpan="2" Grid.Column="0">
+            <Border Background="{StaticResource BrushPrimary}" CornerRadius="1">
+                <Border.Effect>
+                    <DropShadowEffect ShadowDepth="1" Opacity="0.1"/>
+                </Border.Effect>
+            </Border>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1*"/>
+                </Grid.ColumnDefinitions>
+                <Label Content="数据概要" VerticalAlignment="Top" Height="40" VerticalContentAlignment="Center" Padding="10,0,0,0"/>
+                <DockPanel x:Name="DpMain" Grid.Column="1" VerticalAlignment="Top" Height="40" Margin="10,0">
+                    <RadioButton Style="{StaticResource RbCard}" DockPanel.Dock="Right" HorizontalAlignment="Right"/>
+                    <RadioButton Style="{StaticResource RbCard}" DockPanel.Dock="Right" HorizontalAlignment="Right" Margin="0,0,5,0"/>
+                    <RadioButton Style="{StaticResource RbCard}" DockPanel.Dock="Right" HorizontalAlignment="Right" Margin="0,0,5,0"
+                                 IsChecked="True"/>
+                </DockPanel>
+            </Grid>
+            <Grid Margin="0,40,0,0">
+                <Border BorderBrush="{StaticResource BrushBackground}" BorderThickness="0,1,0,0">
+                    <Grid Margin="0,0,25,0">
+                        <oxyplot:Plot Title="今日流量趋势">
+                            <oxyplot:Plot.Axes>
+                                <oxyplot:DateTimeAxis Title="时间" />
+                                <oxyplot:LinearAxis Title="数值" />
+                            </oxyplot:Plot.Axes>
+                        </oxyplot:Plot>
+                    </Grid>
+                </Border>
+            </Grid>
+        </Grid>
+        <Grid Height="195" Margin="5,260,10,0" VerticalAlignment="Top" Grid.Column="2">
+            <Border Background="{StaticResource BrushPrimary}" CornerRadius="1">
+                <Border.Effect>
+                    <DropShadowEffect ShadowDepth="1" Opacity="0.1"/>
+                </Border.Effect>
+            </Border>
+            <Label Content="效果报告" VerticalAlignment="Top" Height="40" VerticalContentAlignment="Center" Padding="10,0,0,0"/>
+            <Grid Margin="0,40,0,0">
+                <Border BorderBrush="{StaticResource BrushBackground}" BorderThickness="0,1,0,0" Padding="10">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="1*"/>
+                            <RowDefinition Height="1*"/>
+                        </Grid.RowDefinitions>
+                        <Grid VerticalAlignment="Center">
+                            <Label Content="65%" VerticalAlignment="Top" HorizontalAlignment="Left" FontSize="26"/>
+                            <Label VerticalAlignment="Top" HorizontalAlignment="Right" Height="44">
+                                <Label.Content>
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="转化率(日同比28%"/>
+                                        <Path Style="{StaticResource Icon}" Data="{StaticResource Icon-Sort-Up}" Fill="Black" Margin="3,0"/>
+                                        <TextBlock Text=")"/>
+                                    </StackPanel>
+                                </Label.Content>
+                            </Label>
+                            <diy:DiyProgressbar Value="65" VerticalAlignment="Top" Margin="0,44,0,0" Height="6"/>
+                        </Grid>
+                        <Grid Grid.Row="1" VerticalAlignment="Center">
+                            <Label Content="32%" VerticalAlignment="Top" HorizontalAlignment="Left" FontSize="26"/>
+                            <Label VerticalAlignment="Top" HorizontalAlignment="Right" Height="44">
+                                <Label.Content>
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="签到率(日同比11%"/>
+                                        <Path Style="{StaticResource Icon}" Data="{StaticResource Icon-Sort-Down}" Fill="Black" Margin="3,0"/>
+                                        <TextBlock Text=")"/>
+                                    </StackPanel>
+                                </Label.Content>
+                            </Label>
+                            <diy:DiyProgressbar Value="32" VerticalAlignment="Top" Margin="0,44,0,0" Height="6"/>
+                        </Grid>
+                    </Grid>
+                </Border>
+            </Grid>
+        </Grid>
+        <Grid Height="195" Margin="5,465,10,0" VerticalAlignment="Top" Grid.Column="2">
+            <Border Background="{StaticResource BrushPrimary}" CornerRadius="1">
+                <Border.Effect>
+                    <DropShadowEffect ShadowDepth="1" Opacity="0.1"/>
+                </Border.Effect>
+            </Border>
+            <Label Content="实时监控" VerticalAlignment="Top" Height="40" VerticalContentAlignment="Center" Padding="10,0,0,0"/>
+            <Grid Margin="0,40,0,0">
+                <Border BorderBrush="{StaticResource BrushBackground}" BorderThickness="0,1,0,0" Padding="10">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="1*"/>
+                            <RowDefinition Height="1*"/>
+                        </Grid.RowDefinitions>
+                        <Grid VerticalAlignment="Center">
+                            <Label Content="58%" VerticalAlignment="Top" HorizontalAlignment="Left" FontSize="26"/>
+                            <Label VerticalAlignment="Top" HorizontalAlignment="Right" Height="44">
+                                <Label.Content>
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="CPU使用率"/>
+                                    </StackPanel>
+                                </Label.Content>
+                            </Label>
+                            <diy:DiyProgressbar Value="58" VerticalAlignment="Top" Margin="0,44,0,0" Height="6"/>
+                        </Grid>
+                        <Grid Grid.Row="1" VerticalAlignment="Center">
+                            <Label Content="90%" VerticalAlignment="Top" HorizontalAlignment="Left" FontSize="26"/>
+                            <Label VerticalAlignment="Top" HorizontalAlignment="Right" Height="44">
+                                <Label.Content>
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="内存占用率"/>
+                                    </StackPanel>
+                                </Label.Content>
+                            </Label>
+                            <diy:DiyProgressbar Value="90" VerticalAlignment="Top" Margin="0,44,0,0" Height="6" 
+                                                Background="{StaticResource BrushDanger}"/>
+                        </Grid>
+                    </Grid>
+                </Border>
+            </Grid>
+        </Grid>
+        <Border Grid.Column="0" Grid.ColumnSpan="2" Margin="10,670,5,10" Height="580" CornerRadius="1" Background="{StaticResource BrushPrimary}">
+            <Border.Effect>
+                <DropShadowEffect ShadowDepth="1" Opacity="0.1"/>
+            </Border.Effect>
+            <TabControl>
+                <diy:DiyTabitem Header="今日热搜" Style="{StaticResource TiPithy}" ShowCloseBtn="False" Height="40" Margin="5,0,0,0">
+                    <DataGrid x:Name="DataGrid1" Margin="10" AutoGenerateColumns="False" IsHitTestVisible="False">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Width="Auto" MinWidth="50" Binding="{Binding Index}"/>
+                            <DataGridTextColumn Width="*" Binding="{Binding KeyWorld}" Header="关键词" />
+                            <DataGridTextColumn Width="*" Binding="{Binding SearchCount}" Header="搜索次数" />
+                            <DataGridTextColumn Width="*" Binding="{Binding UserCount}" Header="用户数" />
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </diy:DiyTabitem>
+                <diy:DiyTabitem Header="今日热帖" Style="{StaticResource TiPithy}" ShowCloseBtn="False" Height="40" Margin="5,0,0,0">
+                    <DataGrid x:Name="DataGrid2" Margin="10" AutoGenerateColumns="False" IsHitTestVisible="False">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Width="Auto" MinWidth="50" Binding="{Binding Index}"/>
+                            <DataGridTextColumn Width="*" Binding="{Binding KeyWorld}" Header="关键词" />
+                            <DataGridTextColumn Width="*" Binding="{Binding SearchCount}" Header="搜索次数" />
+                            <DataGridTextColumn Width="*" Binding="{Binding UserCount}" Header="用户数" />
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </diy:DiyTabitem>
+            </TabControl>
+        </Border>
+        <ucs:UcCard Grid.Column="2" x:Name="Card3" Height="120" Margin="5,670,10,10" VerticalAlignment="Top"/>
+        <Grid Margin="5,800,10,10" VerticalAlignment="Top" Grid.Column="2">
+            <Border Background="{StaticResource BrushPrimary}" CornerRadius="1">
+                <Border.Effect>
+                    <DropShadowEffect ShadowDepth="1" Opacity="0.1"/>
+                </Border.Effect>
+            </Border>
+            <Label Content="作者心语" VerticalAlignment="Top" Height="40" VerticalContentAlignment="Center" Padding="10,0,0,0"/>
+            <Grid Margin="0,40,0,0">
+                <Border BorderBrush="{StaticResource BrushBackground}" BorderThickness="0,1,0,0" Padding="10">
+                    <StackPanel>
+                        <TextBlock FontSize="14">爱上了看见你如何不懂谦卑</TextBlock>
+                        <TextBlock FontSize="14">去讲心中理想不会俗气</TextBlock>
+                        <TextBlock FontSize="14">犹如看得见晨曦才能欢天喜地</TextBlock>
+                        <TextBlock FontSize="14">抱着你我每次回来多少惊喜</TextBlock>
+                        <TextBlock FontSize="14">也许一生太短陪着你</TextBlock>
+                        <TextBlock FontSize="14">情感有若行李仍然沉重待我整理</TextBlock>
+                        <TextBlock FontSize="14">天气不似预期但要走总要飞</TextBlock>
+                        <TextBlock FontSize="14">道别不可再等你不管有没有机</TextBlock>
+                        <TextBlock FontSize="14">给我体贴入微但你手如明日便要远离</TextBlock>
+                        <TextBlock FontSize="14">愿你可以留下共我曾愉快的忆记</TextBlock>
+                        <TextBlock FontSize="14">当世事再没完美可远在岁月如歌中找你</TextBlock>
+                        <TextBlock FontSize="14">再见了背向你眉头多少伤悲</TextBlock>
+                        <TextBlock FontSize="14">也许不必再讲所有道理</TextBlock>
+                        <TextBlock FontSize="14">何时放松我自己才能花天酒地</TextBlock>
+                        <TextBlock FontSize="14">抱着你我说过如何一起高飞</TextBlock>
+                        <TextBlock FontSize="14">这天只想带走还是你</TextBlock>
+                        <TextBlock FontSize="14">如重温往日邮寄但会否疲倦了嬉戏</TextBlock>
+                        <TextBlock FontSize="14">天气不似预期但要走总要飞</TextBlock>
+                        <TextBlock FontSize="14">道别不可再等你不管有没有机</TextBlock>
+                        <TextBlock FontSize="14">给我体贴入微但你手如明日便要远离</TextBlock>
+                        <TextBlock FontSize="14">愿你可以留下共我曾愉快的忆记</TextBlock>
+                        <TextBlock FontSize="14">当世事再没完美可远在岁月如歌中找你</TextBlock>
+                    </StackPanel>
+                </Border>
+            </Grid>
+        </Grid>
     </Grid>
 </Page>

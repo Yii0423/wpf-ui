@@ -41,7 +41,6 @@
 
     <!-- 禁用表单区域 -->
     <Style x:Key="BdFormDisabled" BasedOn="{StaticResource BdFormPrimary}" TargetType="{x:Type Border}">
-        <Setter Property="BorderBrush" Value="{StaticResource BrushCold}"/>
         <Setter Property="Background" Value="{StaticResource BrushDisabled}"/>
         <Setter Property="Cursor" Value="No"/>
     </Style>

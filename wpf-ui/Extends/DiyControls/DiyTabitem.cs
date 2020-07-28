@@ -20,6 +20,19 @@ namespace wpf_ui.Extends.DiyControls
             Loaded += InitializeEvent;
         }
 
+        #region 是否显示关闭按钮
+
+        public bool ShowCloseBtn
+        {
+            get => (bool)GetValue(ShowCloseBtnProperty);
+            set => SetValue(ShowCloseBtnProperty, value);
+        }
+
+        public static readonly DependencyProperty ShowCloseBtnProperty =
+            DependencyProperty.Register("ShowCloseBtn", typeof(bool), typeof(DiyTabitem), new PropertyMetadata(true));
+
+        #endregion
+
         #region 事件
 
         /// <summary>

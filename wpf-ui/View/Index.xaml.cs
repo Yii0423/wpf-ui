@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Data;
 using System.Windows;
 using System.Windows.Controls;
 using wpf_ui.Model;
@@ -110,6 +111,45 @@ namespace wpf_ui.View
                     Title = "待审友情链接",
                     SubTitle = "5",
                     IsTop = true
+                }
+            };
+
+            #endregion
+
+            #region 数据表1/2
+
+            DataTable dt = new DataTable();
+            dt.Columns.Add("Index");
+            dt.Columns.Add("KeyWorld");
+            dt.Columns.Add("SearchCount");
+            dt.Columns.Add("UserCount");
+            for (int i = 0; i < 10; i++) dt.Rows.Add(i, "layui官方教程", i * 36, i * 50);
+            DataGrid1.ItemsSource = DataGrid2.ItemsSource = dt.DefaultView;
+
+            #endregion
+
+            #region 卡片3
+
+            Card3.Title = "产品动态";
+            Card3.MenuItemCount = 1;
+            Card3.ControlStyle = "BtnPrimary";
+            Card3.AutoChange = true;
+            Card3.ItemSources = new List<MMenuItem>
+            {
+                new MMenuItem
+                {
+                    Title = "layuiAdmin 快速上手文档",
+                    Style = "BtnAutoSize"
+                },
+                new MMenuItem
+                {
+                    Title = "layuiAdmin 会员讨论专区",
+                    Style = "BtnAutoSize2"
+                },
+                new MMenuItem
+                {
+                    Title = "获得 layuiAdmin 官方后台模板系统",
+                    Style = "BtnAutoSize3"
                 }
             };
 

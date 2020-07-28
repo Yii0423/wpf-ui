@@ -13,6 +13,7 @@
 
     <!-- 图标基础样式 -->
     <Style x:Key="Icon" TargetType="{x:Type Path}">
+        <Setter Property="SnapsToDevicePixels" Value="True"/>
         <Setter Property="Width" Value="{StaticResource IconSizeDefault}"/>
         <Setter Property="Height" Value="{StaticResource IconSizeDefault}"/>
         <Setter Property="Fill" Value="White"/>

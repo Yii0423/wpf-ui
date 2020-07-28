@@ -15,9 +15,10 @@
     <!-- 选项卡内容样式 -->
     <Style TargetType="{x:Type TabControl}">
         <!-- 解决Tab遮挡Canvas的问题 -->
+        <Setter Property="SnapsToDevicePixels" Value="True"/>
         <Setter Property="Panel.ZIndex" Value="-1"/>
         <Setter Property="Background" Value="Transparent"/>
-        <Setter Property="BorderBrush" Value="{StaticResource BrushCold}"/>
+        <Setter Property="BorderBrush" Value="{StaticResource BrushBackground}"/>
         <Setter Property="BorderThickness" Value="0"/>
         <Setter Property="Template">
             <Setter.Value>
@@ -99,6 +100,14 @@
                             </MultiTrigger.Conditions>
                             <MultiTrigger.Setters>
                                 <Setter TargetName="content" Property="Opacity" Value="0.5"/>
+                            </MultiTrigger.Setters>
+                        </MultiTrigger>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="ShowCloseBtn" Value="False"/>
+                            </MultiTrigger.Conditions>
+                            <MultiTrigger.Setters>
+                                <Setter TargetName="BtnClose" Property="Visibility" Value="Collapsed"/>
                             </MultiTrigger.Setters>
                         </MultiTrigger>
                     </ControlTemplate.Triggers>

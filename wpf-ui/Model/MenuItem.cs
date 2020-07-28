@@ -24,6 +24,10 @@ namespace wpf_ui.Model
         /// </summary>
         public string Url { get; set; }
         /// <summary>
+        /// 样式名
+        /// </summary>
+        public string Style { get; set; }
+        /// <summary>
         /// 是否居右显示
         /// </summary>
         public bool IsRight { get; set; }
@@ -35,5 +39,9 @@ namespace wpf_ui.Model
         /// 是否为顶级菜单
         /// </summary>
         public bool IsTop { get; set; }
+        /// <summary>
+        /// 是否显示徽章
+        /// </summary>
+        public bool IsHasNew { get; set; }
     }
 }

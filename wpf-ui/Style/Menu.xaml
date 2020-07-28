@@ -13,6 +13,7 @@
 
     <!-- 原始顶部父级菜单项 -->
     <Style x:Key="MiTopParentPrimary" TargetType="{x:Type RadioButton}">
+        <Setter Property="SnapsToDevicePixels" Value="True"/>
         <Setter Property="Cursor" Value="Hand"/>
         <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
         <Setter Property="Background" Value="Transparent"/>
@@ -82,6 +83,7 @@
 
     <!-- 原始顶部父级菜单项(白底黑字+无选中) -->
     <Style x:Key="MiTopParentPrimaryWithoutChecked" TargetType="{x:Type RadioButton}">
+        <Setter Property="SnapsToDevicePixels" Value="True"/>
         <Setter Property="Cursor" Value="Hand"/>
         <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
         <Setter Property="Background" Value="Transparent"/>
@@ -91,6 +93,8 @@
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type RadioButton}">
                     <Grid Background="{TemplateBinding Background}">
+                        <Border x:Name="border" HorizontalAlignment="Right" VerticalAlignment="Top" Width="8" Height="8" 
+                                CornerRadius="4" Background="{StaticResource BrushDanger}" Margin="0,13,13,0" Visibility="Collapsed"/>
                         <StackPanel x:Name="content" Orientation="Horizontal" Opacity="0.8" Margin="20,0">
                             <ContentPresenter VerticalAlignment="Center"/>
                             <Path x:Name="path" Margin="5,0,0,0" Style="{DynamicResource Icon}" Fill="{TemplateBinding Foreground}"
@@ -118,6 +122,14 @@
                                 <Setter TargetName="path" Property="Visibility" Value="Visible"/>
                             </MultiTrigger.Setters>
                         </MultiTrigger>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="Tag" Value="-1"/>
+                            </MultiTrigger.Conditions>
+                            <MultiTrigger.Setters>
+                                <Setter TargetName="border" Property="Visibility" Value="Visible"/>
+                            </MultiTrigger.Setters>
+                        </MultiTrigger>
                         <EventTrigger RoutedEvent="MouseEnter">
                             <BeginStoryboard>
                                 <Storyboard>
@@ -140,6 +152,7 @@
 
     <!-- 原始顶部子级菜单项 -->
     <Style x:Key="MiTopChildPrimary" TargetType="{x:Type RadioButton}">
+        <Setter Property="SnapsToDevicePixels" Value="True"/>
         <Setter Property="Cursor" Value="Hand"/>
         <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
         <Setter Property="Background" Value="Transparent"/>
@@ -172,6 +185,7 @@
 
     <!-- 原始侧边父级菜单项 -->
     <Style x:Key="MiLeftParentPrimary" TargetType="{x:Type RadioButton}">
+        <Setter Property="SnapsToDevicePixels" Value="True"/>
         <Setter Property="Cursor" Value="Hand"/>
         <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
         <Setter Property="Background" Value="Transparent"/>
@@ -210,6 +224,7 @@
 
     <!-- 原始侧边子级菜单项 -->
     <Style x:Key="MiLeftChildPrimary" TargetType="{x:Type RadioButton}">
+        <Setter Property="SnapsToDevicePixels" Value="True"/>
         <Setter Property="Cursor" Value="Hand"/>
         <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
         <Setter Property="Background" Value="Transparent"/>

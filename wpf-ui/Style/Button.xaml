@@ -21,6 +21,8 @@
         <Setter Property="Background" Value="{StaticResource BrushPrimary}"/>
         <Setter Property="RenderTransformOrigin" Value="0.5,0.5"/>
         <Setter Property="Height" Value="30"/>
+        <Setter Property="FontSize" Value="{StaticResource FontSizeDefault}"/>
+        <Setter Property="SnapsToDevicePixels" Value="True"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type diy:DiyButton}">
@@ -89,6 +91,27 @@
         <Setter Property="Foreground" Value="{StaticResource BrushCold}"/>
         <Setter Property="Cursor" Value="No"/>
         <Setter Property="Background" Value="{StaticResource BrushDisabled}"/>
+    </Style>
+
+    <!-- 自适应按钮 -->
+    <Style x:Key="BtnAutoSize" BasedOn="{StaticResource BtnPrimary}" TargetType="{x:Type diy:DiyButton}">
+        <Setter Property="Foreground" Value="{StaticResource BrushPrimary}"/>
+        <Setter Property="Background" Value="{StaticResource BrushDefault}"/>
+        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="HorizontalAlignment" Value="Stretch"/>
+        <Setter Property="VerticalAlignment" Value="Stretch"/>
+        <Setter Property="Height" Value="60"/>
+        <Setter Property="Margin" Value="10"/>
+    </Style>
+
+    <!-- 自适应按钮2 -->
+    <Style x:Key="BtnAutoSize2" BasedOn="{StaticResource BtnAutoSize}" TargetType="{x:Type diy:DiyButton}">
+        <Setter Property="Background" Value="{StaticResource BrushDanger}"/>
+    </Style>
+
+    <!-- 自适应按钮3 -->
+    <Style x:Key="BtnAutoSize3" BasedOn="{StaticResource BtnAutoSize}" TargetType="{x:Type diy:DiyButton}">
+        <Setter Property="Background" Value="{StaticResource BrushWarm}"/>
     </Style>
 
     <!-- 卡片1菜单子项 -->
@@ -183,6 +206,39 @@
                             </MultiTrigger.Conditions>
                             <MultiTrigger.Setters>
                                 <Setter TargetName="border" Property="Opacity" Value="1"/>
+                            </MultiTrigger.Setters>
+                        </MultiTrigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- 超链接按钮 -->
+    <Style x:Key="BtnHyperlink" TargetType="{x:Type Button}">
+        <Setter Property="Cursor" Value="Hand"/>
+        <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="RenderTransformOrigin" Value="0.5,0.5"/>
+        <Setter Property="Foreground" Value="{StaticResource BrushNormal}"/>
+        <Setter Property="FontSize" Value="{StaticResource FontSizeDefault}"/>
+        <Setter Property="Margin" Value="5,0,0,0"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Border Background="{TemplateBinding Background}">
+                        <TextBlock x:Name="txt" Foreground="{TemplateBinding Foreground}" VerticalAlignment="Center">
+                                <ContentPresenter VerticalAlignment="Center"/>
+                        </TextBlock>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="Cursor" Value="Hand"/>
+                                <Condition Property="IsMouseOver" Value="True"/>
+                            </MultiTrigger.Conditions>
+                            <MultiTrigger.Setters>
+                                <Setter TargetName="txt" Property="TextDecorations" Value="Underline"/>
                             </MultiTrigger.Setters>
                         </MultiTrigger>
                     </ControlTemplate.Triggers>
