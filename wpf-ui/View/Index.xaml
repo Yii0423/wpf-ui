@@ -25,10 +25,10 @@
             <Label Content="版本信息" VerticalAlignment="Top" Height="40" VerticalContentAlignment="Center" Padding="10,0,0,0"/>
             <Grid Margin="0,40,0,0">
                 <Border BorderBrush="{StaticResource BrushBackground}" BorderThickness="0,1,0,0" Padding="10">
-                    <diy:Table ShowHeader="True">
+                    <diy:Table>
                         <diy:Tr>
-                            <diy:Th Width="1" Title="测试标题1"/>
-                            <diy:Th Width="2" Title="测试标题2"/>
+                            <diy:Th Proportion="1"/>
+                            <diy:Th Proportion="2"/>
                         </diy:Tr>
                         <diy:Tr>
                             <diy:Td>
@@ -203,14 +203,14 @@
             <Grid>
                 <TabControl>
                     <diy:DiyTabitem Header="今日热搜" Style="{StaticResource TiPithy}" ShowCloseBtn="False" Height="40" Margin="5,0,0,0">
-                        <!--<diy:Table x:Name="Table1" Margin="10" ShowHeader="True">
+                        <diy:Table x:Name="Table1" Margin="10" ShowHeader="True">
                             <diy:Tr>
-                                <diy:Th Filed="Id"/>
+                                <diy:Th Proportion="-50" Filed="Id"/>
                                 <diy:Th Filed="KeyWords" Title="关键词"/>
                                 <diy:Th Filed="SearchTimes" Title="搜索次数"/>
                                 <diy:Th Filed="UserCounts" Title="用户数"/>
                             </diy:Tr>
-                        </diy:Table>-->
+                        </diy:Table>
                     </diy:DiyTabitem>
                     <diy:DiyTabitem Header="今日热帖" Style="{StaticResource TiPithy}" ShowCloseBtn="False" Height="40" Margin="5,0,0,0">
 
@@ -219,7 +219,7 @@
             </Grid>
         </Grid>
         <ucs:UcCard Grid.Column="2" x:Name="Card3" Height="120" Margin="5,670,10,10" VerticalAlignment="Top"/>
-        <Grid Margin="5,800,10,10" VerticalAlignment="Top" Grid.Column="2">
+        <Grid Margin="5,800,10,10" Grid.Column="2">
             <Border Background="{StaticResource BrushPrimary}" CornerRadius="1">
                 <Border.Effect>
                     <DropShadowEffect ShadowDepth="1" Opacity="0.1"/>

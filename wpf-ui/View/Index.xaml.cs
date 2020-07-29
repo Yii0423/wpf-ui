@@ -151,7 +151,7 @@ namespace wpf_ui.View
             dt.Columns.Add("SearchTimes");
             dt.Columns.Add("UserCounts");
             for (int i = 0; i < 10; i++) dt.Rows.Add(i, $"关键词{i}", i * 30, i * 60);
-            //Table1.DataSource = dt;
+            Table1.DataSource = dt;
 
             #endregion
         }
