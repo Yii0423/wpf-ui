@@ -72,6 +72,7 @@ namespace wpf_ui.Extends.Ucs
         /// </summary>
         private void UcCard_OnSizeChanged(object sender, SizeChangedEventArgs e)
         {
+            _timer?.Stop();
             DpMain.Children.Clear();
             SpMain.Children.Clear();
             if (string.IsNullOrWhiteSpace(ControlStyle)) return;
@@ -132,7 +133,6 @@ namespace wpf_ui.Extends.Ucs
                     };
                     da.Completed += delegate
                     {
-                        radioButton.IsChecked = true;
                         _oldCheckedIndex = i1;
                         isDo = false;
                     };
@@ -143,7 +143,11 @@ namespace wpf_ui.Extends.Ucs
                 DpMain.Children.Add(radioButton);
             }
             //是否开启自动切换
-            if (AutoChange && _timer == null) SetTimer();
+            if (AutoChange)
+            {
+                if (_timer == null) SetTimer();
+                else _timer.Start();
+            }
             //尺寸变化后重新定位当前卡片页
             if (DpMain.Children.Count == 0 || _oldCheckedIndex == -1) return;
             ThicknessAnimation da2 = new ThicknessAnimation
@@ -155,7 +159,7 @@ namespace wpf_ui.Extends.Ucs
             da2.Completed += delegate
             {
                 //选中卡片右上角当前页标志
-                if (!(DpMain.Children[_oldCheckedIndex] is RadioButton radioButton)) return;
+                if (!(DpMain.Children[remainder == 0 ? _oldCheckedIndex - 1 : _oldCheckedIndex] is RadioButton radioButton)) return;
                 radioButton.IsChecked = true;
             };
             SpMain.BeginAnimation(MarginProperty, da2);

@@ -116,18 +116,6 @@ namespace wpf_ui.View
 
             #endregion
 
-            #region 数据表1/2
-
-            DataTable dt = new DataTable();
-            dt.Columns.Add("Index");
-            dt.Columns.Add("KeyWorld");
-            dt.Columns.Add("SearchCount");
-            dt.Columns.Add("UserCount");
-            for (int i = 0; i < 10; i++) dt.Rows.Add(i, "layui官方教程", i * 36, i * 50);
-            DataGrid1.ItemsSource = DataGrid2.ItemsSource = dt.DefaultView;
-
-            #endregion
-
             #region 卡片3
 
             Card3.Title = "产品动态";
@@ -152,6 +140,18 @@ namespace wpf_ui.View
                     Style = "BtnAutoSize3"
                 }
             };
+
+            #endregion
+
+            #region 数据表1
+
+            DataTable dt = new DataTable();
+            dt.Columns.Add("Id");
+            dt.Columns.Add("KeyWords");
+            dt.Columns.Add("SearchTimes");
+            dt.Columns.Add("UserCounts");
+            for (int i = 0; i < 10; i++) dt.Rows.Add(i, $"关键词{i}", i * 30, i * 60);
+            //Table1.DataSource = dt;
 
             #endregion
         }

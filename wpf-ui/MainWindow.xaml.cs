@@ -56,7 +56,7 @@ namespace wpf_ui
         private void InitData()
         {
             //设置Frame的Z-Index(避免遮挡菜单)
-            Panel.SetZIndex(FrmMain, -1);
+            if (FrmMain.Parent is ScrollViewer scrollViewer) Panel.SetZIndex(scrollViewer, -1);
             //侧边菜单绑定Frame
             MenuLeft.FrmMain = FrmMain;
             //顶部菜单数据源

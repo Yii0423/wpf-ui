@@ -25,45 +25,55 @@
             <Label Content="版本信息" VerticalAlignment="Top" Height="40" VerticalContentAlignment="Center" Padding="10,0,0,0"/>
             <Grid Margin="0,40,0,0">
                 <Border BorderBrush="{StaticResource BrushBackground}" BorderThickness="0,1,0,0" Padding="10">
-                    <Border BorderBrush="{StaticResource BrushTableBoder}" BorderThickness="0,0,1,1">
-                        <diy:DiyTable RowCount="4" ColCount="2">
-                            <Border MinWidth="1">
+                    <diy:Table ShowHeader="True">
+                        <diy:Tr>
+                            <diy:Th Width="1" Title="测试标题1"/>
+                            <diy:Th Width="2" Title="测试标题2"/>
+                        </diy:Tr>
+                        <diy:Tr>
+                            <diy:Td>
                                 <Label Content="当前版本" HorizontalContentAlignment="Right"/>
-                            </Border>
-                            <Border MinWidth="2">
+                            </diy:Td>
+                            <diy:Td>
                                 <StackPanel Orientation="Horizontal">
                                     <Label Content="v1.4.0 pro"/>
                                     <Button Content="日志" Style="{StaticResource BtnHyperlink}"/>
                                     <Button Content="检查更新" Style="{StaticResource BtnHyperlink}"/>
                                 </StackPanel>
-                            </Border>
-                            <Border>
+                            </diy:Td>
+                        </diy:Tr>
+                        <diy:Tr>
+                            <diy:Td>
                                 <Label Content="基于框架" HorizontalContentAlignment="Right"/>
-                            </Border>
-                            <Border>
+                            </diy:Td>
+                            <diy:Td>
                                 <StackPanel Orientation="Horizontal">
                                     <Label Content="layui-v2.5.6"/>
                                 </StackPanel>
-                            </Border>
-                            <Border>
+                            </diy:Td>
+                        </diy:Tr>
+                        <diy:Tr>
+                            <diy:Td>
                                 <Label Content="主要特色" HorizontalContentAlignment="Right"/>
-                            </Border>
-                            <Border>
+                            </diy:Td>
+                            <diy:Td>
                                 <StackPanel Orientation="Horizontal">
                                     <Label Content="单页面 / 响应式 / 清爽 / 极简"/>
                                 </StackPanel>
-                            </Border>
-                            <Border>
+                            </diy:Td>
+                        </diy:Tr>
+                        <diy:Tr>
+                            <diy:Td>
                                 <Label Content="获取渠道" HorizontalContentAlignment="Right"/>
-                            </Border>
-                            <Border>
+                            </diy:Td>
+                            <diy:Td>
                                 <StackPanel Orientation="Horizontal">
                                     <diy:DiyButton Style="{StaticResource BtnDanger}" Content="获取授权" Width="100" Margin="5,0,0,0"/>
                                     <diy:DiyButton Style="{StaticResource BtnDefault}" Content="立即下载" Width="100" Margin="5,0,0,0"/>
                                 </StackPanel>
-                            </Border>
-                        </diy:DiyTable>
-                    </Border>
+                            </diy:Td>
+                        </diy:Tr>
+                    </diy:Table>
                 </Border>
             </Grid>
         </Grid>
@@ -184,33 +194,30 @@
                 </Border>
             </Grid>
         </Grid>
-        <Border Grid.Column="0" Grid.ColumnSpan="2" Margin="10,670,5,10" Height="580" CornerRadius="1" Background="{StaticResource BrushPrimary}">
-            <Border.Effect>
-                <DropShadowEffect ShadowDepth="1" Opacity="0.1"/>
-            </Border.Effect>
-            <TabControl>
-                <diy:DiyTabitem Header="今日热搜" Style="{StaticResource TiPithy}" ShowCloseBtn="False" Height="40" Margin="5,0,0,0">
-                    <DataGrid x:Name="DataGrid1" Margin="10" AutoGenerateColumns="False" IsHitTestVisible="False">
-                        <DataGrid.Columns>
-                            <DataGridTextColumn Width="Auto" MinWidth="50" Binding="{Binding Index}"/>
-                            <DataGridTextColumn Width="*" Binding="{Binding KeyWorld}" Header="关键词" />
-                            <DataGridTextColumn Width="*" Binding="{Binding SearchCount}" Header="搜索次数" />
-                            <DataGridTextColumn Width="*" Binding="{Binding UserCount}" Header="用户数" />
-                        </DataGrid.Columns>
-                    </DataGrid>
-                </diy:DiyTabitem>
-                <diy:DiyTabitem Header="今日热帖" Style="{StaticResource TiPithy}" ShowCloseBtn="False" Height="40" Margin="5,0,0,0">
-                    <DataGrid x:Name="DataGrid2" Margin="10" AutoGenerateColumns="False" IsHitTestVisible="False">
-                        <DataGrid.Columns>
-                            <DataGridTextColumn Width="Auto" MinWidth="50" Binding="{Binding Index}"/>
-                            <DataGridTextColumn Width="*" Binding="{Binding KeyWorld}" Header="关键词" />
-                            <DataGridTextColumn Width="*" Binding="{Binding SearchCount}" Header="搜索次数" />
-                            <DataGridTextColumn Width="*" Binding="{Binding UserCount}" Header="用户数" />
-                        </DataGrid.Columns>
-                    </DataGrid>
-                </diy:DiyTabitem>
-            </TabControl>
-        </Border>
+        <Grid Grid.Column="0" Grid.ColumnSpan="2" Margin="10,670,5,10">
+            <Border CornerRadius="1" Background="{StaticResource BrushPrimary}">
+                <Border.Effect>
+                    <DropShadowEffect ShadowDepth="1" Opacity="0.1"/>
+                </Border.Effect>
+            </Border>
+            <Grid>
+                <TabControl>
+                    <diy:DiyTabitem Header="今日热搜" Style="{StaticResource TiPithy}" ShowCloseBtn="False" Height="40" Margin="5,0,0,0">
+                        <!--<diy:Table x:Name="Table1" Margin="10" ShowHeader="True">
+                            <diy:Tr>
+                                <diy:Th Filed="Id"/>
+                                <diy:Th Filed="KeyWords" Title="关键词"/>
+                                <diy:Th Filed="SearchTimes" Title="搜索次数"/>
+                                <diy:Th Filed="UserCounts" Title="用户数"/>
+                            </diy:Tr>
+                        </diy:Table>-->
+                    </diy:DiyTabitem>
+                    <diy:DiyTabitem Header="今日热帖" Style="{StaticResource TiPithy}" ShowCloseBtn="False" Height="40" Margin="5,0,0,0">
+
+                    </diy:DiyTabitem>
+                </TabControl>
+            </Grid>
+        </Grid>
         <ucs:UcCard Grid.Column="2" x:Name="Card3" Height="120" Margin="5,670,10,10" VerticalAlignment="Top"/>
         <Grid Margin="5,800,10,10" VerticalAlignment="Top" Grid.Column="2">
             <Border Background="{StaticResource BrushPrimary}" CornerRadius="1">

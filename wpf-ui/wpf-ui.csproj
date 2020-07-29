@@ -75,7 +75,7 @@
     <Compile Include="Extends\Ucs\UcTab.xaml.cs">
       <DependentUpon>UcTab.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Model\MenuItem.cs" />
+    <Compile Include="Model\MMenuItem.cs" />
     <Compile Include="View\Index.xaml.cs">
       <DependentUpon>Index.xaml</DependentUpon>
     </Compile>

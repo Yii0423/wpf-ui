@@ -1,6 +1,4 @@
-﻿using System;
-using System.Reflection;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Media;
 
 namespace wpf_ui.Extends.Common
@@ -55,38 +53,6 @@ namespace wpf_ui.Extends.Common
                 }
             }
             return founded;
-        }
-
-        /// <summary>
-        /// 浅拷贝当前对象
-        /// </summary>
-        /// <typeparam name="TA">目标对象类型</typeparam>
-        /// <typeparam name="TB">源对象类型</typeparam>
-        /// <param name="b">源对象</param>
-        /// <returns></returns>
-        public static TA ShallowCopy<TA, TB>(this TB b)
-        {
-            TA a = Activator.CreateInstance<TA>();
-            Type typeb = b.GetType();//获得类型  
-            Type typea = typeof(TA);
-            foreach (PropertyInfo sp in typeb.GetProperties())//获得类型的属性字段  
-            {
-                foreach (PropertyInfo ap in typea.GetProperties())
-                {
-                    if (ap.Name == sp.Name)//判断属性名是否相同  
-                    {
-                        try
-                        {
-                            ap.SetValue(a, sp.GetValue(b, null), null); //获得b对象属性的值复制给a对象的属性  
-                        }
-                        catch (Exception)
-                        {
-                            // ignored
-                        }
-                    }
-                }
-            }
-            return a;
         }
     }
 }
