@@ -256,46 +256,19 @@
 
     <!-- #endregion -->
 
-    <!-- #region 表格用按钮*方便以后扩展 -->
-
-    <!-- 原始表格用按钮 -->
-    <Style x:Key="TableBtnPrimary" BasedOn="{StaticResource BtnPrimary}" TargetType="{x:Type diy:DiyButton}">
-
-    </Style>
-
-    <!-- 默认表格用按钮 -->
-    <Style x:Key="TableBtnDefault" BasedOn="{StaticResource TableBtnPrimary}" TargetType="{x:Type diy:DiyButton}">
-        <Setter Property="Foreground" Value="{StaticResource BrushPrimary}"/>
-        <Setter Property="Background" Value="{StaticResource BrushDefault}"/>
-        <Setter Property="BorderThickness" Value="0"/>
-    </Style>
-
-    <!-- 百搭表格用按钮 -->
-    <Style x:Key="TableBtnNormal" BasedOn="{StaticResource TableBtnPrimary}" TargetType="{x:Type diy:DiyButton}">
-        <Setter Property="Foreground" Value="{StaticResource BrushPrimary}"/>
-        <Setter Property="Background" Value="{StaticResource BrushNormal}"/>
-        <Setter Property="BorderThickness" Value="0"/>
-    </Style>
+    <!-- #region 表格用按钮(编辑和删除) -->
 
     <!-- 暖色表格用按钮 -->
-    <Style x:Key="TableBtnWarm" BasedOn="{StaticResource TableBtnPrimary}" TargetType="{x:Type diy:DiyButton}">
-        <Setter Property="Foreground" Value="{StaticResource BrushPrimary}"/>
-        <Setter Property="Background" Value="{StaticResource BrushWarm}"/>
-        <Setter Property="BorderThickness" Value="0"/>
+    <Style x:Key="TableBtnEdit" BasedOn="{StaticResource BtnWarm}" TargetType="{x:Type diy:DiyButton}">
+        <Setter Property="Margin" Value="5,0,0,0"/>
+        <Setter Property="Width" Value="40"/>
+        <Setter Property="Height" Value="20"/>
+        <Setter Property="FontSize" Value="12"/>
     </Style>
 
     <!-- 警告表格用按钮 -->
-    <Style x:Key="TableBtnDanger" BasedOn="{StaticResource TableBtnPrimary}" TargetType="{x:Type diy:DiyButton}">
-        <Setter Property="Foreground" Value="{StaticResource BrushPrimary}"/>
+    <Style x:Key="TableBtnDelete" BasedOn="{StaticResource TableBtnEdit}" TargetType="{x:Type diy:DiyButton}">
         <Setter Property="Background" Value="{StaticResource BrushDanger}"/>
-        <Setter Property="BorderThickness" Value="0"/>
-    </Style>
-
-    <!-- 禁用表格用按钮 -->
-    <Style x:Key="TableBtnDisabled" BasedOn="{StaticResource TableBtnPrimary}" TargetType="{x:Type diy:DiyButton}">
-        <Setter Property="Cursor" Value="No"/>
-        <Setter Property="Foreground" Value="{StaticResource BrushCold}"/>
-        <Setter Property="Background" Value="{StaticResource BrushDisabled}"/>
     </Style>
 
     <!-- #endregion -->

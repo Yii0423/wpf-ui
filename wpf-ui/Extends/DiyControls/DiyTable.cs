@@ -2,7 +2,6 @@
 using System.Data;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Controls.Primitives;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
@@ -15,6 +14,13 @@ namespace wpf_ui.Extends.DiyControls
     /// </summary>
     public class Table : Grid
     {
+        /// <summary>
+        /// 编辑删除事件
+        /// </summary>
+        /// <param name="id">列对应主键</param>
+        /// <returns></returns>
+        public delegate void DealDelegate(string id);
+
         /// <summary>
         /// 构造函数
         /// </summary>
@@ -89,6 +95,32 @@ namespace wpf_ui.Extends.DiyControls
 
         #endregion
 
+        #region 编辑事件
+
+        public DealDelegate Edit
+        {
+            get => (DealDelegate)GetValue(EditProperty);
+            set => SetValue(EditProperty, value);
+        }
+
+        public static readonly DependencyProperty EditProperty =
+            DependencyProperty.Register("Edit", typeof(DealDelegate), typeof(Table), new PropertyMetadata(null));
+
+        #endregion
+
+        #region 删除事件
+
+        public DealDelegate Delete
+        {
+            get => (DealDelegate)GetValue(DeleteProperty);
+            set => SetValue(DeleteProperty, value);
+        }
+
+        public static readonly DependencyProperty DeleteProperty =
+            DependencyProperty.Register("Delete", typeof(DealDelegate), typeof(Table), new PropertyMetadata(null));
+
+        #endregion
+
         #region 事件
 
         /// <summary>
@@ -108,7 +140,7 @@ namespace wpf_ui.Extends.DiyControls
             {
                 //非纯展示表格
                 RowCount = DataSource.Rows.Count + (ShowHeader ? 1 : 0);
-                ColCount = DataSource.Columns.Count;
+                ColCount = DataSource.Columns.Count + (TrOperation != TrOperation.None ? 1 : 0);
             }
             if (RowCount <= 0 || ColCount <= 0) return;
             //构造行比例
@@ -137,6 +169,8 @@ namespace wpf_ui.Extends.DiyControls
                 {
                     double proportion = 1;
                     if (firstTr.Children.Count > k && firstTr.Children[k] is Th th && !double.IsNaN(th.Proportion)) proportion = th.Proportion;
+                    //若开启了行功能则最后一行默认大小
+                    if (TrOperation != TrOperation.None && k == ColCount - 1) proportion = -100;
                     //负值为像素值，正直为比例值(星值)
                     ColumnDefinition columnDefinition = new ColumnDefinition { Width = new GridLength(Math.Abs(proportion), proportion < 0 ? GridUnitType.Pixel : GridUnitType.Star) };
                     if (curTr.ColumnDefinitions.Count > k) curTr.ColumnDefinitions[k] = columnDefinition; else curTr.ColumnDefinitions.Add(columnDefinition);
@@ -189,6 +223,7 @@ namespace wpf_ui.Extends.DiyControls
                         {
                             //取该列绑定的字段名
                             if (!(firstTr.Children[l] is Th th)) return;
+                            if (TrOperation != TrOperation.None && l == ColCount - 1) th.ThType = ThType.Deal;
                             InitTd(th, curTd, i - 1);
                         }
                     }
@@ -220,11 +255,15 @@ namespace wpf_ui.Extends.DiyControls
         {
             //设置行所处的RowDefinition
             SetRow(tr, index);
-
+            if (index == 0) return;
             //鼠标移入行
-            tr.MouseEnter += delegate { tr.Background = FindResource("BrushBackground") as Brush; };
+            void MouseEnter(object sender, MouseEventArgs e) => tr.Background = FindResource("BrushBackground") as Brush;
+            tr.RemoveHandler(MouseEnterEvent, (MouseEventHandler)MouseEnter);
+            tr.AddHandler(MouseEnterEvent, (MouseEventHandler)MouseEnter);
             //鼠标移出行
-            tr.MouseLeave += delegate { tr.Background = Brushes.Transparent; };
+            void MouseLeave(object sender, MouseEventArgs e) => tr.Background = Brushes.Transparent;
+            tr.RemoveHandler(MouseLeaveEvent, (MouseEventHandler)MouseLeave);
+            tr.AddHandler(MouseLeaveEvent, (MouseEventHandler)MouseLeave);
         }
 
         /// <summary>
@@ -237,7 +276,7 @@ namespace wpf_ui.Extends.DiyControls
         private void InitTd(Th th, Td td, int index = 0)
         {
             string id = DataSource.Rows[index][0].ToStringEx();
-            string content = DataSource.Rows[index][th.Filed].ToStringEx();
+            string content = string.IsNullOrWhiteSpace(th.Filed) ? "" : DataSource.Rows[index][th.Filed].ToStringEx();
             string style = th.InitStyle?.Invoke(content);
             Thickness thickness = new Thickness(5, 0, 5, 0);
             UIElement uiElement;
@@ -248,7 +287,7 @@ namespace wpf_ui.Extends.DiyControls
                     {
                         Margin = thickness,
                         Content = content,
-                        Style = FindResource(style ?? "TableBtnPrimary") as Style
+                        Style = FindResource(style ?? "BtnPrimary") as Style
                     };
                     if (th.BtnClick != null && !style.ToStringEx().Contains("Disabled")) button.Click += delegate { th.BtnClick(id); };
                     uiElement = button;
@@ -275,57 +314,6 @@ namespace wpf_ui.Extends.DiyControls
                     {
                         hyperlink.Click += delegate { th.BtnClick(id); };
                     }
-                    #region 行操作功能
-                    //行功能启用
-                    if (TrOperation != TrOperation.None)
-                    {
-                        StackPanel stackPanel = new StackPanel();
-                        //编辑
-                        if (TrOperation == TrOperation.Both || TrOperation == TrOperation.Edit)
-                        {
-                            stackPanel.Children.Add(new DiyButton
-                            {
-                                Content = "编辑",
-                                Style = FindResource("BtnWarm") as Style,
-                                FontSize = 12,
-                                Width = 35,
-                                Height = 20,
-                                Margin = new Thickness(0, 0, 0, 5)
-                            });
-                        }
-                        //删除
-                        if (TrOperation == TrOperation.Both || TrOperation == TrOperation.Delete)
-                        {
-                            stackPanel.Children.Add(new DiyButton
-                            {
-                                Content = "删除",
-                                Style = FindResource("BtnDanger") as Style,
-                                FontSize = 12,
-                                Width = 35,
-                                Height = 20
-                            });
-                        }
-                        Popup popup = new Popup
-                        {
-                            Placement = PlacementMode.Right,
-                            StaysOpen = false,
-                            PlacementTarget = hyperlink,
-                            AllowsTransparency = true,
-                            Child = new DiyPopup
-                            {
-                                Style = FindResource("PopupPrimary") as Style,
-                                ShowPlace = ShowPlace.Right,
-                                Content = stackPanel
-                            }
-                        };
-                        if (!style.ToStringEx().Contains("Disabled"))
-                        {
-                            void MouseClick(object sender, MouseButtonEventArgs e) => popup.IsOpen = true;
-                            if (th.BtnClick != null) hyperlink.MouseRightButtonUp += MouseClick;
-                            else hyperlink.Click += delegate { MouseClick(null, null); };
-                        }
-                    }
-                    #endregion
                     uiElement = hyperlink;
                     break;
                 case ThType.Image://图片
@@ -337,6 +325,32 @@ namespace wpf_ui.Extends.DiyControls
                     };
                     RenderOptions.SetBitmapScalingMode(image, BitmapScalingMode.HighQuality);
                     uiElement = image;
+                    break;
+                case ThType.Deal://操作列
+                    StackPanel spDeal = new StackPanel { Orientation = Orientation.Horizontal };
+                    if (TrOperation == TrOperation.Both || TrOperation == TrOperation.Edit)
+                    {
+                        //编辑
+                        DiyButton btnEdit = new DiyButton
+                        {
+                            Content = "编辑",
+                            Style = FindResource("TableBtnEdit") as Style
+                        };
+                        btnEdit.Click += delegate { Edit?.Invoke(id); };
+                        spDeal.Children.Add(btnEdit);
+                    }
+                    if (TrOperation == TrOperation.Both || TrOperation == TrOperation.Delete)
+                    {
+                        //删除
+                        DiyButton btnDelete = new DiyButton
+                        {
+                            Content = "删除",
+                            Style = FindResource("TableBtnDelete") as Style
+                        };
+                        btnDelete.Click += delegate { Delete?.Invoke(id); };
+                        spDeal.Children.Add(btnDelete);
+                    }
+                    uiElement = spDeal;
                     break;
                 default://仅文本
                     Label label = new Label
@@ -517,6 +531,10 @@ namespace wpf_ui.Extends.DiyControls
         /// <summary>
         /// 图片
         /// </summary>
-        Image
+        Image,
+        /// <summary>
+        /// 操作列(编辑和删除)
+        /// </summary>
+        Deal
     }
 }

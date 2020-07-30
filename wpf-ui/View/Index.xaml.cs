@@ -155,6 +155,14 @@ namespace wpf_ui.View
 
             #endregion
 
+            #region 数据表1编辑删除事件
+
+            Table1.Edit += id => { MessageBox.Show($"编辑事件：{id}"); };
+
+            Table1.Delete += id => { MessageBox.Show($"删除事件：{id}"); };
+
+            #endregion
+
             #region 数据表1绑定列样式事件
 
             ThId.InitStyle = content =>
@@ -187,7 +195,7 @@ namespace wpf_ui.View
 
             #region 数据表1绑定Button列点击事件
 
-            //ThKeyWords.BtnClick = id => { MessageBox.Show($"列主键：{id}"); };
+            ThKeyWords.BtnClick = id => { MessageBox.Show($"自定义事件：{id}"); };
 
             #endregion
         }
