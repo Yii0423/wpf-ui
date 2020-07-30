@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Windows;
 using System.Windows.Controls;
@@ -167,27 +168,27 @@ namespace wpf_ui.View
 
             ThId.InitStyle = content =>
             {
-                if (content.Contains("20")) return "PbDefault";
-                if (content.Contains("30")) return "PbNormal";
-                if (content.Contains("50")) return "PbWarm";
-                if (content.Contains("60")) return "PbDanger";
+                if (content.Contains("20")) return new MTdStyle { Style = "PbDefault" };
+                if (content.Contains("30")) return new MTdStyle { Style = "PbNormal" };
+                if (content.Contains("50")) return new MTdStyle { Style = "PbWarm" };
+                if (content.Contains("60")) return new MTdStyle { Style = "PbDanger" };
                 return null;
             };
 
             ThKeyWords.InitStyle = content =>
             {
-                if (content.Contains("3")) return "BtnHyperlinkDisabled";
+                if (content.Contains("3")) return new MTdStyle { Style = "BtnHyperlinkDisabled" };
                 return null;
             };
 
             ThUserCounts.InitStyle = content =>
             {
-                if (content.Contains("120")) return "TagPrimary";
-                if (content.Contains("180")) return "TagDefault";
-                if (content.Contains("240")) return "TagNormal";
-                if (content.Contains("300")) return "TagDisabled";
-                if (content.Contains("360")) return "TagWarm";
-                if (content.Contains("420")) return "TagDanger";
+                if (content.Contains("2")) return new MTdStyle { Content = $"{content}%", Style = "TagPrimary" };
+                if (content.Contains("8")) return new MTdStyle { Style = "TagDefault" };
+                if (content.Contains("4")) return new MTdStyle { Style = "TagNormal" };
+                if (content.Contains("0")) return new MTdStyle { Style = "TagDisabled" };
+                if (content.Contains("6")) return new MTdStyle { Content = $"{content}$", Style = "TagWarm" };
+                if (content.Contains("5")) return new MTdStyle { Content = $"{content}.00", Style = "TagDanger" };
                 return null;
             };
 
@@ -198,6 +199,22 @@ namespace wpf_ui.View
             ThKeyWords.BtnClick = id => { MessageBox.Show($"自定义事件：{id}"); };
 
             #endregion
+        }
+
+        private void BtnGetVip_Click(object sender, RoutedEventArgs e)
+        {
+            Random random = new Random();
+            DataTable dt = new DataTable();
+            dt.Columns.Add("Id");
+            dt.Columns.Add("KeyWords");
+            dt.Columns.Add("SearchTimes");
+            dt.Columns.Add("UserCounts");
+            for (int i = 0; i < 10; i++)
+                dt.Rows.Add(random.Next(0, 100),
+                                        $"关键词关键词关键词关键词关键词关键词关键词关键词{i * 99}",
+                                        $"/Content/Images/avatar{random.Next(0, 9)}.jpg",
+                                        i * random.Next(30, 60));
+            Table1.DataSource = dt;
         }
     }
 }

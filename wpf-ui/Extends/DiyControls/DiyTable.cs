@@ -6,6 +6,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using wpf_ui.Extends.Common;
+using wpf_ui.Model;
 
 namespace wpf_ui.Extends.DiyControls
 {
@@ -35,7 +36,11 @@ namespace wpf_ui.Extends.DiyControls
         public DataTable DataSource
         {
             get => (DataTable)GetValue(DataSourceProperty);
-            set => SetValue(DataSourceProperty, value);
+            set
+            {
+                SetValue(DataSourceProperty, value);
+                Init();
+            }
         }
 
         public static readonly DependencyProperty DataSourceProperty =
@@ -281,7 +286,9 @@ namespace wpf_ui.Extends.DiyControls
         {
             string id = DataSource.Rows[index]["id"].ToStringEx();
             string content = string.IsNullOrWhiteSpace(th.Filed) ? "" : DataSource.Rows[index][th.Filed].ToStringEx();
-            string style = th.InitStyle?.Invoke(content);
+            MTdStyle tdStyle = th.InitStyle?.Invoke(content);
+            string style = tdStyle?.Style;
+            content = string.IsNullOrWhiteSpace(tdStyle?.Content) ? content : tdStyle.Content;
             Thickness thickness = new Thickness(5, 0, 5, 0);
             UIElement uiElement;
             switch (th.ThType)
@@ -382,7 +389,7 @@ namespace wpf_ui.Extends.DiyControls
         /// </summary>
         /// <param name="value">列对应数据内容</param>
         /// <returns></returns>
-        public delegate string StyleDelegate(string value);
+        public delegate MTdStyle StyleDelegate(string value);
 
         /// <summary>
         /// Button列点击事件
