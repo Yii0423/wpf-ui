@@ -202,12 +202,12 @@
             <Grid>
                 <TabControl>
                     <diy:DiyTabitem Header="今日热搜" Style="{StaticResource TiPithy}" ShowCloseBtn="False" Height="40" Margin="5,0,0,0">
-                        <diy:Table x:Name="Table1" Margin="10" ShowHeader="True" TrOperation="Both">
+                        <diy:Table x:Name="Table1" Margin="10" TrOperation="Both" ShowHeader="True">
                             <diy:Tr>
-                                <diy:Th x:Name="ThId" Proportion="-100" Filed="Id" ThType="Progressbar"/>
-                                <diy:Th x:Name="ThKeyWords" Filed="KeyWords" Title="关键词" ThType="Hyperlink"/>
-                                <diy:Th x:Name="ThSearchTimes" Filed="SearchTimes" Title="搜索次数" ThType="Image"/>
-                                <diy:Th x:Name="ThUserCounts" Filed="UserCounts" Title="用户数"/>
+                                <diy:Th x:Name="ThSearchTimes" Proportion="-40" Filed="SearchTimes" Title="头像" ThType="Image"/>
+                                <diy:Th x:Name="ThKeyWords" Proportion="-400" Filed="KeyWords" Title="标题" ThType="Hyperlink"/>
+                                <diy:Th x:Name="ThId" Filed="Id" ThType="Progressbar"/>
+                                <diy:Th x:Name="ThUserCounts" Proportion="-60" Filed="UserCounts" Title="资产($)"/>
                             </diy:Tr>
                         </diy:Table>
                     </diy:DiyTabitem>

@@ -170,7 +170,7 @@ namespace wpf_ui.Extends.DiyControls
                     double proportion = 1;
                     if (firstTr.Children.Count > k && firstTr.Children[k] is Th th && !double.IsNaN(th.Proportion)) proportion = th.Proportion;
                     //若开启了行功能则最后一行默认大小
-                    if (TrOperation != TrOperation.None && k == ColCount - 1) proportion = -100;
+                    if (TrOperation != TrOperation.None && k == ColCount - 1) proportion = -96;
                     //负值为像素值，正直为比例值(星值)
                     ColumnDefinition columnDefinition = new ColumnDefinition { Width = new GridLength(Math.Abs(proportion), proportion < 0 ? GridUnitType.Pixel : GridUnitType.Star) };
                     if (curTr.ColumnDefinitions.Count > k) curTr.ColumnDefinitions[k] = columnDefinition; else curTr.ColumnDefinitions.Add(columnDefinition);
@@ -222,9 +222,12 @@ namespace wpf_ui.Extends.DiyControls
                         if (DataSource != null)
                         {
                             //取该列绑定的字段名
-                            if (!(firstTr.Children[l] is Th th)) return;
+                            if (firstTr.Children.Count <= l || !(firstTr.Children[l] is Th th))
+                            {
+                                th = new Th();
+                            }
                             if (TrOperation != TrOperation.None && l == ColCount - 1) th.ThType = ThType.Deal;
-                            InitTd(th, curTd, i - 1);
+                            InitTd(th, curTd, i - (ShowHeader ? 1 : 0));
                         }
                     }
                 }
@@ -255,7 +258,8 @@ namespace wpf_ui.Extends.DiyControls
         {
             //设置行所处的RowDefinition
             SetRow(tr, index);
-            if (index == 0) return;
+            //显示列头的情况下跳过
+            if (index == 0 && ShowHeader) return;
             //鼠标移入行
             void MouseEnter(object sender, MouseEventArgs e) => tr.Background = FindResource("BrushBackground") as Brush;
             tr.RemoveHandler(MouseEnterEvent, (MouseEventHandler)MouseEnter);
@@ -275,7 +279,7 @@ namespace wpf_ui.Extends.DiyControls
         /// <returns></returns>
         private void InitTd(Th th, Td td, int index = 0)
         {
-            string id = DataSource.Rows[index][0].ToStringEx();
+            string id = DataSource.Rows[index]["id"].ToStringEx();
             string content = string.IsNullOrWhiteSpace(th.Filed) ? "" : DataSource.Rows[index][th.Filed].ToStringEx();
             string style = th.InitStyle?.Invoke(content);
             Thickness thickness = new Thickness(5, 0, 5, 0);

@@ -31,10 +31,8 @@
         <Setter Property="HorizontalContentAlignment" Value="Center"/>
         <Setter Property="BorderThickness" Value="{StaticResource BorderThicknessDefault}"/>
         <Setter Property="BorderBrush" Value="{StaticResource BrushCold}"/>
-        <Setter Property="Width" Value="40"/>
         <Setter Property="Height" Value="20"/>
         <Setter Property="Padding" Value="0"/>
-        <Setter Property="HorizontalAlignment" Value="Left"/>
     </Style>
 
     <!-- 默认标签 -->

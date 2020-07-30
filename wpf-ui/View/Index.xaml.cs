@@ -150,7 +150,7 @@ namespace wpf_ui.View
             dt.Columns.Add("KeyWords");
             dt.Columns.Add("SearchTimes");
             dt.Columns.Add("UserCounts");
-            for (int i = 0; i < 10; i++) dt.Rows.Add(i * 10, $"关键词{i * 99}", $"/Content/Images/avatar{i}.jpg", i * 60);
+            for (int i = 0; i < 10; i++) dt.Rows.Add(i * 10, $"关键词关键词关键词关键词关键词关键词关键词关键词{i * 99}", $"/Content/Images/avatar{i}.jpg", i * 60);
             Table1.DataSource = dt;
 
             #endregion
