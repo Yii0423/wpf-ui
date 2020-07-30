@@ -5,6 +5,7 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Shapes;
 using wpf_ui.Extends.Common;
 using wpf_ui.Model;
 
@@ -21,6 +22,13 @@ namespace wpf_ui.Extends.DiyControls
         /// <param name="id">列对应主键</param>
         /// <returns></returns>
         public delegate void DealDelegate(string id);
+
+        /// <summary>
+        /// 列头排序事件
+        /// </summary>
+        /// <param name="thName">列名</param>
+        /// <param name="thSort">排序状态</param>
+        public delegate void SortDelegate(string thName, ThSort thSort);
 
         /// <summary>
         /// 构造函数
@@ -126,6 +134,32 @@ namespace wpf_ui.Extends.DiyControls
 
         #endregion
 
+        #region 当前排序状态
+
+        public MTableSort TableSort
+        {
+            get => (MTableSort)GetValue(TableSortProperty);
+            private set => SetValue(TableSortProperty, value);
+        }
+
+        public static readonly DependencyProperty TableSortProperty =
+            DependencyProperty.Register("TableSort", typeof(MTableSort), typeof(Table), new PropertyMetadata(null));
+
+        #endregion
+
+        #region 列排序事件
+
+        public SortDelegate Sort
+        {
+            get => (SortDelegate)GetValue(SortProperty);
+            set => SetValue(SortProperty, value);
+        }
+
+        public static readonly DependencyProperty SortProperty =
+            DependencyProperty.Register("Sort", typeof(SortDelegate), typeof(Table), new PropertyMetadata(null));
+
+        #endregion
+
         #region 事件
 
         /// <summary>
@@ -205,12 +239,7 @@ namespace wpf_ui.Extends.DiyControls
                         border.Background = FindResource("BrushBackground") as Brush;
                         curTh.Children.Add(border);
                         //后加标题以防被Border遮挡
-                        if (curTh.Children.Count == 1)
-                        {
-                            //构造列头内容(默认Label)
-                            Label label = new Label { Content = curTh.Title };
-                            curTh.Children.Add(label);
-                        }
+                        if (curTh.Children.Count == 1) InitTh(curTh);
                     }
                     else//数据列
                     {
@@ -255,6 +284,53 @@ namespace wpf_ui.Extends.DiyControls
         #region 自定义方法
 
         /// <summary>
+        /// 初始化列头
+        /// </summary>
+        /// <param name="th">列头</param>
+        private void InitTh(Th th)
+        {
+            StackPanel stackPanel1 = new StackPanel { Orientation = Orientation.Horizontal };
+            //构造列头内容(默认Label)
+            Label label = new Label { Content = th.Title, HorizontalAlignment = HorizontalAlignment.Left };
+            stackPanel1.Children.Add(label);
+
+            if (th.SortEnable)
+            {
+                StackPanel stackPanel2 = new StackPanel { VerticalAlignment = VerticalAlignment.Center };
+                //Asc排序标志
+                string style = TableSort.SortState == ThSort.Asc && TableSort.SortName.Equals(th.Filed) ? "BrushMenu" : "BrushFont";
+                Path pathAsc = new Path
+                {
+                    Style = FindResource("Icon") as Style,
+                    Data = FindResource("Icon-Sort-Up") as Geometry,
+                    Fill = FindResource(style) as Brush
+                };
+                stackPanel2.Children.Add(pathAsc);
+                //Desc排序标志
+                style = TableSort.SortState == ThSort.Desc && TableSort.SortName.Equals(th.Filed) ? "BrushMenu" : "BrushFont";
+                Path pathDesc = new Path
+                {
+                    Margin = new Thickness(0, -5, 0, 0),
+                    Style = FindResource("Icon") as Style,
+                    Data = FindResource("Icon-Sort-Down") as Geometry,
+                    Fill = FindResource(style) as Brush
+                };
+                stackPanel2.Children.Add(pathDesc);
+                stackPanel1.Children.Add(stackPanel2);
+                //绑定单击事件
+                stackPanel1.MouseLeftButtonUp += delegate
+                {
+                    TableSort.SortName = th.Filed;
+                    TableSort.SortState = TableSort.SortState == ThSort.None ? ThSort.Asc : TableSort.SortState == ThSort.Asc ? ThSort.Desc : ThSort.None;
+                    Sort(th.Filed, TableSort.SortState);
+                };
+            }
+
+            //合体
+            th.Children.Add(stackPanel1);
+        }
+
+        /// <summary>
         /// 初始化行
         /// </summary>
         /// <param name="tr">行</param>
@@ -286,7 +362,7 @@ namespace wpf_ui.Extends.DiyControls
         {
             string id = DataSource.Rows[index]["id"].ToStringEx();
             string content = string.IsNullOrWhiteSpace(th.Filed) ? "" : DataSource.Rows[index][th.Filed].ToStringEx();
-            MTdStyle tdStyle = th.InitStyle?.Invoke(content);
+            MTdConverter tdStyle = th.Converter?.Invoke(content);
             string style = tdStyle?.Style;
             content = string.IsNullOrWhiteSpace(tdStyle?.Content) ? content : tdStyle.Content;
             Thickness thickness = new Thickness(5, 0, 5, 0);
@@ -300,7 +376,7 @@ namespace wpf_ui.Extends.DiyControls
                         Content = content,
                         Style = FindResource(style ?? "BtnPrimary") as Style
                     };
-                    if (th.BtnClick != null && !style.ToStringEx().Contains("Disabled")) button.Click += delegate { th.BtnClick(id); };
+                    if (th.Click != null && !style.ToStringEx().Contains("Disabled")) button.Click += delegate { th.Click(id); };
                     uiElement = button;
                     break;
                 case ThType.Progressbar://进度条
@@ -321,9 +397,9 @@ namespace wpf_ui.Extends.DiyControls
                         Style = FindResource(style ?? "BtnHyperlink") as Style,
                         HorizontalAlignment = HorizontalAlignment.Left
                     };
-                    if (th.BtnClick != null && !style.ToStringEx().Contains("Disabled"))
+                    if (th.Click != null && !style.ToStringEx().Contains("Disabled"))
                     {
-                        hyperlink.Click += delegate { th.BtnClick(id); };
+                        hyperlink.Click += delegate { th.Click(id); };
                     }
                     uiElement = hyperlink;
                     break;
@@ -389,14 +465,14 @@ namespace wpf_ui.Extends.DiyControls
         /// </summary>
         /// <param name="value">列对应数据内容</param>
         /// <returns></returns>
-        public delegate MTdStyle StyleDelegate(string value);
+        public delegate MTdConverter ConverterDelegate(string value);
 
         /// <summary>
-        /// Button列点击事件
+        /// 列点击事件
         /// </summary>
-        /// <param name="id">列对应主键</param>
+        /// <param name="id">主键</param>
         /// <returns></returns>
-        public delegate void BtnClickDelegate(string id);
+        public delegate void ClickDelegate(string id);
 
         #region 所占比例
 
@@ -437,8 +513,6 @@ namespace wpf_ui.Extends.DiyControls
 
         #endregion
 
-
-
         #region 列类型
 
         public ThType ThType
@@ -452,29 +526,42 @@ namespace wpf_ui.Extends.DiyControls
 
         #endregion
 
-        #region 列样式事件
+        #region 列转换事件
 
-        public StyleDelegate InitStyle
+        public ConverterDelegate Converter
         {
-            get => (StyleDelegate)GetValue(InitStyleProperty);
-            set => SetValue(InitStyleProperty, value);
+            get => (ConverterDelegate)GetValue(ConverterProperty);
+            set => SetValue(ConverterProperty, value);
         }
 
-        public static readonly DependencyProperty InitStyleProperty =
-            DependencyProperty.Register("TiInitStyletle", typeof(StyleDelegate), typeof(Th), new PropertyMetadata(null));
+        public static readonly DependencyProperty ConverterProperty =
+            DependencyProperty.Register("Converter", typeof(ConverterDelegate), typeof(Th), new PropertyMetadata(null));
 
         #endregion
 
-        #region Button列点击事件
+        #region 列点击事件
 
-        public BtnClickDelegate BtnClick
+        public ClickDelegate Click
         {
-            get => (BtnClickDelegate)GetValue(BtnClickProperty);
-            set => SetValue(BtnClickProperty, value);
+            get => (ClickDelegate)GetValue(ClickProperty);
+            set => SetValue(ClickProperty, value);
         }
 
-        public static readonly DependencyProperty BtnClickProperty =
-            DependencyProperty.Register("BtnClick", typeof(BtnClickDelegate), typeof(Th), new PropertyMetadata(null));
+        public static readonly DependencyProperty ClickProperty =
+            DependencyProperty.Register("Click", typeof(ClickDelegate), typeof(Th), new PropertyMetadata(null));
+
+        #endregion
+
+        #region 是否启用排序
+
+        public bool SortEnable
+        {
+            get => (bool)GetValue(SortEnableProperty);
+            set => SetValue(SortEnableProperty, value);
+        }
+
+        public static readonly DependencyProperty SortEnableProperty =
+            DependencyProperty.Register("SortEnable", typeof(bool), typeof(Th), new PropertyMetadata(false));
 
         #endregion
     }

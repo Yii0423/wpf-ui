@@ -3,7 +3,7 @@
     /// <summary>
     /// 列样式转化类
     /// </summary>
-    public class MTdStyle
+    public class MTdConverter
     {
         /// <summary>
         /// 内容

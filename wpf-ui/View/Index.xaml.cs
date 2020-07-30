@@ -156,39 +156,41 @@ namespace wpf_ui.View
 
             #endregion
 
-            #region 数据表1编辑删除事件
+            #region 数据表1编辑/删除/排序事件
 
             Table1.Edit += id => { MessageBox.Show($"编辑事件：{id}"); };
 
             Table1.Delete += id => { MessageBox.Show($"删除事件：{id}"); };
 
+            Table1.Sort
+
             #endregion
 
             #region 数据表1绑定列样式事件
 
-            ThId.InitStyle = content =>
+            ThId.Converter = content =>
             {
-                if (content.Contains("20")) return new MTdStyle { Style = "PbDefault" };
-                if (content.Contains("30")) return new MTdStyle { Style = "PbNormal" };
-                if (content.Contains("50")) return new MTdStyle { Style = "PbWarm" };
-                if (content.Contains("60")) return new MTdStyle { Style = "PbDanger" };
+                if (content.Contains("20")) return new MTdConverter { Style = "PbDefault" };
+                if (content.Contains("30")) return new MTdConverter { Style = "PbNormal" };
+                if (content.Contains("50")) return new MTdConverter { Style = "PbWarm" };
+                if (content.Contains("60")) return new MTdConverter { Style = "PbDanger" };
                 return null;
             };
 
-            ThKeyWords.InitStyle = content =>
+            ThKeyWords.Converter = content =>
             {
-                if (content.Contains("3")) return new MTdStyle { Style = "BtnHyperlinkDisabled" };
+                if (content.Contains("3")) return new MTdConverter { Style = "BtnHyperlinkDisabled" };
                 return null;
             };
 
-            ThUserCounts.InitStyle = content =>
+            ThUserCounts.Converter = content =>
             {
-                if (content.Contains("2")) return new MTdStyle { Content = $"{content}%", Style = "TagPrimary" };
-                if (content.Contains("8")) return new MTdStyle { Style = "TagDefault" };
-                if (content.Contains("4")) return new MTdStyle { Style = "TagNormal" };
-                if (content.Contains("0")) return new MTdStyle { Style = "TagDisabled" };
-                if (content.Contains("6")) return new MTdStyle { Content = $"{content}$", Style = "TagWarm" };
-                if (content.Contains("5")) return new MTdStyle { Content = $"{content}.00", Style = "TagDanger" };
+                if (content.Contains("2")) return new MTdConverter { Content = $"{content}%", Style = "TagPrimary" };
+                if (content.Contains("8")) return new MTdConverter { Style = "TagDefault" };
+                if (content.Contains("4")) return new MTdConverter { Style = "TagNormal" };
+                if (content.Contains("0")) return new MTdConverter { Style = "TagDisabled" };
+                if (content.Contains("6")) return new MTdConverter { Content = $"{content}$", Style = "TagWarm" };
+                if (content.Contains("5")) return new MTdConverter { Content = $"{content}.00", Style = "TagDanger" };
                 return null;
             };
 
@@ -196,7 +198,7 @@ namespace wpf_ui.View
 
             #region 数据表1绑定Button列点击事件
 
-            ThKeyWords.BtnClick = id => { MessageBox.Show($"自定义事件：{id}"); };
+            ThKeyWords.Click = id => { MessageBox.Show($"自定义事件：{id}"); };
 
             #endregion
         }

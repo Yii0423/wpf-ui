@@ -76,7 +76,7 @@
       <DependentUpon>UcTab.xaml</DependentUpon>
     </Compile>
     <Compile Include="Model\MMenuItem.cs" />
-    <Compile Include="Model\MTdStyle.cs" />
+    <Compile Include="Model\MTdConverter.cs" />
     <Compile Include="View\Index.xaml.cs">
       <DependentUpon>Index.xaml</DependentUpon>
     </Compile>
