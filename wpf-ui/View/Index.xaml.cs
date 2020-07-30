@@ -162,7 +162,7 @@ namespace wpf_ui.View
 
             Table1.Delete += id => { MessageBox.Show($"删除事件：{id}"); };
 
-            Table1.Sort
+            Table1.Sort += tableSort => BtnGetVip_Click(null, null);
 
             #endregion
 

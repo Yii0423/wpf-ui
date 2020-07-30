@@ -26,9 +26,8 @@ namespace wpf_ui.Extends.DiyControls
         /// <summary>
         /// 列头排序事件
         /// </summary>
-        /// <param name="thName">列名</param>
-        /// <param name="thSort">排序状态</param>
-        public delegate void SortDelegate(string thName, ThSort thSort);
+        /// <param name="tableSort">列排序对象</param>
+        public delegate void SortDelegate(MTableSort tableSort);
 
         /// <summary>
         /// 构造函数
@@ -289,45 +288,65 @@ namespace wpf_ui.Extends.DiyControls
         /// <param name="th">列头</param>
         private void InitTh(Th th)
         {
-            StackPanel stackPanel1 = new StackPanel { Orientation = Orientation.Horizontal };
+            DockPanel dockPanel = new DockPanel();
             //构造列头内容(默认Label)
             Label label = new Label { Content = th.Title, HorizontalAlignment = HorizontalAlignment.Left };
-            stackPanel1.Children.Add(label);
-
+            dockPanel.Children.Add(label);
+            //构造排序
             if (th.SortEnable)
             {
-                StackPanel stackPanel2 = new StackPanel { VerticalAlignment = VerticalAlignment.Center };
+                //设置鼠标形状
+                dockPanel.Cursor = Cursors.Hand;
+                //排序标志区域
+                StackPanel stackPanel1 = new StackPanel
+                {
+                    HorizontalAlignment = HorizontalAlignment.Left,
+                    VerticalAlignment = VerticalAlignment.Center
+                };
                 //Asc排序标志
-                string style = TableSort.SortState == ThSort.Asc && TableSort.SortName.Equals(th.Filed) ? "BrushMenu" : "BrushFont";
+                string style = TableSort != null && TableSort.SortState == ThSort.Asc && TableSort.SortName.Equals(th.Filed) ? "BrushMenu" : "BrushFont";
                 Path pathAsc = new Path
                 {
                     Style = FindResource("Icon") as Style,
                     Data = FindResource("Icon-Sort-Up") as Geometry,
-                    Fill = FindResource(style) as Brush
+                    Fill = FindResource(style) as Brush,
+                    Height = 6
                 };
-                stackPanel2.Children.Add(pathAsc);
+                stackPanel1.Children.Add(pathAsc);
                 //Desc排序标志
-                style = TableSort.SortState == ThSort.Desc && TableSort.SortName.Equals(th.Filed) ? "BrushMenu" : "BrushFont";
+                style = TableSort != null && TableSort.SortState == ThSort.Desc && TableSort.SortName.Equals(th.Filed) ? "BrushMenu" : "BrushFont";
                 Path pathDesc = new Path
                 {
-                    Margin = new Thickness(0, -5, 0, 0),
+                    Margin = new Thickness(0, 1, 0, 0),
                     Style = FindResource("Icon") as Style,
                     Data = FindResource("Icon-Sort-Down") as Geometry,
-                    Fill = FindResource(style) as Brush
+                    Fill = FindResource(style) as Brush,
+                    Height = 6
                 };
-                stackPanel2.Children.Add(pathDesc);
-                stackPanel1.Children.Add(stackPanel2);
-                //绑定单击事件
-                stackPanel1.MouseLeftButtonUp += delegate
+                stackPanel1.Children.Add(pathDesc);
+                //外部构造StackPanel用以填充满剩余部分以便触发排序单击事件
+                StackPanel stackPanel2 = new StackPanel
                 {
+                    Orientation = Orientation.Horizontal,
+                    Background = Brushes.Transparent
+                };
+                stackPanel2.Children.Add(stackPanel1);
+                DockPanel.SetDock(stackPanel2, Dock.Right);
+                dockPanel.Children.Add(stackPanel2);
+                //绑定单击事件
+                dockPanel.MouseLeftButtonUp += delegate
+                {
+                    if (TableSort == null) TableSort = new MTableSort();
+                    //切换排序列则清空上次排序状态
+                    if (!th.Filed.Equals(TableSort.SortName)) TableSort.SortState = ThSort.Asc;
+                    else TableSort.SortState = TableSort.SortState == ThSort.None ? ThSort.Asc : TableSort.SortState == ThSort.Asc ? ThSort.Desc : ThSort.None;
+                    //更新排序列
                     TableSort.SortName = th.Filed;
-                    TableSort.SortState = TableSort.SortState == ThSort.None ? ThSort.Asc : TableSort.SortState == ThSort.Asc ? ThSort.Desc : ThSort.None;
-                    Sort(th.Filed, TableSort.SortState);
+                    Sort(TableSort);
                 };
             }
-
             //合体
-            th.Children.Add(stackPanel1);
+            th.Children.Add(dockPanel);
         }
 
         /// <summary>
