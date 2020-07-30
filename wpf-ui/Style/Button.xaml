@@ -248,13 +248,19 @@
         </Setter>
     </Style>
 
+    <!-- 禁用超链接按钮 -->
+    <Style x:Key="BtnHyperlinkDisabled" BasedOn="{StaticResource BtnHyperlink}" TargetType="{x:Type diy:DiyButton}">
+        <Setter Property="Cursor" Value="No"/>
+        <Setter Property="Foreground" Value="Black"/>
+    </Style>
+
     <!-- #endregion -->
 
-    <!-- #region 表格用按钮 -->
+    <!-- #region 表格用按钮*方便以后扩展 -->
 
     <!-- 原始表格用按钮 -->
     <Style x:Key="TableBtnPrimary" BasedOn="{StaticResource BtnPrimary}" TargetType="{x:Type diy:DiyButton}">
-        
+
     </Style>
 
     <!-- 默认表格用按钮 -->

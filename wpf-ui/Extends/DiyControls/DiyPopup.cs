@@ -12,8 +12,8 @@ namespace wpf_ui.Extends.DiyControls
 
         public ShowPlace ShowPlace
         {
-            get { return (ShowPlace)GetValue(ShowPlaceProperty); }
-            set { SetValue(ShowPlaceProperty, value); }
+            get => (ShowPlace)GetValue(ShowPlaceProperty);
+            set => SetValue(ShowPlaceProperty, value);
         }
 
         public static readonly DependencyProperty ShowPlaceProperty =
@@ -23,8 +23,8 @@ namespace wpf_ui.Extends.DiyControls
 
         public CornerRadius CornerRadius
         {
-            get { return (CornerRadius)GetValue(CornerRadiusProperty); }
-            set { SetValue(CornerRadiusProperty, value); }
+            get => (CornerRadius)GetValue(CornerRadiusProperty);
+            set => SetValue(CornerRadiusProperty, value);
         }
 
         public static readonly DependencyProperty CornerRadiusProperty =

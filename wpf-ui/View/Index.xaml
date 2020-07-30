@@ -68,7 +68,7 @@
                             </diy:Td>
                             <diy:Td>
                                 <StackPanel Orientation="Horizontal">
-                                    <diy:DiyButton Style="{StaticResource BtnDanger}" Content="获取授权" Width="100" Margin="5,0,0,0"/>
+                                    <diy:DiyButton x:Name="BtnGetVip" Style="{StaticResource BtnDanger}" Content="获取授权" Width="100" Margin="5,0,0,0"/>
                                     <diy:DiyButton Style="{StaticResource BtnDefault}" Content="立即下载" Width="100" Margin="5,0,0,0"/>
                                 </StackPanel>
                             </diy:Td>
@@ -202,11 +202,11 @@
             <Grid>
                 <TabControl>
                     <diy:DiyTabitem Header="今日热搜" Style="{StaticResource TiPithy}" ShowCloseBtn="False" Height="40" Margin="5,0,0,0">
-                        <diy:Table x:Name="Table1" Margin="10" ShowHeader="True">
+                        <diy:Table x:Name="Table1" Margin="10" ShowHeader="True" TrOperation="Both">
                             <diy:Tr>
                                 <diy:Th x:Name="ThId" Proportion="-100" Filed="Id" ThType="Progressbar"/>
-                                <diy:Th x:Name="ThKeyWords" Filed="KeyWords" Title="关键词" ThType="Button"/>
-                                <diy:Th x:Name="ThSearchTimes" Filed="SearchTimes" Title="搜索次数" ThType="Hyperlink"/>
+                                <diy:Th x:Name="ThKeyWords" Filed="KeyWords" Title="关键词" ThType="Hyperlink"/>
+                                <diy:Th x:Name="ThSearchTimes" Filed="SearchTimes" Title="搜索次数" ThType="Image"/>
                                 <diy:Th x:Name="ThUserCounts" Filed="UserCounts" Title="用户数"/>
                             </diy:Tr>
                         </diy:Table>

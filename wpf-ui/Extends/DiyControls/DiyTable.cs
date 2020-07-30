@@ -2,7 +2,10 @@
 using System.Data;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
+using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Media.Imaging;
 using wpf_ui.Extends.Common;
 
 namespace wpf_ui.Extends.DiyControls
@@ -18,7 +21,7 @@ namespace wpf_ui.Extends.DiyControls
         public Table()
         {
             //绑定初始化事件
-            Loaded += InitializeEvent;
+            Loaded += delegate { Init(); };
         }
 
         #region 数据源(目前仅支持DataTable)
@@ -73,12 +76,25 @@ namespace wpf_ui.Extends.DiyControls
 
         #endregion
 
+        #region 行功能启用
+
+        public TrOperation TrOperation
+        {
+            get => (TrOperation)GetValue(TrOperationProperty);
+            set => SetValue(TrOperationProperty, value);
+        }
+
+        public static readonly DependencyProperty TrOperationProperty =
+            DependencyProperty.Register("TrOperation", typeof(TrOperation), typeof(Table), new PropertyMetadata(TrOperation.None));
+
+        #endregion
+
         #region 事件
 
         /// <summary>
-        /// 初始化事件
+        /// 初始化
         /// </summary>
-        private void InitializeEvent(object sender, RoutedEventArgs e)
+        private void Init()
         {
             //获取行数和列数
             if (Children.Count == 0 || !(Children[0] is Tr firstTr)) return;
@@ -98,7 +114,10 @@ namespace wpf_ui.Extends.DiyControls
             //构造行比例
             for (int i = 0; i < RowCount; i++)
             {
-                RowDefinition rowDefinition = new RowDefinition { Height = new GridLength(1, GridUnitType.Star) };
+                RowDefinition rowDefinition = new RowDefinition
+                {
+                    Height = DataSource == null ? new GridLength(1, GridUnitType.Star) : new GridLength(38, GridUnitType.Pixel)
+                };
                 if (RowDefinitions.Count > i) RowDefinitions[i] = rowDefinition; else RowDefinitions.Add(rowDefinition);
             }
             //构造单元格
@@ -111,8 +130,8 @@ namespace wpf_ui.Extends.DiyControls
                     curTr = new Tr();
                     Children.Add(curTr);
                 }
-                if (DataSource != null) RowDefinitions[i].Height = new GridLength(38, GridUnitType.Pixel);
-                SetRow(curTr, i);
+                //设置行
+                InitTr(curTr, i);
                 //构造列比例
                 for (int k = 0; k < ColCount; k++)
                 {
@@ -170,7 +189,7 @@ namespace wpf_ui.Extends.DiyControls
                         {
                             //取该列绑定的字段名
                             if (!(firstTr.Children[l] is Th th)) return;
-                            curTd.Children.Add(InitTd(th, i - 1));
+                            InitTd(th, curTd, i - 1);
                         }
                     }
                 }
@@ -193,17 +212,35 @@ namespace wpf_ui.Extends.DiyControls
         #region 自定义方法
 
         /// <summary>
-        /// 初始化单元格内容
+        /// 初始化行
         /// </summary>
-        /// <param name="th">对应列</param>
+        /// <param name="tr">行</param>
+        /// <param name="index">行索引</param>
+        private void InitTr(Tr tr, int index = 0)
+        {
+            //设置行所处的RowDefinition
+            SetRow(tr, index);
+
+            //鼠标移入行
+            tr.MouseEnter += delegate { tr.Background = FindResource("BrushBackground") as Brush; };
+            //鼠标移出行
+            tr.MouseLeave += delegate { tr.Background = Brushes.Transparent; };
+        }
+
+        /// <summary>
+        /// 初始化单元格
+        /// </summary>
+        /// <param name="th">列头</param>
+        /// <param name="td">单元格</param>
         /// <param name="index">行索引</param>
         /// <returns></returns>
-        private UIElement InitTd(Th th, int index = 0)
+        private void InitTd(Th th, Td td, int index = 0)
         {
             string id = DataSource.Rows[index][0].ToStringEx();
             string content = DataSource.Rows[index][th.Filed].ToStringEx();
             string style = th.InitStyle?.Invoke(content);
             Thickness thickness = new Thickness(5, 0, 5, 0);
+            UIElement uiElement;
             switch (th.ThType)
             {
                 case ThType.Button://按钮
@@ -214,7 +251,8 @@ namespace wpf_ui.Extends.DiyControls
                         Style = FindResource(style ?? "TableBtnPrimary") as Style
                     };
                     if (th.BtnClick != null && !style.ToStringEx().Contains("Disabled")) button.Click += delegate { th.BtnClick(id); };
-                    return button;
+                    uiElement = button;
+                    break;
                 case ThType.Progressbar://进度条
                     double.TryParse(content, out double value);
                     DiyProgressbar progressbar = new DiyProgressbar
@@ -223,9 +261,83 @@ namespace wpf_ui.Extends.DiyControls
                         Value = value,
                         Style = FindResource(style ?? "PbDefault") as Style
                     };
-                    return progressbar;
+                    uiElement = progressbar;
+                    break;
                 case ThType.Hyperlink://超链接
-                    return new DiyButton { Margin = thickness, Content = content, Style = FindResource(style ?? "BtnHyperlink") as Style };
+                    DiyButton hyperlink = new DiyButton
+                    {
+                        Margin = thickness,
+                        Content = content,
+                        Style = FindResource(style ?? "BtnHyperlink") as Style,
+                        HorizontalAlignment = HorizontalAlignment.Left
+                    };
+                    if (th.BtnClick != null && !style.ToStringEx().Contains("Disabled"))
+                    {
+                        hyperlink.Click += delegate { th.BtnClick(id); };
+                    }
+                    #region 行操作功能
+                    //行功能启用
+                    if (TrOperation != TrOperation.None)
+                    {
+                        StackPanel stackPanel = new StackPanel();
+                        //编辑
+                        if (TrOperation == TrOperation.Both || TrOperation == TrOperation.Edit)
+                        {
+                            stackPanel.Children.Add(new DiyButton
+                            {
+                                Content = "编辑",
+                                Style = FindResource("BtnWarm") as Style,
+                                FontSize = 12,
+                                Width = 35,
+                                Height = 20,
+                                Margin = new Thickness(0, 0, 0, 5)
+                            });
+                        }
+                        //删除
+                        if (TrOperation == TrOperation.Both || TrOperation == TrOperation.Delete)
+                        {
+                            stackPanel.Children.Add(new DiyButton
+                            {
+                                Content = "删除",
+                                Style = FindResource("BtnDanger") as Style,
+                                FontSize = 12,
+                                Width = 35,
+                                Height = 20
+                            });
+                        }
+                        Popup popup = new Popup
+                        {
+                            Placement = PlacementMode.Right,
+                            StaysOpen = false,
+                            PlacementTarget = hyperlink,
+                            AllowsTransparency = true,
+                            Child = new DiyPopup
+                            {
+                                Style = FindResource("PopupPrimary") as Style,
+                                ShowPlace = ShowPlace.Right,
+                                Content = stackPanel
+                            }
+                        };
+                        if (!style.ToStringEx().Contains("Disabled"))
+                        {
+                            void MouseClick(object sender, MouseButtonEventArgs e) => popup.IsOpen = true;
+                            if (th.BtnClick != null) hyperlink.MouseRightButtonUp += MouseClick;
+                            else hyperlink.Click += delegate { MouseClick(null, null); };
+                        }
+                    }
+                    #endregion
+                    uiElement = hyperlink;
+                    break;
+                case ThType.Image://图片
+                    Image image = new Image
+                    {
+                        HorizontalAlignment = HorizontalAlignment.Left,
+                        Margin = new Thickness(5),
+                        Source = new BitmapImage(new Uri(content, UriKind.RelativeOrAbsolute))
+                    };
+                    RenderOptions.SetBitmapScalingMode(image, BitmapScalingMode.HighQuality);
+                    uiElement = image;
+                    break;
                 default://仅文本
                     Label label = new Label
                     {
@@ -233,8 +345,10 @@ namespace wpf_ui.Extends.DiyControls
                         Content = content,
                         Style = FindResource(style ?? "TagPrimary") as Style
                     };
-                    return label;
+                    uiElement = label;
+                    break;
             }
+            td.Children.Add(uiElement);
         }
 
         #endregion
@@ -298,6 +412,8 @@ namespace wpf_ui.Extends.DiyControls
 
         #endregion
 
+
+
         #region 列类型
 
         public ThType ThType
@@ -355,6 +471,29 @@ namespace wpf_ui.Extends.DiyControls
     }
 
     /// <summary>
+    /// 行功能启用
+    /// </summary>
+    public enum TrOperation
+    {
+        /// <summary>
+        /// 全部不启用
+        /// </summary>
+        None,
+        /// <summary>
+        /// 启用编辑
+        /// </summary>
+        Edit,
+        /// <summary>
+        /// 启用删除
+        /// </summary>
+        Delete,
+        /// <summary>
+        /// 全部启用
+        /// </summary>
+        Both
+    }
+
+    /// <summary>
     /// 列类型
     /// </summary>
     public enum ThType
@@ -374,6 +513,10 @@ namespace wpf_ui.Extends.DiyControls
         /// <summary>
         /// 超链接
         /// </summary>
-        Hyperlink
+        Hyperlink,
+        /// <summary>
+        /// 图片
+        /// </summary>
+        Image
     }
 }
