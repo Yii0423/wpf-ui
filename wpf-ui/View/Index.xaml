@@ -17,7 +17,7 @@
         <ucs:UcCard x:Name="Card1" Height="240" Margin="10,10,5,0" VerticalAlignment="Top"/>
         <ucs:UcCard x:Name="Card2" Height="240" Margin="5,10,5,0" VerticalAlignment="Top" Grid.Column="1"/>
         <Grid Height="240" Margin="5,10,10,0" VerticalAlignment="Top" Grid.Column="2">
-            <Border Background="{StaticResource BrushPrimary}" CornerRadius="1">
+            <Border Background="{StaticResource BrushPrimary}">
                 <Border.Effect>
                     <DropShadowEffect ShadowDepth="1" Opacity="0.1"/>
                 </Border.Effect>
@@ -78,7 +78,7 @@
             </Grid>
         </Grid>
         <Grid Height="400" Margin="10,260,5,10" VerticalAlignment="Top" ColumnSpan="2" Grid.Column="0">
-            <Border Background="{StaticResource BrushPrimary}" CornerRadius="1">
+            <Border Background="{StaticResource BrushPrimary}">
                 <Border.Effect>
                     <DropShadowEffect ShadowDepth="1" Opacity="0.1"/>
                 </Border.Effect>
@@ -110,7 +110,7 @@
             </Grid>
         </Grid>
         <Grid Height="195" Margin="5,260,10,0" VerticalAlignment="Top" Grid.Column="2">
-            <Border Background="{StaticResource BrushPrimary}" CornerRadius="1">
+            <Border Background="{StaticResource BrushPrimary}">
                 <Border.Effect>
                     <DropShadowEffect ShadowDepth="1" Opacity="0.1"/>
                 </Border.Effect>
@@ -134,7 +134,7 @@
                                     </StackPanel>
                                 </Label.Content>
                             </Label>
-                            <diy:DiyProgressbar Value="65" VerticalAlignment="Top" Margin="0,44,0,0" Height="6"/>
+                            <diy:DiyProgressbar Value="65" VerticalAlignment="Top" Margin="0,44,0,0" Height="6" Style="{StaticResource PbDefault}"/>
                         </Grid>
                         <Grid Grid.Row="1" VerticalAlignment="Center">
                             <Label Content="32%" VerticalAlignment="Top" HorizontalAlignment="Left" FontSize="26"/>
@@ -147,14 +147,14 @@
                                     </StackPanel>
                                 </Label.Content>
                             </Label>
-                            <diy:DiyProgressbar Value="32" VerticalAlignment="Top" Margin="0,44,0,0" Height="6"/>
+                            <diy:DiyProgressbar Value="32" VerticalAlignment="Top" Margin="0,44,0,0" Height="6" Style="{StaticResource PbDefault}"/>
                         </Grid>
                     </Grid>
                 </Border>
             </Grid>
         </Grid>
         <Grid Height="195" Margin="5,465,10,0" VerticalAlignment="Top" Grid.Column="2">
-            <Border Background="{StaticResource BrushPrimary}" CornerRadius="1">
+            <Border Background="{StaticResource BrushPrimary}">
                 <Border.Effect>
                     <DropShadowEffect ShadowDepth="1" Opacity="0.1"/>
                 </Border.Effect>
@@ -176,7 +176,7 @@
                                     </StackPanel>
                                 </Label.Content>
                             </Label>
-                            <diy:DiyProgressbar Value="58" VerticalAlignment="Top" Margin="0,44,0,0" Height="6"/>
+                            <diy:DiyProgressbar Value="58" VerticalAlignment="Top" Margin="0,44,0,0" Height="6" Style="{StaticResource PbDefault}"/>
                         </Grid>
                         <Grid Grid.Row="1" VerticalAlignment="Center">
                             <Label Content="90%" VerticalAlignment="Top" HorizontalAlignment="Left" FontSize="26"/>
@@ -187,15 +187,14 @@
                                     </StackPanel>
                                 </Label.Content>
                             </Label>
-                            <diy:DiyProgressbar Value="90" VerticalAlignment="Top" Margin="0,44,0,0" Height="6" 
-                                                Background="{StaticResource BrushDanger}"/>
+                            <diy:DiyProgressbar Value="90" VerticalAlignment="Top" Margin="0,44,0,0" Height="6" Style="{StaticResource PbDanger}"/>
                         </Grid>
                     </Grid>
                 </Border>
             </Grid>
         </Grid>
         <Grid Grid.Column="0" Grid.ColumnSpan="2" Margin="10,670,5,10">
-            <Border CornerRadius="1" Background="{StaticResource BrushPrimary}">
+            <Border Background="{StaticResource BrushPrimary}">
                 <Border.Effect>
                     <DropShadowEffect ShadowDepth="1" Opacity="0.1"/>
                 </Border.Effect>
@@ -205,10 +204,10 @@
                     <diy:DiyTabitem Header="今日热搜" Style="{StaticResource TiPithy}" ShowCloseBtn="False" Height="40" Margin="5,0,0,0">
                         <diy:Table x:Name="Table1" Margin="10" ShowHeader="True">
                             <diy:Tr>
-                                <diy:Th Proportion="-50" Filed="Id"/>
-                                <diy:Th Filed="KeyWords" Title="关键词"/>
-                                <diy:Th Filed="SearchTimes" Title="搜索次数"/>
-                                <diy:Th Filed="UserCounts" Title="用户数"/>
+                                <diy:Th x:Name="ThId" Proportion="-100" Filed="Id" ThType="Progressbar"/>
+                                <diy:Th x:Name="ThKeyWords" Filed="KeyWords" Title="关键词" ThType="Button"/>
+                                <diy:Th x:Name="ThSearchTimes" Filed="SearchTimes" Title="搜索次数" ThType="Hyperlink"/>
+                                <diy:Th x:Name="ThUserCounts" Filed="UserCounts" Title="用户数"/>
                             </diy:Tr>
                         </diy:Table>
                     </diy:DiyTabitem>
@@ -220,7 +219,7 @@
         </Grid>
         <ucs:UcCard Grid.Column="2" x:Name="Card3" Height="120" Margin="5,670,10,10" VerticalAlignment="Top"/>
         <Grid Margin="5,800,10,10" Grid.Column="2">
-            <Border Background="{StaticResource BrushPrimary}" CornerRadius="1">
+            <Border Background="{StaticResource BrushPrimary}">
                 <Border.Effect>
                     <DropShadowEffect ShadowDepth="1" Opacity="0.1"/>
                 </Border.Effect>

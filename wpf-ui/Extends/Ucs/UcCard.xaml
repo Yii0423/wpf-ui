@@ -6,7 +6,7 @@
              mc:Ignorable="d" d:DesignHeight="240" d:DesignWidth="530" 
              SizeChanged="UcCard_OnSizeChanged" Loaded="UcCard_OnLoaded">
     <Grid>
-        <Border Background="{StaticResource BrushPrimary}" CornerRadius="1">
+        <Border Background="{StaticResource BrushPrimary}">
             <Border.Effect>
                 <DropShadowEffect ShadowDepth="1" Opacity="0.1"/>
             </Border.Effect>

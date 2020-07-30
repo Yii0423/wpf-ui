@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Data;
+using System.Diagnostics.Eventing.Reader;
 using System.Windows;
 using System.Windows.Controls;
 using wpf_ui.Model;
@@ -150,8 +151,49 @@ namespace wpf_ui.View
             dt.Columns.Add("KeyWords");
             dt.Columns.Add("SearchTimes");
             dt.Columns.Add("UserCounts");
-            for (int i = 0; i < 10; i++) dt.Rows.Add(i, $"关键词{i}", i * 30, i * 60);
+            for (int i = 0; i < 10; i++) dt.Rows.Add(i * 10, $"关键词{i}", i * 30, i * 60);
             Table1.DataSource = dt;
+
+            #endregion
+
+            #region 数据表1绑定列样式事件
+
+            ThId.InitStyle = content =>
+            {
+                if (content.Contains("20")) return "PbDefault";
+                if (content.Contains("30")) return "PbNormal";
+                if (content.Contains("50")) return "PbWarm";
+                if (content.Contains("60")) return "PbDanger";
+                return null;
+            };
+
+            ThKeyWords.InitStyle = content =>
+            {
+                if (content.Contains("关键词1")) return "TableBtnPrimary";
+                if (content.Contains("关键词2")) return "TableBtnDefault";
+                if (content.Contains("关键词3")) return "TableBtnNormal";
+                if (content.Contains("关键词4")) return "TableBtnDisabled";
+                if (content.Contains("关键词5")) return "TableBtnWarm";
+                if (content.Contains("关键词6")) return "TableBtnDanger";
+                return null;
+            };
+
+            ThUserCounts.InitStyle = content =>
+            {
+                if (content.Contains("120")) return "TagPrimary";
+                if (content.Contains("180")) return "TagDefault";
+                if (content.Contains("240")) return "TagNormal";
+                if (content.Contains("300")) return "TagDisabled";
+                if (content.Contains("360")) return "TagWarm";
+                if (content.Contains("420")) return "TagDanger";
+                return null;
+            };
+
+            #endregion
+
+            #region 数据表1绑定Button列点击事件
+
+            ThKeyWords.BtnClick = id => { MessageBox.Show($"列主键：{id}"); };
 
             #endregion
         }

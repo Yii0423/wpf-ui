@@ -139,7 +139,8 @@ namespace wpf_ui.Extends.Ucs
                     SpMain.BeginAnimation(MarginProperty, da);
                     isDo = true;
                 };
-                radioButton.MouseEnter += delegate { radioButton.IsChecked = true; };
+                //自动切换开启时取消绑定鼠标移入事件
+                if (!AutoChange) radioButton.MouseEnter += delegate { radioButton.IsChecked = true; };
                 DpMain.Children.Add(radioButton);
             }
             //是否开启自动切换

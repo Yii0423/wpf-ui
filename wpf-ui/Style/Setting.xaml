@@ -70,6 +70,8 @@
     <system:Double x:Key="FontSizeDefault">14</system:Double>
     <!-- 默认图标字号 -->
     <system:Double x:Key="IconSizeDefault">12</system:Double>
+    <!-- 默认标签字号 -->
+    <system:Double x:Key="TagSizeDefault">10</system:Double>
     <!-- 默认边框尺寸 -->
     <Thickness x:Key="BorderThicknessDefault">1,1,1,1</Thickness>
     <!-- 默认圆角尺寸 -->

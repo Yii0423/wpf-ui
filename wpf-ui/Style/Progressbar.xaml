@@ -14,7 +14,7 @@
     <!-- #region 进度条 -->
 
     <!-- 默认进度条 -->
-    <Style TargetType="{x:Type diy:DiyProgressbar}">
+    <Style x:Key="PbDefault" TargetType="{x:Type diy:DiyProgressbar}">
         <Setter Property="Background" Value="{StaticResource BrushChecked}"/>
         <Setter Property="Height" Value="10"/>
         <Setter Property="SnapsToDevicePixels" Value="True"/>
@@ -76,6 +76,21 @@
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
+    </Style>
+
+    <!-- 百搭进度条 -->
+    <Style x:Key="PbNormal" BasedOn="{StaticResource PbDefault}" TargetType="{x:Type diy:DiyProgressbar}">
+        <Setter Property="Background" Value="{StaticResource BrushNormal}"/>
+    </Style>
+
+    <!-- 暖色进度条 -->
+    <Style x:Key="PbWarm" BasedOn="{StaticResource PbDefault}" TargetType="{x:Type diy:DiyProgressbar}">
+        <Setter Property="Background" Value="{StaticResource BrushWarm}"/>
+    </Style>
+
+    <!-- 警告进度条 -->
+    <Style x:Key="PbDanger" BasedOn="{StaticResource PbDefault}" TargetType="{x:Type diy:DiyProgressbar}">
+        <Setter Property="Background" Value="{StaticResource BrushDanger}"/>
     </Style>
 
     <!-- 圆形进度条 -->

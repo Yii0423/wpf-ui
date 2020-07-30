@@ -20,4 +20,58 @@
 
     <!-- #endregion -->
 
+    <!-- #region 标签 -->
+
+    <!-- 原始标签 -->
+    <Style x:Key="TagPrimary" TargetType="{x:Type Label}">
+        <Setter Property="SnapsToDevicePixels" Value="True"/>
+        <Setter Property="FontFamily" Value="{StaticResource FontFamilyDefault}"/>
+        <Setter Property="FontSize" Value="{StaticResource TagSizeDefault}"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <Setter Property="HorizontalContentAlignment" Value="Center"/>
+        <Setter Property="BorderThickness" Value="{StaticResource BorderThicknessDefault}"/>
+        <Setter Property="BorderBrush" Value="{StaticResource BrushCold}"/>
+        <Setter Property="Width" Value="40"/>
+        <Setter Property="Height" Value="20"/>
+        <Setter Property="Padding" Value="0"/>
+        <Setter Property="HorizontalAlignment" Value="Left"/>
+    </Style>
+
+    <!-- 默认标签 -->
+    <Style x:Key="TagDefault" BasedOn="{StaticResource TagPrimary}" TargetType="{x:Type Label}">
+        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="Foreground" Value="{StaticResource BrushPrimary}"/>
+        <Setter Property="Background" Value="{StaticResource BrushDefault}"/>
+    </Style>
+
+    <!-- 百搭标签 -->
+    <Style x:Key="TagNormal" BasedOn="{StaticResource TagPrimary}" TargetType="{x:Type Label}">
+        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="Foreground" Value="{StaticResource BrushPrimary}"/>
+        <Setter Property="Background" Value="{StaticResource BrushNormal}"/>
+    </Style>
+
+    <!-- 暖色标签 -->
+    <Style x:Key="TagWarm" BasedOn="{StaticResource TagPrimary}" TargetType="{x:Type Label}">
+        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="Foreground" Value="{StaticResource BrushPrimary}"/>
+        <Setter Property="Background" Value="{StaticResource BrushWarm}"/>
+    </Style>
+
+    <!-- 警告标签 -->
+    <Style x:Key="TagDanger" BasedOn="{StaticResource TagPrimary}" TargetType="{x:Type Label}">
+        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="Foreground" Value="{StaticResource BrushPrimary}"/>
+        <Setter Property="Background" Value="{StaticResource BrushDanger}"/>
+    </Style>
+
+    <!-- 禁用标签 -->
+    <Style x:Key="TagDisabled" BasedOn="{StaticResource TagPrimary}" TargetType="{x:Type Label}">
+        <Setter Property="Cursor" Value="No"/>
+        <Setter Property="Foreground" Value="{StaticResource BrushCold}"/>
+        <Setter Property="Background" Value="{StaticResource BrushDisabled}"/>
+    </Style>
+
+    <!-- #endregion -->
+
 </ResourceDictionary>

@@ -54,5 +54,15 @@ namespace wpf_ui.Extends.Common
             }
             return founded;
         }
+
+        /// <summary>
+        /// 强化版ToString
+        /// </summary>
+        /// <param name="obj">对象</param>
+        /// <returns></returns>
+        public static string ToStringEx(this object obj)
+        {
+            return obj == null ? "" : obj.ToString();
+        }
     }
 }

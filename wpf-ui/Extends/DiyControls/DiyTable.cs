@@ -170,12 +170,7 @@ namespace wpf_ui.Extends.DiyControls
                         {
                             //取该列绑定的字段名
                             if (!(firstTr.Children[l] is Th th)) return;
-                            //构造列头内容(默认Label)
-                            Label label = new Label
-                            {
-                                Content = DataSource.Rows[i - 1][th.Filed].ToString()
-                            };
-                            curTd.Children.Add(label);
+                            curTd.Children.Add(InitTd(th, i - 1));
                         }
                     }
                 }
@@ -194,6 +189,55 @@ namespace wpf_ui.Extends.DiyControls
         }
 
         #endregion
+
+        #region 自定义方法
+
+        /// <summary>
+        /// 初始化单元格内容
+        /// </summary>
+        /// <param name="th">对应列</param>
+        /// <param name="index">行索引</param>
+        /// <returns></returns>
+        private UIElement InitTd(Th th, int index = 0)
+        {
+            string id = DataSource.Rows[index][0].ToStringEx();
+            string content = DataSource.Rows[index][th.Filed].ToStringEx();
+            string style = th.InitStyle?.Invoke(content);
+            Thickness thickness = new Thickness(5, 0, 5, 0);
+            switch (th.ThType)
+            {
+                case ThType.Button://按钮
+                    DiyButton button = new DiyButton
+                    {
+                        Margin = thickness,
+                        Content = content,
+                        Style = FindResource(style ?? "TableBtnPrimary") as Style
+                    };
+                    if (th.BtnClick != null && !style.ToStringEx().Contains("Disabled")) button.Click += delegate { th.BtnClick(id); };
+                    return button;
+                case ThType.Progressbar://进度条
+                    double.TryParse(content, out double value);
+                    DiyProgressbar progressbar = new DiyProgressbar
+                    {
+                        Margin = thickness,
+                        Value = value,
+                        Style = FindResource(style ?? "PbDefault") as Style
+                    };
+                    return progressbar;
+                case ThType.Hyperlink://超链接
+                    return new DiyButton { Margin = thickness, Content = content, Style = FindResource(style ?? "BtnHyperlink") as Style };
+                default://仅文本
+                    Label label = new Label
+                    {
+                        Margin = thickness,
+                        Content = content,
+                        Style = FindResource(style ?? "TagPrimary") as Style
+                    };
+                    return label;
+            }
+        }
+
+        #endregion
     }
 
     /// <summary>
@@ -201,6 +245,20 @@ namespace wpf_ui.Extends.DiyControls
     /// </summary>
     public class Th : Grid
     {
+        /// <summary>
+        /// 列样式委托
+        /// </summary>
+        /// <param name="value">列对应数据内容</param>
+        /// <returns></returns>
+        public delegate string StyleDelegate(string value);
+
+        /// <summary>
+        /// Button列点击事件
+        /// </summary>
+        /// <param name="id">列对应主键</param>
+        /// <returns></returns>
+        public delegate void BtnClickDelegate(string id);
+
         #region 所占比例
 
         public double Proportion
@@ -240,18 +298,44 @@ namespace wpf_ui.Extends.DiyControls
 
         #endregion
 
-        //#region 绑定字段名
+        #region 列类型
 
-        //public string Filed
-        //{
-        //    get => (string)GetValue(FiledProperty);
-        //    set => SetValue(FiledProperty, value);
-        //}
+        public ThType ThType
+        {
+            get => (ThType)GetValue(ThTypeProperty);
+            set => SetValue(ThTypeProperty, value);
+        }
 
-        //public static readonly DependencyProperty FiledProperty =
-        //    DependencyProperty.Register("Filed", typeof(string), typeof(Th), new PropertyMetadata(""));
+        public static readonly DependencyProperty ThTypeProperty =
+            DependencyProperty.Register("ThType", typeof(ThType), typeof(Th), new PropertyMetadata(ThType.Normal));
 
-        //#endregion
+        #endregion
+
+        #region 列样式事件
+
+        public StyleDelegate InitStyle
+        {
+            get => (StyleDelegate)GetValue(InitStyleProperty);
+            set => SetValue(InitStyleProperty, value);
+        }
+
+        public static readonly DependencyProperty InitStyleProperty =
+            DependencyProperty.Register("TiInitStyletle", typeof(StyleDelegate), typeof(Th), new PropertyMetadata(null));
+
+        #endregion
+
+        #region Button列点击事件
+
+        public BtnClickDelegate BtnClick
+        {
+            get => (BtnClickDelegate)GetValue(BtnClickProperty);
+            set => SetValue(BtnClickProperty, value);
+        }
+
+        public static readonly DependencyProperty BtnClickProperty =
+            DependencyProperty.Register("BtnClick", typeof(BtnClickDelegate), typeof(Th), new PropertyMetadata(null));
+
+        #endregion
     }
 
     /// <summary>
@@ -268,5 +352,28 @@ namespace wpf_ui.Extends.DiyControls
     public class Td : Grid
     {
 
+    }
+
+    /// <summary>
+    /// 列类型
+    /// </summary>
+    public enum ThType
+    {
+        /// <summary>
+        /// 默认(仅文本)
+        /// </summary>
+        Normal,
+        /// <summary>
+        /// 按钮
+        /// </summary>
+        Button,
+        /// <summary>
+        /// 进度条
+        /// </summary>
+        Progressbar,
+        /// <summary>
+        /// 超链接
+        /// </summary>
+        Hyperlink
     }
 }
