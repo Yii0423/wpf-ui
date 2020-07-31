@@ -186,11 +186,11 @@ namespace wpf_ui.Extends.DiyControls
             {
                 RowDefinition rowDefinition = new RowDefinition
                 {
-                    Height = DataSource == null ? new GridLength(1, GridUnitType.Star) : new GridLength(38, GridUnitType.Pixel)
+                    Height = DataSource != null || ShowHeader && i == 0 ? new GridLength(38, GridUnitType.Pixel) : new GridLength(1, GridUnitType.Star)
                 };
                 if (RowDefinitions.Count > i) RowDefinitions[i] = rowDefinition; else RowDefinitions.Add(rowDefinition);
             }
-            //构造单元格
+            //构造表格
             for (int i = 0; i < RowCount; i++)
             {
                 //构造行
@@ -265,17 +265,6 @@ namespace wpf_ui.Extends.DiyControls
                     }
                 }
             }
-            //构造外边框
-            Border slideBorder = new Border
-            {
-                Name = "yii",
-                BorderBrush = FindResource("BrushTableBoder") as Brush,
-                BorderThickness = new Thickness(1)
-            };
-            if (this.FindChild<Border>("yii") != null) return;
-            Children.Add(slideBorder);
-            SetRowSpan(slideBorder, RowCount);
-            SetColumnSpan(slideBorder, ColCount);
         }
 
         #endregion

@@ -1,0 +1,44 @@
+﻿<UserControl x:Class="wpf_ui.Extends.Ucs.UcPagination"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:diy="clr-namespace:wpf_ui.Extends.DiyControls"
+             mc:Ignorable="d" Height="38" d:DesignWidth="800"
+             Loaded="UcPagination_OnLoaded">
+    <Grid>
+        <Border BorderBrush="{StaticResource BrushTableBoder}" BorderThickness="1"/>
+        <StackPanel Orientation="Horizontal">
+            <diy:DiyButton x:Name="BtnPrev" Style="{StaticResource BtnPaginationDisabled}" Click="BtnPrev_OnClick">
+                <Path Style="{StaticResource Icon}" Data="{StaticResource Icon-Angle-Left}" 
+                      Fill="{Binding RelativeSource={RelativeSource FindAncestor,AncestorType={x:Type diy:DiyButton},AncestorLevel=1},Path=Foreground}"/>
+            </diy:DiyButton>
+            <StackPanel x:Name="SpPages" Orientation="Horizontal"/>
+            <diy:DiyButton x:Name="BtnNext" Style="{StaticResource BtnPaginationDisabled}" Click="BtnNext_OnClick">
+                <Path Style="{StaticResource Icon}" Data="{StaticResource Icon-Angle-Right}" 
+                      Fill="{Binding RelativeSource={RelativeSource FindAncestor,AncestorType={x:Type diy:DiyButton},AncestorLevel=1},Path=Foreground}"/>
+            </diy:DiyButton>
+            <Label Content="跳转至" FontSize="{StaticResource IconSizeDefault}" Margin="5,0,0,0"/>
+            <diy:DiyTextbox x:Name="TxtPageIndex" Style="{StaticResource TbDefault}" Width="40" Height="26" HorizontalContentAlignment="Center" Text="1"
+                            Padding="0" FontSize="{StaticResource IconSizeDefault}"/>
+            <Label Content="页" FontSize="{StaticResource IconSizeDefault}"/>
+            <diy:DiyButton x:Name="BtnTurn" Style="{StaticResource BtnPrimary}" Width="40" Height="26" Background="Transparent" Content="确定" 
+                           FontSize="{StaticResource IconSizeDefault}" Click="BtnTurn_OnClick"/>
+            <Label Content="共" FontSize="{StaticResource IconSizeDefault}" Padding="5,0,0,0"/>
+            <Label x:Name="LabDataCounts" Content="0" FontSize="{StaticResource IconSizeDefault}" Padding="2,0"/>
+            <Label Content="条数据" FontSize="{StaticResource IconSizeDefault}" Padding="0,0,5,0"/>
+            <ComboBox x:Name="CmbPaging" Width="100" Height="26" Text="10条/页" FontSize="{StaticResource IconSizeDefault}" IsReadOnly="True"
+                      SelectionChanged="CmbPaging_OnSelectionChanged">
+                <ComboBoxItem Content="10条/页"/>
+                <ComboBoxItem Content="20条/页"/>
+                <ComboBoxItem Content="30条/页"/>
+                <ComboBoxItem Content="40条/页"/>
+                <ComboBoxItem Content="50条/页"/>
+                <ComboBoxItem Content="60条/页"/>
+                <ComboBoxItem Content="70条/页"/>
+                <ComboBoxItem Content="80条/页"/>
+                <ComboBoxItem Content="90条/页"/>
+            </ComboBox>
+        </StackPanel>
+    </Grid>
+</UserControl>

@@ -72,6 +72,9 @@
     <Compile Include="Extends\Ucs\UcCard.xaml.cs">
       <DependentUpon>UcCard.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Extends\Ucs\UcPagination.xaml.cs">
+      <DependentUpon>UcPagination.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Extends\Ucs\UcTab.xaml.cs">
       <DependentUpon>UcTab.xaml</DependentUpon>
     </Compile>
@@ -94,6 +97,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Extends\Ucs\UcMenuTop.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Extends\Ucs\UcPagination.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
