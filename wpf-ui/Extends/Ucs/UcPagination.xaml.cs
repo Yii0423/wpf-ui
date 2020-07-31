@@ -8,10 +8,22 @@ using wpf_ui.Extends.DiyControls;
 namespace wpf_ui.Extends.Ucs
 {
     /// <summary>
+    /// 分页回调
+    /// </summary>
+    /// <param name="pageIndex">页码</param>
+    /// <param name="pageCounts">每页数据数</param>
+    public delegate void PagingDelegate(int pageIndex, int pageCounts);
+
+    /// <summary>
     /// UcPagination.xaml 的交互逻辑
     /// </summary>
     public partial class UcPagination : UserControl
     {
+        /// <summary>
+        /// 分页回调事件
+        /// </summary>
+        public PagingDelegate Paging;
+
         /// <summary>
         /// 数据总条数
         /// </summary>
@@ -26,6 +38,19 @@ namespace wpf_ui.Extends.Ucs
         /// 总页数
         /// </summary>
         private int _allPages;
+
+        /// <summary>
+        /// 当前页数
+        /// </summary>
+        public int PageIndex
+        {
+            get => _pageIndex;
+            set
+            {
+                _pageIndex = value;
+                InitPages();
+            }
+        }
 
         /// <summary>
         /// 当前页数
@@ -144,6 +169,8 @@ namespace wpf_ui.Extends.Ucs
                     SpPages.Children.Add(btnPage);
                 }
             }
+            //触发分页回调事件
+            Paging?.Invoke(_pageIndex, _pageCounts);
         }
 
         /// <summary>

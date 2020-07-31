@@ -146,14 +146,36 @@ namespace wpf_ui.View
 
             #region 数据表1
 
+            //数据源
+            Random random = new Random();
             DataTable dt = new DataTable();
             dt.Columns.Add("Id");
             dt.Columns.Add("KeyWords");
             dt.Columns.Add("SearchTimes");
             dt.Columns.Add("UserCounts");
-            for (int i = 0; i < 10; i++) dt.Rows.Add(i * 10, $"关键词关键词关键词关键词关键词关键词关键词关键词{i * 99}", $"/Content/Images/avatar{i}.jpg", i * 60);
-            Table1.DataSource = dt;
-            Pagination1.DataCounts = 50000;
+            for (int i = 0; i < 100; i++)
+            {
+                dt.Rows.Add(i, $"关键词{i}", $"/Content/Images/avatar{random.Next(0, 9)}.jpg", random.Next(1, 100));
+            }
+
+            //分页回调函数实现(需在总页数赋值前实现)
+            Pagination1.Paging += (pageIndex, pageCounts) =>
+            {
+                //先排序
+                if (Table1.TableSort != null && Table1.TableSort.SortState != ThSort.None)
+                {
+                    DataView dv = new DataView(dt) { Sort = $"{Table1.TableSort.SortName} {Table1.TableSort.SortState}" };
+                    dt = dv.ToTable();
+                }
+                //筛选指定区间行
+                DataTable dtNew = dt.Clone();
+                for (int i = (pageIndex - 1) * pageCounts; i < pageIndex * pageCounts; i++)
+                {
+                    dtNew.ImportRow(dt.Rows[i]);
+                }
+                Table1.DataSource = dtNew;
+            };
+            Pagination1.DataCounts = dt.Rows.Count;
 
             #endregion
 
@@ -163,7 +185,7 @@ namespace wpf_ui.View
 
             Table1.Delete += id => { MessageBox.Show($"删除事件：{id}"); };
 
-            Table1.Sort += tableSort => BtnGetVip_Click(null, null);
+            Table1.Sort += tableSort => { Pagination1.PageIndex = 1; };
 
             #endregion
 
@@ -202,22 +224,6 @@ namespace wpf_ui.View
             ThKeyWords.Click = id => { MessageBox.Show($"自定义事件：{id}"); };
 
             #endregion
-        }
-
-        private void BtnGetVip_Click(object sender, RoutedEventArgs e)
-        {
-            Random random = new Random();
-            DataTable dt = new DataTable();
-            dt.Columns.Add("Id");
-            dt.Columns.Add("KeyWords");
-            dt.Columns.Add("SearchTimes");
-            dt.Columns.Add("UserCounts");
-            for (int i = 0; i < 10; i++)
-                dt.Rows.Add(random.Next(0, 100),
-                                        $"关键词关键词关键词关键词关键词关键词关键词关键词{i * 99}",
-                                        $"/Content/Images/avatar{random.Next(0, 9)}.jpg",
-                                        i * random.Next(30, 60));
-            Table1.DataSource = dt;
         }
     }
 }

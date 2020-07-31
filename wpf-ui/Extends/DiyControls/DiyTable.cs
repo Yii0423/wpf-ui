@@ -181,14 +181,16 @@ namespace wpf_ui.Extends.DiyControls
                 ColCount = DataSource.Columns.Count + (TrOperation != TrOperation.None ? 1 : 0);
             }
             if (RowCount <= 0 || ColCount <= 0) return;
-            //构造行比例
+            //先清空
+            RowDefinitions.Clear();
+            //再构造行比例
             for (int i = 0; i < RowCount; i++)
             {
                 RowDefinition rowDefinition = new RowDefinition
                 {
                     Height = DataSource != null || ShowHeader && i == 0 ? new GridLength(38, GridUnitType.Pixel) : new GridLength(1, GridUnitType.Star)
                 };
-                if (RowDefinitions.Count > i) RowDefinitions[i] = rowDefinition; else RowDefinitions.Add(rowDefinition);
+                RowDefinitions.Add(rowDefinition);
             }
             //构造表格
             for (int i = 0; i < RowCount; i++)
@@ -202,7 +204,9 @@ namespace wpf_ui.Extends.DiyControls
                 }
                 //设置行
                 InitTr(curTr, i);
-                //构造列比例
+                //先清空
+                curTr.ColumnDefinitions.Clear();
+                //再构造列比例
                 for (int k = 0; k < ColCount; k++)
                 {
                     double proportion = 1;
@@ -211,7 +215,7 @@ namespace wpf_ui.Extends.DiyControls
                     if (TrOperation != TrOperation.None && k == ColCount - 1) proportion = -96;
                     //负值为像素值，正直为比例值(星值)
                     ColumnDefinition columnDefinition = new ColumnDefinition { Width = new GridLength(Math.Abs(proportion), proportion < 0 ? GridUnitType.Pixel : GridUnitType.Star) };
-                    if (curTr.ColumnDefinitions.Count > k) curTr.ColumnDefinitions[k] = columnDefinition; else curTr.ColumnDefinitions.Add(columnDefinition);
+                    curTr.ColumnDefinitions.Add(columnDefinition);
                 }
                 for (int l = 0; l < ColCount; l++)
                 {
@@ -331,7 +335,7 @@ namespace wpf_ui.Extends.DiyControls
                     else TableSort.SortState = TableSort.SortState == ThSort.None ? ThSort.Asc : TableSort.SortState == ThSort.Asc ? ThSort.Desc : ThSort.None;
                     //更新排序列
                     TableSort.SortName = th.Filed;
-                    Sort(TableSort);
+                    Sort?.Invoke(TableSort);
                 };
             }
             //合体
