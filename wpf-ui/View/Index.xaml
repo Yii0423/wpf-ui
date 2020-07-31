@@ -193,7 +193,7 @@
                 </Border>
             </Grid>
         </Grid>
-        <Grid Grid.Column="0" Grid.ColumnSpan="2" Margin="10,670,5,10">
+        <Grid Grid.Column="0" Grid.ColumnSpan="2" Margin="10,670,5,10" VerticalAlignment="Top">
             <Border Background="{StaticResource BrushPrimary}">
                 <Border.Effect>
                     <DropShadowEffect ShadowDepth="1" Opacity="0.1"/>
@@ -215,19 +215,67 @@
                         </StackPanel>
                     </diy:DiyTabitem>
                     <diy:DiyTabitem Header="今日热帖" Style="{StaticResource TiPithy}" ShowCloseBtn="False" Height="40" Margin="5,0,0,0">
-
+                        <diy:Table Margin="10" Height="180">
+                            <diy:Tr>
+                                <diy:Th Proportion="1"/>
+                                <diy:Th Proportion="2"/>
+                            </diy:Tr>
+                            <diy:Tr>
+                                <diy:Td>
+                                    <Label Content="当前版本" HorizontalContentAlignment="Right"/>
+                                </diy:Td>
+                                <diy:Td>
+                                    <StackPanel Orientation="Horizontal">
+                                        <Label Content="v1.4.0 pro"/>
+                                        <Button Content="日志" Style="{StaticResource BtnHyperlink}"/>
+                                        <Button Content="检查更新" Style="{StaticResource BtnHyperlink}"/>
+                                    </StackPanel>
+                                </diy:Td>
+                            </diy:Tr>
+                            <diy:Tr>
+                                <diy:Td>
+                                    <Label Content="基于框架" HorizontalContentAlignment="Right"/>
+                                </diy:Td>
+                                <diy:Td>
+                                    <StackPanel Orientation="Horizontal">
+                                        <Label Content="layui-v2.5.6"/>
+                                    </StackPanel>
+                                </diy:Td>
+                            </diy:Tr>
+                            <diy:Tr>
+                                <diy:Td>
+                                    <Label Content="主要特色" HorizontalContentAlignment="Right"/>
+                                </diy:Td>
+                                <diy:Td>
+                                    <StackPanel Orientation="Horizontal">
+                                        <Label Content="单页面 / 响应式 / 清爽 / 极简"/>
+                                    </StackPanel>
+                                </diy:Td>
+                            </diy:Tr>
+                            <diy:Tr>
+                                <diy:Td>
+                                    <Label Content="获取渠道" HorizontalContentAlignment="Right"/>
+                                </diy:Td>
+                                <diy:Td>
+                                    <StackPanel Orientation="Horizontal">
+                                        <diy:DiyButton Style="{StaticResource BtnDanger}" Content="获取授权" Width="100" Margin="5,0,0,0"/>
+                                        <diy:DiyButton Style="{StaticResource BtnDefault}" Content="立即下载" Width="100" Margin="5,0,0,0"/>
+                                    </StackPanel>
+                                </diy:Td>
+                            </diy:Tr>
+                        </diy:Table>
                     </diy:DiyTabitem>
                 </TabControl>
             </Grid>
         </Grid>
         <ucs:UcCard Grid.Column="2" x:Name="Card3" Height="120" Margin="5,670,10,10" VerticalAlignment="Top"/>
-        <Grid Margin="5,800,10,10" Grid.Column="2">
+        <Grid Margin="5,800,10,10" Grid.Column="2" VerticalAlignment="Top">
             <Border Background="{StaticResource BrushPrimary}">
                 <Border.Effect>
                     <DropShadowEffect ShadowDepth="1" Opacity="0.1"/>
                 </Border.Effect>
             </Border>
-            <Label Content="作者心语" VerticalAlignment="Top" Height="40" VerticalContentAlignment="Center" Padding="10,0,0,0"/>
+            <Label Content="岁月如歌-陈奕迅" VerticalAlignment="Top" Height="40" VerticalContentAlignment="Center" Padding="10,0,0,0"/>
             <Grid Margin="0,40,0,0">
                 <Border BorderBrush="{StaticResource BrushBackground}" BorderThickness="0,1,0,0" Padding="10">
                     <StackPanel>
@@ -252,7 +300,7 @@
                         <TextBlock FontSize="14">道别不可再等你不管有没有机</TextBlock>
                         <TextBlock FontSize="14">给我体贴入微但你手如明日便要远离</TextBlock>
                         <TextBlock FontSize="14">愿你可以留下共我曾愉快的忆记</TextBlock>
-                        <TextBlock FontSize="14">当世事再没完美可远在岁月如歌中找你</TextBlock>
+                        <TextBlock FontSize="14">当世事再无完美可远在岁月如歌中找你</TextBlock>
                     </StackPanel>
                 </Border>
             </Grid>

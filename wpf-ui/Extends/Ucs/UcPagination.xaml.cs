@@ -100,7 +100,7 @@ namespace wpf_ui.Extends.Ucs
             if (_allPages <= 5)
             {
                 //小于5页
-                pages = new List<string> { "1", "2", "3", "4", "5" };
+                for (int i = 1; i <= _allPages; i++) pages.Add(i.ToString());
             }
             else
             {

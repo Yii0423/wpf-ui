@@ -168,6 +168,8 @@ namespace wpf_ui.Extends.DiyControls
         {
             //获取行数和列数
             if (Children.Count == 0 || !(Children[0] is Tr firstTr)) return;
+            //非纯展示表格构造前清空原数据
+            if (Children.Count > 1 && DataSource != null) Children.RemoveRange(1, Children.Count - 1);
             if (DataSource == null)
             {
                 //纯展示表格
@@ -211,7 +213,7 @@ namespace wpf_ui.Extends.DiyControls
                 {
                     double proportion = 1;
                     if (firstTr.Children.Count > k && firstTr.Children[k] is Th th && !double.IsNaN(th.Proportion)) proportion = th.Proportion;
-                    //若开启了行功能则最后一行默认大小
+                    //若开启了行功能则最后一列默认大小
                     if (TrOperation != TrOperation.None && k == ColCount - 1) proportion = -96;
                     //负值为像素值，正直为比例值(星值)
                     ColumnDefinition columnDefinition = new ColumnDefinition { Width = new GridLength(Math.Abs(proportion), proportion < 0 ? GridUnitType.Pixel : GridUnitType.Star) };

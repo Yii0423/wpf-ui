@@ -19,7 +19,7 @@
                       Fill="{Binding RelativeSource={RelativeSource FindAncestor,AncestorType={x:Type diy:DiyButton},AncestorLevel=1},Path=Foreground}"/>
             </diy:DiyButton>
             <Label Content="跳转至" FontSize="{StaticResource IconSizeDefault}" Margin="5,0,0,0"/>
-            <diy:DiyTextbox x:Name="TxtPageIndex" Style="{StaticResource TbDefault}" Width="40" Height="26" HorizontalContentAlignment="Center" Text="1"
+            <diy:DiyTextbox x:Name="TxtPageIndex" Style="{StaticResource TbPrimary}" Width="40" Height="26" HorizontalContentAlignment="Center" Text="1"
                             Padding="0" FontSize="{StaticResource IconSizeDefault}"/>
             <Label Content="页" FontSize="{StaticResource IconSizeDefault}"/>
             <diy:DiyButton x:Name="BtnTurn" Style="{StaticResource BtnPrimary}" Width="40" Height="26" Background="Transparent" Content="确定" 
