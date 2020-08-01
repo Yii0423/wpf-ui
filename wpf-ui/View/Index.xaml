@@ -68,7 +68,7 @@
                             </diy:Td>
                             <diy:Td>
                                 <StackPanel Orientation="Horizontal">
-                                    <diy:DiyButton x:Name="BtnGetVip" Style="{StaticResource BtnDanger}" Content="获取授权" Width="100" Margin="5,0,0,0"/>
+                                    <diy:DiyButton Style="{StaticResource BtnDanger}" Content="获取授权" Width="100" Margin="5,0,0,0"/>
                                     <diy:DiyButton Style="{StaticResource BtnDefault}" Content="立即下载" Width="100" Margin="5,0,0,0"/>
                                 </StackPanel>
                             </diy:Td>
@@ -205,6 +205,7 @@
                         <StackPanel>
                             <diy:Table x:Name="Table1" Margin="10,10,10,0" TrOperation="Both" ShowHeader="True">
                                 <diy:Tr>
+                                    <diy:Th x:Name="ThCheckBox" Proportion="-40" Filed="Id" ThType="CheckBox"/>
                                     <diy:Th x:Name="ThSearchTimes" Proportion="-40" Filed="SearchTimes" Title="头像" ThType="Image"/>
                                     <diy:Th x:Name="ThKeyWords" Proportion="-400" Filed="KeyWords" Title="标题" ThType="Hyperlink" SortEnable="True"/>
                                     <diy:Th x:Name="ThId" Filed="Id" ThType="Progressbar"/>

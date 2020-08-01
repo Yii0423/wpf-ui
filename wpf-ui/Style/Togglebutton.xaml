@@ -47,13 +47,6 @@
                                 <Setter TargetName="bd1" Property="BorderBrush" Value="{StaticResource BrushChecked}"/>
                             </MultiTrigger.Setters>
                         </MultiTrigger>
-                        <EventTrigger RoutedEvent="Checked">
-                            <BeginStoryboard>
-                                <Storyboard>
-                                    <DoubleAnimation Storyboard.TargetName="bd1" Storyboard.TargetProperty="Opacity" From="0" To="1" Duration="0:0:0.25"/>
-                                </Storyboard>
-                            </BeginStoryboard>
-                        </EventTrigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
@@ -112,13 +105,6 @@
                                 <Setter TargetName="bd" Property="BorderBrush" Value="{StaticResource BrushChecked}"/>
                             </MultiTrigger.Setters>
                         </MultiTrigger>
-                        <EventTrigger RoutedEvent="Checked">
-                            <BeginStoryboard>
-                                <Storyboard>
-                                    <DoubleAnimation Storyboard.TargetName="bd" Storyboard.TargetProperty="Opacity" From="0" To="1" Duration="0:0:0.25"/>
-                                </Storyboard>
-                            </BeginStoryboard>
-                        </EventTrigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>

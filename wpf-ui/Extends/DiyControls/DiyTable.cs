@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Windows;
 using System.Windows.Controls;
@@ -159,6 +160,19 @@ namespace wpf_ui.Extends.DiyControls
 
         #endregion
 
+        #region 选中数据行
+
+        public List<DataRow> SelectRows
+        {
+            get => (List<DataRow>)GetValue(SelectRowsProperty);
+            private set => SetValue(SelectRowsProperty, value);
+        }
+
+        public static readonly DependencyProperty SelectRowsProperty =
+            DependencyProperty.Register("SelectRows", typeof(List<DataRow>), typeof(Table), new PropertyMetadata(null));
+
+        #endregion
+
         #region 事件
 
         /// <summary>
@@ -168,6 +182,8 @@ namespace wpf_ui.Extends.DiyControls
         {
             //获取行数和列数
             if (Children.Count == 0 || !(Children[0] is Tr firstTr)) return;
+            //初始化选中数据行集合
+            SelectRows = new List<DataRow>();
             //非纯展示表格构造前清空原数据
             if (Children.Count > 1 && DataSource != null) Children.RemoveRange(1, Children.Count - 1);
             if (DataSource == null)
@@ -227,7 +243,8 @@ namespace wpf_ui.Extends.DiyControls
                         Padding = new Thickness(2.5),
                         BorderBrush = FindResource("BrushTableBoder") as Brush,
                         BorderThickness = new Thickness(1),
-                        Margin = new Thickness(l == 0 ? 0 : -1, i == 0 ? 0 : -1, 0, 0)
+                        Margin = new Thickness(l == 0 ? 0 : -1, i == 0 ? 0 : -1, 0, 0),
+                        Background = Brushes.Transparent
                     };
                     //列头
                     if (ShowHeader && i == 0)
@@ -284,9 +301,32 @@ namespace wpf_ui.Extends.DiyControls
         private void InitTh(Th th)
         {
             DockPanel dockPanel = new DockPanel();
-            //构造列头内容(默认Label)
-            Label label = new Label { Content = th.Title, HorizontalAlignment = HorizontalAlignment.Left };
-            dockPanel.Children.Add(label);
+            //构造列头内容
+            switch (th.ThType)
+            {
+                case ThType.CheckBox://复选框
+                    CheckBox checkBox = new CheckBox { HorizontalAlignment = HorizontalAlignment.Center, IsHitTestVisible = false };
+                    if (!(th.Children[0] is Border border)) return;
+                    border.MouseLeftButtonDown += delegate
+                    {
+                        bool isChecked = !(checkBox.IsChecked ?? false);
+                        checkBox.IsChecked = isChecked;
+                        //全选/取消全选
+                        foreach (var child in Children)
+                        {
+                            if (!(child is Tr tr)) continue;
+                            CheckBox checkBox1 = tr.FindChild<CheckBox>();
+                            if (checkBox1 != null) checkBox1.IsChecked = isChecked;
+                        }
+                    };
+                    th.Cursor = Cursors.Hand;
+                    dockPanel.Children.Add(checkBox);
+                    break;
+                default://仅文本
+                    Label label = new Label { Content = th.Title, HorizontalAlignment = HorizontalAlignment.Left };
+                    dockPanel.Children.Add(label);
+                    break;
+            }
             //构造排序
             if (th.SortEnable)
             {
@@ -374,7 +414,7 @@ namespace wpf_ui.Extends.DiyControls
         /// <returns></returns>
         private void InitTd(Th th, Td td, int index = 0)
         {
-            string id = DataSource.Rows[index]["id"].ToStringEx();
+            string id = DataSource.Rows[index][0].ToStringEx();
             string content = string.IsNullOrWhiteSpace(th.Filed) ? "" : DataSource.Rows[index][th.Filed].ToStringEx();
             MTdConverter tdStyle = th.Converter?.Invoke(content);
             string style = tdStyle?.Style;
@@ -426,6 +466,14 @@ namespace wpf_ui.Extends.DiyControls
                     };
                     RenderOptions.SetBitmapScalingMode(image, BitmapScalingMode.HighQuality);
                     uiElement = image;
+                    break;
+                case ThType.CheckBox://复选框
+                    CheckBox checkBox = new CheckBox { HorizontalAlignment = HorizontalAlignment.Center, IsHitTestVisible = false };
+                    checkBox.Checked += delegate { SelectRows.Add(DataSource.Rows[index]); };
+                    checkBox.Unchecked += delegate { SelectRows.Remove(DataSource.Rows[index]); };
+                    uiElement = checkBox;
+                    td.MouseLeftButtonDown += delegate { checkBox.IsChecked = !(checkBox.IsChecked ?? false); };
+                    td.Cursor = Cursors.Hand;
                     break;
                 case ThType.Deal://操作列
                     StackPanel spDeal = new StackPanel { Orientation = Orientation.Horizontal };
@@ -644,6 +692,10 @@ namespace wpf_ui.Extends.DiyControls
         /// 图片
         /// </summary>
         Image,
+        /// <summary>
+        /// 复选框
+        /// </summary>
+        CheckBox,
         /// <summary>
         /// 操作列(编辑和删除)
         /// </summary>

@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
+using wpf_ui.Extends.Common;
 using wpf_ui.Model;
 
 namespace wpf_ui.View
@@ -221,7 +223,12 @@ namespace wpf_ui.View
 
             #region 数据表1绑定Button列点击事件
 
-            ThKeyWords.Click = id => { MessageBox.Show($"自定义事件：{id}"); };
+            ThKeyWords.Click = id =>
+            {
+                string ids = "";
+                Table1.SelectRows.ToList().ForEach(m => ids += m[0].ToStringEx() + ",");
+                MessageBox.Show($"选中的数据行id：{ids}");
+            };
 
             #endregion
         }
