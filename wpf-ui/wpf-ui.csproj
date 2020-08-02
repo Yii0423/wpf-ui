@@ -67,6 +67,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Extends\Common\Alter.cs" />
+    <Compile Include="Extends\Common\Animate.cs" />
     <Compile Include="Extends\DiyControls\DiyRadioButton.cs" />
     <Compile Include="Extends\DiyControls\DiyTable.cs" />
     <Compile Include="Extends\Ucs\UcCard.xaml.cs">
@@ -108,7 +110,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="MainWindow.xaml">
+    <Page Include="Client.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -132,8 +134,8 @@
     <Compile Include="Extends\Ucs\UcMenuTop.xaml.cs">
       <DependentUpon>UcMenuTop.xaml</DependentUpon>
     </Compile>
-    <Compile Include="MainWindow.xaml.cs">
-      <DependentUpon>MainWindow.xaml</DependentUpon>
+    <Compile Include="Client.xaml.cs">
+      <DependentUpon>Client.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
     <Page Include="Style\Border.xaml">

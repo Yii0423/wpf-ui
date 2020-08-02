@@ -243,8 +243,7 @@ namespace wpf_ui.Extends.DiyControls
                         Padding = new Thickness(2.5),
                         BorderBrush = FindResource("BrushTableBoder") as Brush,
                         BorderThickness = new Thickness(1),
-                        Margin = new Thickness(l == 0 ? 0 : -1, i == 0 ? 0 : -1, 0, 0),
-                        Background = Brushes.Transparent
+                        Margin = new Thickness(l == 0 ? 0 : -1, i == 0 ? 0 : -1, 0, 0)
                     };
                     //列头
                     if (ShowHeader && i == 0)

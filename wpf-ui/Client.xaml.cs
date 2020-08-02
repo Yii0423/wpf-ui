@@ -14,8 +14,18 @@ namespace wpf_ui
     /// <summary>
     /// MainWindow.xaml 的交互逻辑
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class Client : Window
     {
+        /// <summary>
+        /// 主窗体
+        /// </summary>
+        public static Window MainWindow;
+
+        /// <summary>
+        /// 遮罩层
+        /// </summary>
+        public static Border MainShade;
+
         /// <summary>
         /// 窗体阴影宽度
         /// </summary>
@@ -34,7 +44,7 @@ namespace wpf_ui
         /// <summary>
         /// 构造函数
         /// </summary>
-        public MainWindow()
+        public Client()
         {
             InitializeComponent();
 
@@ -55,6 +65,8 @@ namespace wpf_ui
         /// </summary>
         private void InitData()
         {
+            //遮罩赋值
+            MainShade = BorderShade;
             //设置Frame的Z-Index(避免遮挡菜单)
             if (FrmMain.Parent is ScrollViewer scrollViewer) Panel.SetZIndex(scrollViewer, -1);
             //侧边菜单绑定Frame

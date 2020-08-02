@@ -176,6 +176,7 @@ namespace wpf_ui.View
                     dtNew.ImportRow(dt.Rows[i]);
                 }
                 Table1.DataSource = dtNew;
+                Alter.Msg($"当前第{pageIndex}页 每页显示{pageCounts}条数据");
             };
             Pagination1.DataCounts = dt.Rows.Count;
 
@@ -231,6 +232,14 @@ namespace wpf_ui.View
             };
 
             #endregion
+        }
+
+        /// <summary>
+        /// 测试按钮点击事件
+        /// </summary>
+        private void BtnTest_OnClick(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }
