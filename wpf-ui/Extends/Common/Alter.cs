@@ -36,7 +36,7 @@ namespace wpf_ui.Extends.Common
                     Color = Colors.Black,
                     Opacity = 0.5d
                 },
-                //Opacity = 0d
+                Opacity = 0d,
                 RenderTransform = new ScaleTransform
                 {
                     ScaleX = 0.7d,
