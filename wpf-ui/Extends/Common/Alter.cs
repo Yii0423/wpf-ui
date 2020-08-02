@@ -12,12 +12,18 @@ namespace wpf_ui.Extends.Common
     public class Alter
     {
         /// <summary>
+        /// 记录上一条消息(避免重叠显示)
+        /// </summary>
+        private static Label _label;
+
+        /// <summary>
         /// 仅显示一个会自动关闭的结果
         /// </summary>
         /// <param name="content">消息内容</param>
         /// <param name="time">自动关闭的时间(默认3秒钟)</param>
         public static void Msg(string content, double time = 3)
         {
+            if (_label != null) (Client.MainShade.Parent as Grid)?.Children.Remove(_label);
             Label label = new Label
             {
                 Height = 50,
@@ -39,23 +45,27 @@ namespace wpf_ui.Extends.Common
                 RenderTransformOrigin = new Point(0.5, 0.5)
             };
             (Client.MainShade.Parent as Grid)?.Children.Add(label);
-            //淡入显示
-            label.ScaleIn(animateCompleted: () =>
+            _label = label;
+            label.Loaded += delegate
             {
-                DispatcherTimer dTmr = new DispatcherTimer { Interval = TimeSpan.FromSeconds(time) };
-                dTmr.Tick += delegate
+                //淡入显示
+                label.ScaleIn(animateCompleted: () =>
                 {
-                    //淡出消失
-                    label.ScaleOut(animateCompleted: () =>
+                    DispatcherTimer dTmr = new DispatcherTimer { Interval = TimeSpan.FromSeconds(time) };
+                    dTmr.Tick += delegate
                     {
-                        (Client.MainShade.Parent as Grid)?.Children.Remove(label);
-                        dTmr.Stop();
-                    });
-                    label.FadeOut();
-                };
-                dTmr.Start();
-            });
-            label.FadeIn();
+                        //淡出消失
+                        label.ScaleOut(animateCompleted: () =>
+                        {
+                            (Client.MainShade.Parent as Grid)?.Children.Remove(label);
+                            dTmr.Stop();
+                        });
+                        label.FadeOut();
+                    };
+                    dTmr.Start();
+                });
+                label.FadeIn();
+            };
         }
         public void Tip() { }
         public void Confirm() { }
