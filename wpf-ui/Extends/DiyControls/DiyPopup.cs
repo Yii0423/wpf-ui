@@ -44,18 +44,18 @@ namespace wpf_ui.Extends.DiyControls
         /// <summary>
         /// 上
         /// </summary>
-        Top,
+        Top = 10,
         /// <summary>
         /// 左
         /// </summary>
-        Left,
+        Left = 9,
         /// <summary>
         /// 右
         /// </summary>
-        Right,
+        Right = 4,
         /// <summary>
         /// 下
         /// </summary>
-        Bottom
+        Bottom = 2
     }
 }

@@ -5,6 +5,7 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using wpf_ui.Extends.Common;
+using wpf_ui.Extends.DiyControls;
 using wpf_ui.Model;
 
 namespace wpf_ui.View
@@ -239,7 +240,7 @@ namespace wpf_ui.View
         /// </summary>
         private void BtnTest_OnClick(object sender, RoutedEventArgs e)
         {
-
+            Alter.Tip(BtnTest, "若能避开猛烈的狂喜，自然不会有悲痛的来袭。");
         }
     }
 }

@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
 
@@ -33,50 +32,50 @@ namespace wpf_ui.Extends.Common
         /// <summary>
         /// 淡入
         /// </summary>
-        /// <param name="control">主控件</param>
+        /// <param name="uiElement">主控件</param>
         /// <param name="time">动画时间</param>
         /// <param name="animateCompleted">回调</param>
-        public static void FadeIn(this Control control, double time = AnimateTime, AnimateCompleted animateCompleted = null)
+        public static void FadeIn(this UIElement uiElement, double time = AnimateTime, AnimateCompleted animateCompleted = null)
         {
             DoubleAnimation da = new DoubleAnimation
             {
                 From = 0d,
                 To = 1d,
-                Duration = TimeSpan.FromSeconds(time - 0.05d),
+                Duration = TimeSpan.FromSeconds(time),
                 EasingFunction = EasingFunction
             };
             da.Completed += delegate { animateCompleted?.Invoke(); };
-            control.BeginAnimation(UIElement.OpacityProperty, da);
+            uiElement.BeginAnimation(UIElement.OpacityProperty, da);
         }
 
         /// <summary>
         /// 淡出
         /// </summary>
-        /// <param name="control">主控件</param>
+        /// <param name="uiElement">主控件</param>
         /// <param name="time">动画时间</param>
         /// <param name="animateCompleted">回调</param>
-        public static void FadeOut(this Control control, double time = AnimateTime, AnimateCompleted animateCompleted = null)
+        public static void FadeOut(this UIElement uiElement, double time = AnimateTime, AnimateCompleted animateCompleted = null)
         {
             DoubleAnimation da = new DoubleAnimation
             {
                 From = 1d,
                 To = 0d,
-                Duration = TimeSpan.FromSeconds(time - 0.05d),
+                Duration = TimeSpan.FromSeconds(time),
                 EasingFunction = EasingFunction
             };
             da.Completed += delegate { animateCompleted?.Invoke(); };
-            control.BeginAnimation(UIElement.OpacityProperty, da);
+            uiElement.BeginAnimation(UIElement.OpacityProperty, da);
         }
 
         /// <summary>
         /// 缩放进入
         /// </summary>
-        /// <param name="control">主控件</param>
+        /// <param name="uiElement">主控件</param>
         /// <param name="time">动画时间</param>
         /// <param name="animateCompleted">回调</param>
-        public static void ScaleIn(this Control control, double time = AnimateTime, AnimateCompleted animateCompleted = null)
+        public static void ScaleIn(this UIElement uiElement, double time = AnimateTime, AnimateCompleted animateCompleted = null)
         {
-            ScaleTransform scaleTransform = control.RenderTransform as ScaleTransform;
+            ScaleTransform scaleTransform = uiElement.RenderTransform as ScaleTransform;
             DoubleAnimation da = new DoubleAnimation
             {
                 From = 0.7d,
@@ -92,12 +91,12 @@ namespace wpf_ui.Extends.Common
         /// <summary>
         /// 缩放退出
         /// </summary>
-        /// <param name="control">主控件</param>
+        /// <param name="uiElement">主控件</param>
         /// <param name="time">动画时间</param>
         /// <param name="animateCompleted">回调</param>
-        public static void ScaleOut(this Control control, double time = AnimateTime, AnimateCompleted animateCompleted = null)
+        public static void ScaleOut(this UIElement uiElement, double time = AnimateTime, AnimateCompleted animateCompleted = null)
         {
-            ScaleTransform scaleTransform = control.RenderTransform as ScaleTransform;
+            ScaleTransform scaleTransform = uiElement.RenderTransform as ScaleTransform;
             DoubleAnimation da = new DoubleAnimation
             {
                 From = 1d,

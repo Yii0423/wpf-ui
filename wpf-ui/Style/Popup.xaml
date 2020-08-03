@@ -13,7 +13,7 @@
     <!-- #region 悬浮弹窗 -->
 
     <!-- 原始悬浮弹窗 -->
-    <Style x:Key="PopupPrimary" TargetType="{x:Type diy:DiyPopup}">
+    <Style TargetType="{x:Type diy:DiyPopup}">
         <Setter Property="Background" Value="White"/>
         <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
         <Setter Property="SnapsToDevicePixels" Value="True"/>
