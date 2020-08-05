@@ -65,6 +65,8 @@ namespace wpf_ui
         /// </summary>
         private void InitData()
         {
+            //主窗体赋值
+            MainWindow = this;
             //遮罩赋值
             MainShade = BorderShade;
             //设置Frame的Z-Index(避免遮挡菜单)

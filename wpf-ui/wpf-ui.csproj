@@ -86,6 +86,12 @@
     <Compile Include="Model\MMenuItem.cs" />
     <Compile Include="Model\MTableSort.cs" />
     <Compile Include="Model\MTdConverter.cs" />
+    <Compile Include="View\Alters\AConfirm.xaml.cs">
+      <DependentUpon>AConfirm.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Alters\APrompt.xaml.cs">
+      <DependentUpon>APrompt.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\Index.xaml.cs">
       <DependentUpon>Index.xaml</DependentUpon>
     </Compile>
@@ -202,6 +208,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Style\Tooltip.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Alters\AConfirm.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Alters\APrompt.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -13,15 +13,15 @@ namespace wpf_ui.Extends.Common
         /// <summary>
         /// 默认动画时间
         /// </summary>
-        private const double AnimateTime = 0.1d;
+        private const double AnimateTime = 0.15d;
 
         /// <summary>
         /// 动画缓动类型
         /// </summary>
         private static readonly EasingFunctionBase EasingFunction = new PowerEase
         {
-            EasingMode = EasingMode.EaseIn,
-            Power = 3
+            EasingMode = EasingMode.EaseInOut,
+            //Power = 10
         };
 
         /// <summary>

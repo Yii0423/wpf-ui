@@ -1,10 +1,12 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 using System.Windows.Media;
 using System.Windows.Threading;
 using wpf_ui.Extends.DiyControls;
+using wpf_ui.View.Alters;
 
 namespace wpf_ui.Extends.Common
 {
@@ -23,9 +25,9 @@ namespace wpf_ui.Extends.Common
         /// </summary>
         /// <param name="content">消息内容</param>
         /// <param name="time">自动关闭的时间(默认3秒钟)</param>
-        public static void Msg(string content, double time = 3)
+        public static void Msg(object content, double time = 3)
         {
-            if (string.IsNullOrWhiteSpace(content)) return;
+            if (string.IsNullOrWhiteSpace(content.ToStringEx())) return;
             if (_msgLabel != null) (Client.MainShade.Parent as Grid)?.Children.Remove(_msgLabel);
             Label label = new Label
             {
@@ -113,8 +115,34 @@ namespace wpf_ui.Extends.Common
             (Client.MainShade.Parent as Grid)?.Children.Add(_tipPopup);
         }
 
-        public static void Confirm() { }
-        public static void Prompt() { }
+        /// <summary>
+        /// 显示一个需要确认的弹窗(可自定义窗体按钮)
+        /// </summary>
+        /// <param name="content">提示内容</param>
+        /// <param name="title">提示标题</param>
+        /// <param name="list">自定义按钮</param>
+        public static bool Confirm(string content, string title = "系统确认", List<DiyButton> list = null)
+        {
+            AConfirm confirm = new AConfirm
+            {
+                Title = title,
+                Content = content,
+                Btns = list
+            };
+            confirm.ShowDialog();
+            return confirm.Result;
+        }
+
+        /// <summary>
+        /// 显示一个需要反馈的弹窗(可自定义窗体按钮)
+        /// </summary>
+        /// <param name="title"></param>
+        public static string Prompt(string title)
+        {
+            APrompt prompt = new APrompt { Title = title };
+            prompt.ShowDialog();
+            return prompt.Content;
+        }
         public static void Open() { }
         public static void Loading() { }
     }

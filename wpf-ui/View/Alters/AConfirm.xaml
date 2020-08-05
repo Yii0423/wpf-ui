@@ -1,0 +1,36 @@
+﻿<Window x:Class="wpf_ui.View.Alters.AConfirm"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:diy="clr-namespace:wpf_ui.Extends.DiyControls"
+        mc:Ignorable="d" Title="AConfirm" Width="300" SizeToContent="Height"
+        AllowsTransparency="True" WindowStyle="None" WindowStartupLocation="CenterOwner" 
+        Background="Transparent" ShowInTaskbar="False" ResizeMode="NoResize"
+        Loaded="AConfirm_OnLoaded" Closing="AConfirm_OnClosing">
+    <Grid x:Name="GridMain" Background="White" RenderTransformOrigin="0.5,0.5">
+        <Grid.RenderTransform>
+            <ScaleTransform ScaleX="0.7" ScaleY="0.7"/>
+        </Grid.RenderTransform>
+        <Label VerticalAlignment="Top" Height="40" Background="{StaticResource BrushBackground}"
+               Padding="10,0" BorderBrush="{StaticResource BrushTableBoder}" BorderThickness="0,0,0,1"
+               MouseLeftButtonDown="LabTitle_OnMouseLeftButtonDown" Cursor="SizeAll">
+            <TextBlock x:Name="TxtTitle">
+                人间失格
+            </TextBlock>
+        </Label>
+        <Label Margin="10,45" VerticalContentAlignment="Top" TextOptions.TextFormattingMode="Display" Padding="0,15">
+            <TextBlock x:Name="TxtContent" TextWrapping="Wrap">
+                若能避开猛烈的狂喜，自然不会有悲痛的来袭。
+            </TextBlock>
+        </Label>
+        <DockPanel x:Name="DpMain" Height="30" VerticalAlignment="Bottom" Margin="10,0,10,10">
+            <diy:DiyButton x:Name="BtnSure" Content="确定" HorizontalAlignment="Right" VerticalAlignment="Bottom" Width="75"
+                       Style="{StaticResource BtnNormal}" DockPanel.Dock="Right" Margin="5,0,0,0" Click="BtnSure_Click"
+                       TextOptions.TextFormattingMode="Display" IsDefault="True"/>
+            <diy:DiyButton x:Name="BtnCancel" Content="取消" HorizontalAlignment="Right" VerticalAlignment="Bottom" Width="75"
+                           Style="{StaticResource BtnPrimary}" DockPanel.Dock="Right" Click="BtnCancel_Click"
+                           TextOptions.TextFormattingMode="Display"/>
+        </DockPanel>
+    </Grid>
+</Window>

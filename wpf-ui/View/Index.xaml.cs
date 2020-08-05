@@ -240,7 +240,10 @@ namespace wpf_ui.View
         /// </summary>
         private void BtnTest_OnClick(object sender, RoutedEventArgs e)
         {
-            Alter.Tip(BtnTest, "若能避开猛烈的狂喜，自然不会有悲痛的来袭。");
+            //Alter.Msg("若能避开猛烈的狂喜，自然不会有悲痛的来袭。");
+            //Alter.Tip(BtnTest, "若能避开猛烈的狂喜，自然不会有悲痛的来袭。");
+            //Alter.Msg(Alter.Confirm("若能避开猛烈的狂喜，自然不会有悲痛的来袭。"));
+            Alter.Msg(Alter.Prompt("若能避开猛烈的狂喜，自然不会有悲痛的来袭。"));
         }
     }
 }
