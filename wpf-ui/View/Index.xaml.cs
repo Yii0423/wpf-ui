@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
+using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
 using wpf_ui.Extends.Common;
@@ -242,8 +243,22 @@ namespace wpf_ui.View
         {
             //Alter.Msg("若能避开猛烈的狂喜，自然不会有悲痛的来袭。");
             //Alter.Tip(BtnTest, "若能避开猛烈的狂喜，自然不会有悲痛的来袭。");
-            //Alter.Msg(Alter.Confirm("若能避开猛烈的狂喜，自然不会有悲痛的来袭。"));
-            Alter.Msg(Alter.Prompt("若能避开猛烈的狂喜，自然不会有悲痛的来袭。"));
+            //Alter.Msg(Alter.Confirm("你确定要避开吗？"));
+            Alter.Msg(Alter.Prompt("请输入一些文字："));
+            //new Thread(() =>
+            //{
+            //    Dispatcher.Invoke(() =>
+            //    {
+            //        BtnTest.IsEnabled = false;
+            //        GridCharts.Loading();
+            //    });
+            //    Thread.Sleep(5000);
+            //    Dispatcher.Invoke(() =>
+            //    {
+            //        GridCharts.ClearLoading();
+            //        BtnTest.IsEnabled = true;
+            //    });
+            //}).Start();
         }
     }
 }

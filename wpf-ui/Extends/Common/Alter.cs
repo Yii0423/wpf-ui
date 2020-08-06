@@ -4,6 +4,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 using System.Windows.Media;
+using System.Windows.Media.Imaging;
 using System.Windows.Threading;
 using wpf_ui.Extends.DiyControls;
 using wpf_ui.View.Alters;
@@ -143,7 +144,46 @@ namespace wpf_ui.Extends.Common
             prompt.ShowDialog();
             return prompt.Content;
         }
+
+        /// <summary>
+        /// 在指定区域内显示一个正在加载的弹窗
+        /// </summary>
+        /// <param name="grid">指定区域</param>
+        /// <param name="imageIndex">加载中图片索引</param>
+        public static void Loading(Grid grid, int imageIndex = 3)
+        {
+            if (grid.FindChild<Border>("loading") != null) return;
+            Image image = new Image
+            {
+                Source = new BitmapImage(new Uri($"/Content/Images/loading/loading{imageIndex}.png", UriKind.RelativeOrAbsolute)),
+                MaxWidth = 32,
+                MaxHeight = 32,
+                Margin = new Thickness(0, 10, 0, 10),
+                VerticalAlignment = VerticalAlignment.Center,
+                HorizontalAlignment = HorizontalAlignment.Center,
+                RenderTransform = new RotateTransform { Angle = 0d },
+                RenderTransformOrigin = new Point(0.5, 0.5)
+            };
+            RenderOptions.SetBitmapScalingMode(image, BitmapScalingMode.HighQuality);
+            Border border = new Border
+            {
+                Name = "loading",
+                Background = new SolidColorBrush
+                {
+                    Color = Colors.Black,
+                    Opacity = 0.5d
+                },
+                Child = image
+            };
+            grid.Children.Add(border);
+            int rows = grid.RowDefinitions.Count;
+            int cols = grid.ColumnDefinitions.Count;
+            if (rows != 0) Grid.SetRowSpan(border, rows);
+            if (cols != 0) Grid.SetColumnSpan(border, cols);
+            image.Rotate(3);
+        }
+
         public static void Open() { }
-        public static void Loading() { }
+
     }
 }

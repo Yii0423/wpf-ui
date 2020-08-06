@@ -75,7 +75,7 @@ namespace wpf_ui.Extends.Common
         /// <param name="animateCompleted">回调</param>
         public static void ScaleIn(this UIElement uiElement, double time = AnimateTime, AnimateCompleted animateCompleted = null)
         {
-            ScaleTransform scaleTransform = uiElement.RenderTransform as ScaleTransform;
+            if (!(uiElement.RenderTransform is ScaleTransform scaleTransform)) return;
             DoubleAnimation da = new DoubleAnimation
             {
                 From = 0.7d,
@@ -84,8 +84,8 @@ namespace wpf_ui.Extends.Common
                 EasingFunction = EasingFunction
             };
             da.Completed += delegate { animateCompleted?.Invoke(); };
-            scaleTransform?.BeginAnimation(ScaleTransform.ScaleXProperty, da);
-            scaleTransform?.BeginAnimation(ScaleTransform.ScaleYProperty, da);
+            scaleTransform.BeginAnimation(ScaleTransform.ScaleXProperty, da);
+            scaleTransform.BeginAnimation(ScaleTransform.ScaleYProperty, da);
         }
 
         /// <summary>
@@ -96,7 +96,7 @@ namespace wpf_ui.Extends.Common
         /// <param name="animateCompleted">回调</param>
         public static void ScaleOut(this UIElement uiElement, double time = AnimateTime, AnimateCompleted animateCompleted = null)
         {
-            ScaleTransform scaleTransform = uiElement.RenderTransform as ScaleTransform;
+            if (!(uiElement.RenderTransform is ScaleTransform scaleTransform)) return;
             DoubleAnimation da = new DoubleAnimation
             {
                 From = 1d,
@@ -105,8 +105,26 @@ namespace wpf_ui.Extends.Common
                 EasingFunction = EasingFunction
             };
             da.Completed += delegate { animateCompleted?.Invoke(); };
-            scaleTransform?.BeginAnimation(ScaleTransform.ScaleXProperty, da);
-            scaleTransform?.BeginAnimation(ScaleTransform.ScaleYProperty, da);
+            scaleTransform.BeginAnimation(ScaleTransform.ScaleXProperty, da);
+            scaleTransform.BeginAnimation(ScaleTransform.ScaleYProperty, da);
+        }
+
+        /// <summary>
+        /// 旋转动画
+        /// </summary>
+        /// <param name="uiElement">主控件</param>
+        /// <param name="time">动画时间</param>
+        public static void Rotate(this UIElement uiElement, double time = AnimateTime)
+        {
+            if (!(uiElement.RenderTransform is RotateTransform rotateTransform)) return;
+            rotateTransform.BeginAnimation(RotateTransform.AngleProperty, new DoubleAnimation
+            {
+                From = 0d,
+                To = 360d,
+                Duration = TimeSpan.FromSeconds(time),
+                RepeatBehavior = RepeatBehavior.Forever,
+                EasingFunction = EasingFunction
+            });
         }
     }
 }

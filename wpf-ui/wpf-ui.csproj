@@ -262,6 +262,9 @@
   <ItemGroup>
     <Resource Include="Content\Images\avatar1.jpg" />
     <Resource Include="Content\Images\avatar2.jpg" />
+    <Resource Include="Content\Images\loading\loading1.png" />
+    <Resource Include="Content\Images\loading\Loading2.png" />
+    <Resource Include="Content\Images\loading\loading3.png" />
     <Content Include="Extends\Dlls\Microsoft.Expression.Drawing.dll" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -1,7 +1,4 @@
-﻿using System;
-using System.ComponentModel;
-using System.Reflection;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 
@@ -67,6 +64,24 @@ namespace wpf_ui.Extends.Common
         public static string ToStringEx(this object obj)
         {
             return obj == null ? "" : obj.ToString();
+        }
+
+        /// <summary>
+        /// 在指定区域内加载loading
+        /// </summary>
+        /// <param name="grid">指定区域</param>
+        public static void Loading(this Grid grid)
+        {
+            Alter.Loading(grid);
+        }
+
+        /// <summary>
+        /// 清除指定区域内的loading
+        /// </summary>
+        /// <param name="grid">指定区域</param>
+        public static void ClearLoading(this Grid grid)
+        {
+            grid.Children.Remove(grid.FindChild<Border>("loading"));
         }
     }
 }
