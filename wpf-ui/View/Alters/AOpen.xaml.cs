@@ -52,7 +52,15 @@ namespace wpf_ui.View.Alters
         /// </summary>
         private void LabTitle_OnMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            DragMove();
+            switch (e.ClickCount)
+            {
+                case 1:
+                    DragMove();
+                    break;
+                case 2:
+                    WindowState = WindowState == WindowState.Maximized ? WindowState.Normal : WindowState.Maximized;
+                    break;
+            }
         }
 
         /// <summary>
