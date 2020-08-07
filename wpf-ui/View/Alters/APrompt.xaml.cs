@@ -11,11 +11,6 @@ namespace wpf_ui.View.Alters
     public partial class APrompt : Window
     {
         /// <summary>
-        /// 标题
-        /// </summary>
-        public new string Title { get; set; }
-
-        /// <summary>
         /// 内容
         /// </summary>
         public new string Content { get; set; }

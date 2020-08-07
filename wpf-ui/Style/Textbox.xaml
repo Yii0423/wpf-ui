@@ -30,7 +30,7 @@
                         <Border x:Name="border" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" 
                                 Background="{TemplateBinding Background}" CornerRadius="{TemplateBinding CornerRadius}" Opacity="0.9" Padding="5">
                             <Grid>
-                                <ScrollViewer x:Name="PART_ContentHost" Margin="15,0,0,0" SnapsToDevicePixels="True" Style="{DynamicResource ForScrollviewer}"/>
+                                <ScrollViewer x:Name="PART_ContentHost" Margin="15,0,0,0" Style="{DynamicResource ForScrollviewer}"/>
                                 <!-- 图标 -->
                                 <Path x:Name="ptIcon" Margin="3,0,0,0" Style="{DynamicResource Icon}" Fill="Black" HorizontalAlignment="Left"
                                       Opacity="{DynamicResource WaterMarkOpacityDefault}" Data="{TemplateBinding Icon}"/>

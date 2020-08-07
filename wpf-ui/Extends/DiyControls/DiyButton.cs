@@ -60,5 +60,18 @@ namespace wpf_ui.Extends.DiyControls
             DependencyProperty.Register("Url", typeof(string), typeof(DiyButton), new PropertyMetadata(""));
 
         #endregion
+
+        #region 关闭按钮
+
+        public bool IsClose
+        {
+            get => (bool)GetValue(IsCloseProperty);
+            set => SetValue(IsCloseProperty, value);
+        }
+
+        public static readonly DependencyProperty IsCloseProperty =
+            DependencyProperty.Register("IsClose", typeof(bool), typeof(DiyButton), new PropertyMetadata(false));
+
+        #endregion
     }
 }

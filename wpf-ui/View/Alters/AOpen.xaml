@@ -1,0 +1,30 @@
+﻿<Window x:Class="wpf_ui.View.Alters.AOpen"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:diy="clr-namespace:wpf_ui.Extends.DiyControls"
+        mc:Ignorable="d" Height="500" Width="800" Background="Transparent" BorderThickness="10"
+        AllowsTransparency="True" WindowStyle="None" WindowStartupLocation="CenterOwner"
+        Loaded="AOpen_OnLoaded" Closing="AOpen_OnClosing">
+    <Window.Effect>
+        <DropShadowEffect ShadowDepth="0" BlurRadius="10" Direction="10" Opacity="0.6"/>
+    </Window.Effect>
+    <Grid x:Name="GridMain" Background="White" RenderTransformOrigin="0.5,0.5">
+        <Grid.RenderTransform>
+            <ScaleTransform ScaleX="0.7" ScaleY="0.7"/>
+        </Grid.RenderTransform>
+        <Label VerticalAlignment="Top" Height="40" Background="{StaticResource BrushBackground}"
+               Padding="10,0" BorderBrush="{StaticResource BrushTableBoder}" BorderThickness="0,0,0,1"
+               MouseLeftButtonDown="LabTitle_OnMouseLeftButtonDown" Cursor="SizeAll">
+            <TextBlock x:Name="TxtTitle">人间失格</TextBlock>
+        </Label>
+        <StackPanel x:Name="SpWindows" Orientation="Horizontal" Height="40" VerticalAlignment="Top" FlowDirection="RightToLeft" 
+                    HorizontalAlignment="Right" Margin="0,0,5,0" ButtonBase.Click="SpWindows_OnClick">
+            <diy:DiyButton Style="{StaticResource BtnWindows}" Icon="{DynamicResource Icon-Remove}" IsClose="True" Tag="Close"/>
+        </StackPanel>
+        <ScrollViewer Margin="0,40,0,0" Style="{StaticResource ForScrollviewer}">
+            <Frame x:Name="FrmMain" Navigated="FrmMain_Navigated"/>
+        </ScrollViewer>
+    </Grid>
+</Window>

@@ -89,6 +89,9 @@
     <Compile Include="View\Alters\AConfirm.xaml.cs">
       <DependentUpon>AConfirm.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\Alters\AOpen.xaml.cs">
+      <DependentUpon>AOpen.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\Alters\APrompt.xaml.cs">
       <DependentUpon>APrompt.xaml</DependentUpon>
     </Compile>
@@ -212,6 +215,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\Alters\AConfirm.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Alters\AOpen.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

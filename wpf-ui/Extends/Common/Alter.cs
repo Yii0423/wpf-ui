@@ -183,7 +183,16 @@ namespace wpf_ui.Extends.Common
             image.Rotate(3);
         }
 
-        public static void Open() { }
-
+        /// <summary>
+        /// 打开一个含有指向链接Frame的弹窗
+        /// </summary>
+        /// <param name="title">弹窗标题</param>
+        /// <param name="url">Frame链接</param>
+        public static bool Open(string title, Uri url)
+        {
+            AOpen open = new AOpen { Title = title, Url = url };
+            open.ShowDialog();
+            return open.Result;
+        }
     }
 }

@@ -1,8 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
 using System.ComponentModel;
-using System.Linq;
 using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Input;
 using wpf_ui.Extends.Common;
 using wpf_ui.Extends.DiyControls;
@@ -10,19 +8,14 @@ using wpf_ui.Extends.DiyControls;
 namespace wpf_ui.View.Alters
 {
     /// <summary>
-    /// AConfirm.xaml 的交互逻辑
+    /// AOpen.xaml 的交互逻辑
     /// </summary>
-    public partial class AConfirm : Window
+    public partial class AOpen : Window
     {
         /// <summary>
-        /// 内容
+        /// 页面链接
         /// </summary>
-        public new string Content { get; set; }
-
-        /// <summary>
-        /// 自定义按钮
-        /// </summary>
-        public List<DiyButton> Btns { get; set; }
+        public Uri Url { get; set; }
 
         /// <summary>
         /// 结果
@@ -32,7 +25,7 @@ namespace wpf_ui.View.Alters
         /// <summary>
         /// 构造函数
         /// </summary>
-        public AConfirm()
+        public AOpen()
         {
             InitializeComponent();
             //设定父窗体
@@ -42,7 +35,7 @@ namespace wpf_ui.View.Alters
         /// <summary>
         /// 窗体加载
         /// </summary>
-        private void AConfirm_OnLoaded(object sender, RoutedEventArgs e)
+        private void AOpen_OnLoaded(object sender, RoutedEventArgs e)
         {
             //显示遮罩
             Client.MainShade.Visibility = Visibility.Visible;
@@ -51,17 +44,7 @@ namespace wpf_ui.View.Alters
             GridMain.ScaleIn();
             //加载内容
             TxtTitle.Text = Title;
-            TxtContent.Text = Content;
-            //加载自定义按钮
-            if (Btns == null || !Btns.Any()) return;
-            DpMain.Children.Clear();
-            for (int i = Btns.Count - 1; i >= 0; i--)
-            {
-                DiyButton diyButton = Btns[i];
-                diyButton.Margin = new Thickness(5, 0, 0, 0);
-                DockPanel.SetDock(diyButton, Dock.Right);
-                DpMain.Children.Add(diyButton);
-            }
+            if (Url != null) FrmMain.Navigate(Url);
         }
 
         /// <summary>
@@ -73,20 +56,26 @@ namespace wpf_ui.View.Alters
         }
 
         /// <summary>
-        /// 确定
+        /// Frame导航结束清除历史记录以防后退
         /// </summary>
-        private void BtnSure_Click(object sender, RoutedEventArgs e)
+        private void FrmMain_Navigated(object sender, System.Windows.Navigation.NavigationEventArgs e)
         {
-            Result = true;
-            BeforeClose();
+            if (!FrmMain.CanGoBack) return;
+            FrmMain.RemoveBackEntry();
         }
 
         /// <summary>
-        /// 取消
+        /// 窗体按钮事件
         /// </summary>
-        private void BtnCancel_Click(object sender, RoutedEventArgs e)
+        private void SpWindows_OnClick(object sender, RoutedEventArgs e)
         {
-            BeforeClose();
+            if (!(e.OriginalSource is DiyButton diyButton)) return;
+            switch (diyButton.Tag.ToStringEx())
+            {
+                case "Close":
+                    BeforeClose();
+                    break;
+            }
         }
 
         /// <summary>
@@ -101,7 +90,7 @@ namespace wpf_ui.View.Alters
         /// <summary>
         /// 窗体关闭时关闭遮罩
         /// </summary>
-        private void AConfirm_OnClosing(object sender, CancelEventArgs e)
+        private void AOpen_OnClosing(object sender, CancelEventArgs e)
         {
             //关闭遮罩
             Client.MainShade.Visibility = Visibility.Collapsed;
