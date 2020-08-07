@@ -4,10 +4,13 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:diy="clr-namespace:wpf_ui.Extends.DiyControls"
-        mc:Ignorable="d" Title="AConfirm" Width="300" SizeToContent="Height"
+        mc:Ignorable="d" Title="AConfirm" Width="320" SizeToContent="Height"
         AllowsTransparency="True" WindowStyle="None" WindowStartupLocation="CenterOwner" 
-        Background="Transparent" ShowInTaskbar="False" ResizeMode="NoResize"
+        Background="Transparent" ShowInTaskbar="False" ResizeMode="NoResize" BorderThickness="10"
         Loaded="AConfirm_OnLoaded" Closing="AConfirm_OnClosing">
+    <Window.Effect>
+        <DropShadowEffect ShadowDepth="0" BlurRadius="10" Direction="10" Opacity="0.6"/>
+    </Window.Effect>
     <Grid x:Name="GridMain" Background="White" RenderTransformOrigin="0.5,0.5">
         <Grid.RenderTransform>
             <ScaleTransform ScaleX="0.7" ScaleY="0.7"/>
