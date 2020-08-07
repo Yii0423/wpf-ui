@@ -178,7 +178,7 @@ namespace wpf_ui.View
                     dtNew.ImportRow(dt.Rows[i]);
                 }
                 Table1.DataSource = dtNew;
-                Alter.Msg($"当前第{pageIndex}页 每页显示{pageCounts}条数据");
+                Alter.Msg($"当前第{pageIndex}页 每页显示{pageCounts}条数据", Client.MainWindow);
             };
             Pagination1.DataCounts = dt.Rows.Count;
 
@@ -241,25 +241,25 @@ namespace wpf_ui.View
         /// </summary>
         private void BtnTest_OnClick(object sender, RoutedEventArgs e)
         {
-            //Alter.Msg("若能避开猛烈的狂喜，自然不会有悲痛的来袭。");
-            //Alter.Tip(BtnTest, "若能避开猛烈的狂喜，自然不会有悲痛的来袭。");
-            //Alter.Msg(Alter.Confirm("你确定要避开吗？"));
-            //Alter.Msg(Alter.Prompt("请输入一些文字："));
-            //new Thread(() =>
-            //{
-            //    Dispatcher.Invoke(() =>
-            //    {
-            //        BtnTest.IsEnabled = false;
-            //        GridCharts.Loading();
-            //    });
-            //    Thread.Sleep(5000);
-            //    Dispatcher.Invoke(() =>
-            //    {
-            //        GridCharts.ClearLoading();
-            //        BtnTest.IsEnabled = true;
-            //    });
-            //}).Start();
-            Alter.Open("若能避开猛烈的狂喜，自然不会有悲痛的来袭。", null);
+            new Thread(() =>
+            {
+                string str = "";
+                Dispatcher.Invoke(() =>
+                {
+                    str = Alter.Prompt("请输入一些内容：");
+                    if (string.IsNullOrWhiteSpace(str)) return;
+                    BtnTest.IsEnabled = false;
+                    BtnTest.FindParent<Grid>().Loading();
+                });
+                Thread.Sleep(5000);
+                Dispatcher.Invoke(() =>
+                {
+                    BtnTest.FindParent<Grid>().ClearLoading();
+                    BtnTest.IsEnabled = true;
+                    Alter.Msg(str, Client.MainWindow);
+                });
+            }).Start();
+            //Alter.Open("若能避开猛烈的狂喜，自然不会有悲痛的来袭。", null);
         }
     }
 }

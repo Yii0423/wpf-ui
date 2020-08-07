@@ -25,11 +25,14 @@ namespace wpf_ui.Extends.Common
         /// 显示一个会自动关闭的消息弹窗
         /// </summary>
         /// <param name="content">消息内容</param>
+        /// <param name="frameworkElement">显示消息的窗体</param>
         /// <param name="time">自动关闭的时间(默认3秒钟)</param>
-        public static void Msg(object content, double time = 3)
+        public static void Msg(object content, FrameworkElement frameworkElement, double time = 3)
         {
-            if (string.IsNullOrWhiteSpace(content.ToStringEx())) return;
-            if (_msgLabel != null) (Client.MainShade.Parent as Grid)?.Children.Remove(_msgLabel);
+            if (string.IsNullOrWhiteSpace(content.ToStringEx()) || frameworkElement == null) return;
+            Grid parentGrid = frameworkElement.FindChild<Grid>();
+            if (parentGrid == null) return;
+            if (_msgLabel != null) parentGrid.Children.Remove(_msgLabel);
             Label label = new Label
             {
                 Height = 50,
@@ -53,7 +56,7 @@ namespace wpf_ui.Extends.Common
             };
             //解决缩放过程中的字体模糊问题
             TextOptions.SetTextFormattingMode(label, TextFormattingMode.Display);
-            (Client.MainShade.Parent as Grid)?.Children.Add(label);
+            parentGrid.Children.Add(label);
             _msgLabel = label;
             label.Loaded += delegate
             {
@@ -85,14 +88,16 @@ namespace wpf_ui.Extends.Common
         /// <summary>
         /// 显示一个与控件绑定且有内容的提示窗体
         /// </summary>
-        /// <param name="uiElement">指定控件</param>
         /// <param name="content">提示内容</param>
+        /// <param name="uiElement">指定控件</param>
         /// <param name="showPlace">相对于控件的提示位置</param>
         /// <param name="maxWidth">显示最大宽度</param>
-        public static void Tip(UIElement uiElement, string content, ShowPlace showPlace = ShowPlace.Top, double maxWidth = 200)
+        public static void Tip(string content, UIElement uiElement, ShowPlace showPlace = ShowPlace.Top, double maxWidth = 200)
         {
             if (string.IsNullOrWhiteSpace(content)) return;
-            if (_tipPopup != null) (Client.MainShade.Parent as Grid)?.Children.Remove(_tipPopup);
+            Grid parentGrid = uiElement.FindParent<Grid>();
+            if (parentGrid == null) return;
+            if (_tipPopup != null) parentGrid.Children.Remove(_tipPopup);
             _tipPopup = new Popup
             {
                 AllowsTransparency = true,
@@ -113,7 +118,7 @@ namespace wpf_ui.Extends.Common
                     IsHitTestVisible = false
                 }
             };
-            (Client.MainShade.Parent as Grid)?.Children.Add(_tipPopup);
+            parentGrid.Children.Add(_tipPopup);
         }
 
         /// <summary>

@@ -14,7 +14,8 @@
 
     <!-- 原始悬浮弹窗 -->
     <Style TargetType="{x:Type diy:DiyPopup}">
-        <Setter Property="Background" Value="White"/>
+        <Setter Property="Background" Value="Black"/>
+        <Setter Property="Foreground" Value="White"/>
         <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
         <Setter Property="SnapsToDevicePixels" Value="True"/>
         <Setter Property="UseLayoutRounding" Value="True"/>
