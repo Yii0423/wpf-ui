@@ -4,8 +4,8 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:diy="clr-namespace:wpf_ui.Extends.DiyControls"
-        mc:Ignorable="d" Height="500" Width="800" Background="Transparent" BorderThickness="10"
-        AllowsTransparency="True" WindowStyle="None" WindowStartupLocation="CenterOwner"
+        mc:Ignorable="d" Height="400" Width="600" Background="Transparent" BorderThickness="10"
+        AllowsTransparency="True" WindowStyle="None" WindowStartupLocation="CenterOwner" ShowInTaskbar="False"
         Loaded="AOpen_OnLoaded" Closing="AOpen_OnClosing">
     <Window.Effect>
         <DropShadowEffect ShadowDepth="0" BlurRadius="10" Direction="10" Opacity="0.6"/>

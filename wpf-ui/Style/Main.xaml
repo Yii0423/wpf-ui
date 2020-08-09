@@ -1,10 +1,10 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="/Style/Icon.xaml"/>
+        <ResourceDictionary Source="/Style/Scrollbar.xaml"/>
         <ResourceDictionary Source="/Style/Tooltip.xaml"/>
         <ResourceDictionary Source="/Style/Border.xaml"/>
         <ResourceDictionary Source="/Style/Popup.xaml"/>
-        <ResourceDictionary Source="/Style/Scrollbar.xaml"/>
         <ResourceDictionary Source="/Style/Label.xaml"/>
         <ResourceDictionary Source="/Style/Button.xaml"/>
         <ResourceDictionary Source="/Style/Textbox.xaml"/>

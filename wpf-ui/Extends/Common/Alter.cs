@@ -7,6 +7,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Threading;
 using wpf_ui.Extends.DiyControls;
+using wpf_ui.Model;
 using wpf_ui.View.Alters;
 
 namespace wpf_ui.Extends.Common
@@ -25,11 +26,12 @@ namespace wpf_ui.Extends.Common
         /// 显示一个会自动关闭的消息弹窗
         /// </summary>
         /// <param name="content">消息内容</param>
-        /// <param name="frameworkElement">显示消息的窗体</param>
+        /// <param name="frameworkElement">显示消息的窗体(默认主窗体)</param>
         /// <param name="time">自动关闭的时间(默认3秒钟)</param>
-        public static void Msg(object content, FrameworkElement frameworkElement, double time = 3)
+        public static void Msg(object content, FrameworkElement frameworkElement = null, double time = 3)
         {
-            if (string.IsNullOrWhiteSpace(content.ToStringEx()) || frameworkElement == null) return;
+            if (string.IsNullOrWhiteSpace(content.ToStringEx())) return;
+            if (frameworkElement == null) frameworkElement = Client.MainWindow;
             Grid parentGrid = frameworkElement.FindChild<Grid>();
             if (parentGrid == null) return;
             if (_msgLabel != null) parentGrid.Children.Remove(_msgLabel);
@@ -114,8 +116,7 @@ namespace wpf_ui.Extends.Common
                         Text = content,
                         TextWrapping = TextWrapping.Wrap,
                         MaxWidth = maxWidth,
-                    },
-                    IsHitTestVisible = false
+                    }
                 }
             };
             parentGrid.Children.Add(_tipPopup);
@@ -191,11 +192,10 @@ namespace wpf_ui.Extends.Common
         /// <summary>
         /// 打开一个含有指向链接Frame的弹窗
         /// </summary>
-        /// <param name="title">弹窗标题</param>
-        /// <param name="url">Frame链接</param>
-        public static bool Open(string title, Uri url)
+        /// <param name="mOpen">弹窗属性对象</param>
+        public static bool Open(MOpen mOpen)
         {
-            AOpen open = new AOpen { Title = title, Url = url };
+            AOpen open = new AOpen { MOpen = mOpen };
             open.ShowDialog();
             return open.Result;
         }

@@ -473,6 +473,7 @@ namespace wpf_ui.Extends.DiyControls
                     uiElement = checkBox;
                     td.MouseLeftButtonDown += delegate { checkBox.IsChecked = !(checkBox.IsChecked ?? false); };
                     td.Cursor = Cursors.Hand;
+                    if (td.Children[0] is Border border) border.Background = Brushes.Transparent;
                     break;
                 case ThType.Deal://操作列
                     StackPanel spDeal = new StackPanel { Orientation = Orientation.Horizontal };

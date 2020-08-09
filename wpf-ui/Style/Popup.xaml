@@ -28,8 +28,10 @@
                                 <DropShadowEffect ShadowDepth="0" BlurRadius="3" Color="Black" Opacity="0.8"/>
                             </StackPanel.Effect>
                             <Border MinWidth="12" MinHeight="12" Background="{TemplateBinding Background}" CornerRadius="{TemplateBinding CornerRadius}">
-                                <ContentPresenter Margin="5" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" 
+                                <ScrollViewer MaxWidth="300" MaxHeight="200" Style="{DynamicResource ForScrollviewer}">
+                                    <ContentPresenter Margin="5" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" 
                                                   VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                                </ScrollViewer>
                             </Border>
                             <Path Fill="{TemplateBinding Background}" Data="M 0,0 L 10,0 5,6 0,0" Margin="5,0,0,0"/>
                         </StackPanel>

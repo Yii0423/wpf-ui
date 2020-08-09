@@ -69,7 +69,7 @@
                             <diy:Td>
                                 <StackPanel Orientation="Horizontal">
                                     <diy:DiyButton x:Name="BtnTest" Style="{StaticResource BtnDanger}" Content="获取授权" Width="100" Margin="5,0,0,0" Click="BtnTest_OnClick"/>
-                                    <diy:DiyButton Style="{StaticResource BtnDefault}" Content="立即下载" Width="100" Margin="5,0,0,0"/>
+                                    <diy:DiyButton x:Name="BtnTest2" Style="{StaticResource BtnDefault}" Content="立即下载" Width="100" Margin="5,0,0,0" Click="BtnTest2_OnClick"/>
                                 </StackPanel>
                             </diy:Td>
                         </diy:Tr>

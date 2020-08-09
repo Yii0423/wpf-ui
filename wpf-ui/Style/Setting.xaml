@@ -103,6 +103,10 @@
         <Setter Property="SnapsToDevicePixels" Value="True"/>
     </Style>
 
+    <Style BasedOn="{x:Null}" TargetType="{x:Type Frame}">
+        <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+    </Style>
+
     <!-- #endregion -->
 
 </ResourceDictionary>

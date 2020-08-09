@@ -83,5 +83,15 @@ namespace wpf_ui.Extends.Common
         {
             grid.Children.Remove(grid.FindChild<Border>("loading"));
         }
+
+        /// <summary>
+        /// 对指定控件加载Tip
+        /// </summary>
+        /// <param name="uiElement">指定控件</param>
+        /// <param name="content">提示内容</param>
+        public static void Tip(this UIElement uiElement, string content)
+        {
+            Alter.Tip(content, uiElement);
+        }
     }
 }

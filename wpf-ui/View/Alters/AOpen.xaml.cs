@@ -1,9 +1,10 @@
-﻿using System;
-using System.ComponentModel;
+﻿using System.ComponentModel;
+using System.Security.Policy;
 using System.Windows;
 using System.Windows.Input;
 using wpf_ui.Extends.Common;
 using wpf_ui.Extends.DiyControls;
+using wpf_ui.Model;
 
 namespace wpf_ui.View.Alters
 {
@@ -13,9 +14,9 @@ namespace wpf_ui.View.Alters
     public partial class AOpen : Window
     {
         /// <summary>
-        /// 页面链接
+        /// 窗体属性对象
         /// </summary>
-        public Uri Url { get; set; }
+        public MOpen MOpen { get; set; }
 
         /// <summary>
         /// 结果
@@ -42,9 +43,13 @@ namespace wpf_ui.View.Alters
             //动画
             GridMain.FadeIn();
             GridMain.ScaleIn();
-            //加载内容
-            TxtTitle.Text = Title;
-            if (Url != null) FrmMain.Navigate(Url);
+            //加载窗体属性
+            Width = MOpen.Width;
+            Height = MOpen.Height;
+            TxtTitle.Text = MOpen.Title;
+            if (MOpen.Url != null) FrmMain.Navigate(MOpen.Url);
+            if (MOpen.FixedSize) ResizeMode = ResizeMode.NoResize;
+            if (MOpen.StartMax) WindowState = WindowState.Maximized;
         }
 
         /// <summary>

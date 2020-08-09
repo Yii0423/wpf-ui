@@ -66,7 +66,7 @@ namespace wpf_ui.View.Alters
             string content = TxtContent.Text.Trim();
             if (string.IsNullOrWhiteSpace(content))
             {
-                Alter.Tip("必填项不可为空", TxtContent);
+                TxtContent.Tip("必填项不可为空");
                 TxtContent.Style = FindResource("TbDanger") as Style;
                 TxtContent.Focus();
                 return;

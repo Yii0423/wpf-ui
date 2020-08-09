@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
@@ -177,7 +178,7 @@ namespace wpf_ui.View
                     dtNew.ImportRow(dt.Rows[i]);
                 }
                 Table1.DataSource = dtNew;
-                Alter.Msg($"当前第{pageIndex}页 每页显示{pageCounts}条数据", Client.MainWindow);
+                Alter.Msg($"当前第{pageIndex}页 每页显示{pageCounts}条数据");
             };
             Pagination1.DataCounts = dt.Rows.Count;
 
@@ -229,7 +230,7 @@ namespace wpf_ui.View
             {
                 string ids = "";
                 Table1.SelectRows.ToList().ForEach(m => ids += m[0].ToStringEx() + ",");
-                MessageBox.Show($"选中的数据行id：{ids}");
+                Alter.Msg(string.IsNullOrWhiteSpace(ids) ? "请至少选择一条数据" : $"选中的数据行id：{ids}");
             };
 
             #endregion
@@ -255,9 +256,52 @@ namespace wpf_ui.View
                 {
                     BtnTest.FindParent<Grid>().ClearLoading();
                     BtnTest.IsEnabled = true;
-                    Alter.Open("若能避开猛烈的狂喜，自然不会有悲痛的来袭。", null);
+                    Alter.Open(new MOpen
+                    {
+                        Title = "若能避开猛烈的狂喜，自然不会有悲痛的来袭。",
+                        FixedSize = true
+                    });
                 });
             }).Start();
+        }
+
+        private void BtnTest2_OnClick(object sender, RoutedEventArgs e)
+        {
+            BtnTest2.Tip(@"你陪我步入蝉夏
+越过城市喧嚣
+歌声还在游走
+你榴花般的双眸
+不见你的温柔
+丢失花间欢笑
+岁月无法停留
+流云的等候
+我真的好想你
+在每一个雨季
+你选择遗忘的
+是我最不舍的
+纸短情长啊
+道不尽太多涟漪
+我的故事都是关于你呀
+怎么会爱上了她
+并决定跟她回家
+放弃了我的所有我的一切无所谓
+纸短情长啊
+诉不完当时年少
+我的故事还是关于你呀
+我真的好想你
+在每一个雨季
+你选择遗忘的
+是我最不舍的
+纸短情长啊
+道不尽太多涟漪
+我的故事都是关于你呀
+怎么会爱上了她
+并决定跟她回家
+放弃了我的所有我的一切无所谓
+纸短情长啊
+诉不完当时年少
+我的故事还是关于你呀
+我的故事还是关于你呀");
         }
     }
 }
