@@ -8,6 +8,8 @@ namespace wpf_ui
     /// </summary>
     public partial class Window1 : Window
     {
+        public static Window MainWindow;
+
         public Window1()
         {
             InitializeComponent();
@@ -15,6 +17,7 @@ namespace wpf_ui
 
         private void Window1_OnLoaded(object sender, RoutedEventArgs e)
         {
+            MainWindow = this;
             TxtDate.DateTime();
         }
     }

@@ -2,6 +2,7 @@
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
+using System.Windows.Input;
 using System.Windows.Media;
 using wpf_ui.Extends.Ucs;
 
@@ -117,10 +118,12 @@ namespace wpf_ui.Extends.Common
         /// 时间控件
         /// </summary>
         /// <param name="txtBox">指定文本框</param>
-        public static void DateTime(this TextBox txtBox)
+        /// <param name="dateTime">初始时间</param>
+        public static void DateTime(this TextBox txtBox, DateTime? dateTime = null)
         {
             if (!(txtBox.FindParent<Grid>() is Grid grid)) return;
             grid.Children.Remove(grid.FindChild<Popup>($"Popup_{txtBox.Name}"));
+            UcDate ucDate = new UcDate(dateTime ?? System.DateTime.Now);
             Popup popup = new Popup
             {
                 Name = $"Popup_{txtBox.Name}",
@@ -131,12 +134,27 @@ namespace wpf_ui.Extends.Common
                 {
                     Width = 276,
                     Height = 376,
-                    Children = { new UcDate() }
+                    Children = { ucDate }
                 }
+            };
+            ucDate.Sure += dt =>
+            {
+                txtBox.Text = dt.ToString("yyyy-MM-dd");
+                popup.IsOpen = false;
+            };
+            ucDate.Reset += () =>
+            {
+                txtBox.Clear();
+                popup.IsOpen = false;
             };
             grid.Children.Add(popup);
             txtBox.GotFocus += delegate { popup.IsOpen = true; };
-            txtBox.LostFocus += delegate { popup.IsOpen = false; };
+            txtBox.LostFocus += (sender, args) =>
+            {
+                Point point = Mouse.GetPosition(ucDate);
+                if (point.X >= 0 && point.X <= ucDate.ActualWidth && point.Y >= 0 && point.Y <= ucDate.ActualHeight) return;
+                popup.IsOpen = false;
+            };
         }
     }
 }

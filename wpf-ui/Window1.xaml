@@ -9,7 +9,7 @@
         Loaded="Window1_OnLoaded">
     <Grid>
         <diy:DiyTextbox x:Name="TxtDate" HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="Wrap" Icon="{StaticResource Icon-Calendar}"
-                                VerticalAlignment="Top" Width="300" WaterMark="YYYY-MM-DD" Style="{StaticResource TbPrimary}"/>
+                                VerticalAlignment="Top" Width="300" WaterMark="YYYY-MM-dd" Style="{StaticResource TbPrimary}"/>
         <diy:DiyButton Content="测试日期" HorizontalAlignment="Left" Margin="315,10,0,0" VerticalAlignment="Top" Width="75" 
                        Style="{StaticResource BtnPrimary}"/>
     </Grid>

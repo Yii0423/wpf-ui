@@ -13,16 +13,37 @@ namespace wpf_ui.Extends.Ucs
     public partial class UcDate : UserControl
     {
         /// <summary>
+        /// 确定回调
+        /// </summary>
+        public delegate void SureDelegate(DateTime dateTime);
+
+        /// <summary>
+        /// 重置回调
+        /// </summary>
+        public delegate void ResetDelegate();
+
+        /// <summary>
         /// 当前选择时间
         /// </summary>
-        public DateTime DateTime { get; set; } = DateTime.Now;
+        public DateTime DateTime { get; set; }
+
+        /// <summary>
+        /// 确定回调
+        /// </summary>
+        public SureDelegate Sure { get; set; }
+
+        /// <summary>
+        /// 重置回调
+        /// </summary>
+        public ResetDelegate Reset { get; set; }
 
         /// <summary>
         /// 构造函数
         /// </summary>
-        public UcDate()
+        public UcDate(DateTime dateTime)
         {
             InitializeComponent();
+            DateTime = dateTime;
         }
 
         /// <summary>
@@ -254,6 +275,7 @@ namespace wpf_ui.Extends.Ucs
                 bool isInit = dtNow.ToString("yyyyMM").Equals(DateTime.ToString("yyyyMM"));
                 DateTime = dtNow;
                 if (!isInit) InitDays();
+                Sure?.Invoke(DateTime);
             });
         }
 
@@ -262,7 +284,7 @@ namespace wpf_ui.Extends.Ucs
         /// </summary>
         private void BtnSure_OnClick(object sender, RoutedEventArgs e)
         {
-            Alter.Msg($"您选择的时间是：{DateTime:yyyy-MM-dd}", this);
+            Sure?.Invoke(DateTime);
         }
 
         /// <summary>
@@ -272,6 +294,7 @@ namespace wpf_ui.Extends.Ucs
         {
             DateTime = DateTime.Now;
             InitDays();
+            Sure?.Invoke(DateTime);
         }
 
         /// <summary>
@@ -279,7 +302,7 @@ namespace wpf_ui.Extends.Ucs
         /// </summary>
         private void BtnReset_OnClick(object sender, RoutedEventArgs e)
         {
-
+            Reset?.Invoke();
         }
     }
 }
