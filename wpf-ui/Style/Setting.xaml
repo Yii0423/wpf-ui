@@ -29,7 +29,7 @@
     <!-- 界面底色 -->
     <Color x:Key="ColorBackground">#F2F2F2</Color>
     <!-- 表格边框色 -->
-    <Color x:Key="ColorTableBoder">#E6E6E6</Color>
+    <Color x:Key="ColorTableBorder">#E6E6E6</Color>
 
     <!-- #endregion -->
 
@@ -60,7 +60,7 @@
     <!-- 界面底色 -->
     <SolidColorBrush x:Key="BrushBackground" Color="{DynamicResource ColorBackground}"/>
     <!-- 表格边框色 -->
-    <SolidColorBrush x:Key="BrushTableBoder" Color="{DynamicResource ColorTableBoder}"/>
+    <SolidColorBrush x:Key="BrushTableBorder" Color="{DynamicResource ColorTableBorder}"/>
 
     <!-- #endregion -->
 

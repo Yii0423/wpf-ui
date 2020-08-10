@@ -16,7 +16,7 @@
             <ScaleTransform ScaleX="0.7" ScaleY="0.7"/>
         </Grid.RenderTransform>
         <Label VerticalAlignment="Top" Height="40" Background="{StaticResource BrushBackground}"
-               Padding="10,0" BorderBrush="{StaticResource BrushTableBoder}" BorderThickness="0,0,0,1"
+               Padding="10,0" BorderBrush="{StaticResource BrushTableBorder}" BorderThickness="0,0,0,1"
                MouseLeftButtonDown="LabTitle_OnMouseLeftButtonDown" Cursor="SizeAll">
             <TextBlock x:Name="TxtTitle">
                 人间失格

@@ -71,7 +71,7 @@ namespace wpf_ui.Extends.Common
                         //淡出消失
                         label.ScaleOut(animateCompleted: () =>
                         {
-                            (Client.MainShade.Parent as Grid)?.Children.Remove(label);
+                            parentGrid.Children.Remove(label);
                             dTmr.Stop();
                         });
                         label.FadeOut();

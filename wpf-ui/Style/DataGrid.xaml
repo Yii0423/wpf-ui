@@ -12,13 +12,13 @@
     <!--DataGrid-->
     <Style TargetType="{x:Type DataGrid}">
         <Setter Property="Background" Value="{StaticResource BrushPrimary}"/>
-        <Setter Property="BorderBrush" Value="{StaticResource BrushTableBoder}"/>
+        <Setter Property="BorderBrush" Value="{StaticResource BrushTableBorder}"/>
         <Setter Property="BorderThickness" Value="1"/>
         <Setter Property="RowHeight" Value="38"/>
         <Setter Property="ColumnHeaderHeight" Value="38"/>
         <Setter Property="GridLinesVisibility" Value="All"/>
-        <Setter Property="HorizontalGridLinesBrush" Value="{StaticResource BrushTableBoder}"/>
-        <Setter Property="VerticalGridLinesBrush" Value="{StaticResource BrushTableBoder}"/>
+        <Setter Property="HorizontalGridLinesBrush" Value="{StaticResource BrushTableBorder}"/>
+        <Setter Property="VerticalGridLinesBrush" Value="{StaticResource BrushTableBorder}"/>
         <Setter Property="HeadersVisibility" Value="Column"/>
         <Setter Property="AlternationCount" Value="2"/>
         <Setter Property="AlternatingRowBackground" Value="#f9f9f9"/>
@@ -95,7 +95,7 @@
     <Style TargetType="{x:Type DataGridColumnHeader}">
         <Setter Property="SnapsToDevicePixels" Value="True"/>
         <Setter Property="Background" Value="{StaticResource BrushBackground}"/>
-        <Setter Property="BorderBrush" Value="{StaticResource BrushTableBoder}"/>
+        <Setter Property="BorderBrush" Value="{StaticResource BrushTableBorder}"/>
         <Setter Property="BorderThickness" Value="1,0,1,1"/>
         <Setter Property="Margin" Value="-1,0,0,0"/>
         <Setter Property="Padding" Value="5,0,0,0"/>

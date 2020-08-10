@@ -1,6 +1,9 @@
-﻿using System.Windows;
+﻿using System;
+using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
 using System.Windows.Media;
+using wpf_ui.Extends.Ucs;
 
 namespace wpf_ui.Extends.Common
 {
@@ -92,6 +95,48 @@ namespace wpf_ui.Extends.Common
         public static void Tip(this UIElement uiElement, string content)
         {
             Alter.Tip(content, uiElement);
+        }
+
+        /// <summary>
+        /// 英文星期几转星期索引(0:周一...以此类推)
+        /// </summary>
+        /// <param name="week">英文星期几</param>
+        /// <returns></returns>
+        public static int ToWeekIndex(this DayOfWeek week)
+        {
+            return Convert.ToInt32(week.ToString().Replace("Monday", "0")
+                                                  .Replace("Tuesday", "1")
+                                                  .Replace("Wednesday", "2")
+                                                  .Replace("Thursday", "3")
+                                                  .Replace("Friday", "4")
+                                                  .Replace("Saturday", "5")
+                                                  .Replace("Sunday", "6"));
+        }
+
+        /// <summary>
+        /// 时间控件
+        /// </summary>
+        /// <param name="txtBox">指定文本框</param>
+        public static void DateTime(this TextBox txtBox)
+        {
+            if (!(txtBox.FindParent<Grid>() is Grid grid)) return;
+            grid.Children.Remove(grid.FindChild<Popup>($"Popup_{txtBox.Name}"));
+            Popup popup = new Popup
+            {
+                Name = $"Popup_{txtBox.Name}",
+                PlacementTarget = txtBox,
+                Placement = PlacementMode.Bottom,
+                AllowsTransparency = true,
+                Child = new Canvas
+                {
+                    Width = 276,
+                    Height = 376,
+                    Children = { new UcDate() }
+                }
+            };
+            grid.Children.Add(popup);
+            txtBox.GotFocus += delegate { popup.IsOpen = true; };
+            txtBox.LostFocus += delegate { popup.IsOpen = false; };
         }
     }
 }

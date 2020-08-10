@@ -241,7 +241,7 @@ namespace wpf_ui.Extends.DiyControls
                     Border border = new Border
                     {
                         Padding = new Thickness(2.5),
-                        BorderBrush = FindResource("BrushTableBoder") as Brush,
+                        BorderBrush = FindResource("BrushTableBorder") as Brush,
                         BorderThickness = new Thickness(1),
                         Margin = new Thickness(l == 0 ? 0 : -1, i == 0 ? 0 : -1, 0, 0)
                     };

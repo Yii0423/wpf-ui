@@ -7,7 +7,7 @@
              mc:Ignorable="d" Height="38" d:DesignWidth="800"
              Loaded="UcPagination_OnLoaded">
     <Grid>
-        <Border BorderBrush="{StaticResource BrushTableBoder}" BorderThickness="1"/>
+        <Border BorderBrush="{StaticResource BrushTableBorder}" BorderThickness="1"/>
         <StackPanel Orientation="Horizontal">
             <diy:DiyButton x:Name="BtnPrev" Style="{StaticResource BtnPaginationDisabled}" Click="BtnPrev_OnClick">
                 <Path Style="{StaticResource Icon}" Data="{StaticResource Icon-Angle-Left}" 

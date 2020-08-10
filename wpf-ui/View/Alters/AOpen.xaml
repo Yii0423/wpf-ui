@@ -15,13 +15,13 @@
             <ScaleTransform ScaleX="0.7" ScaleY="0.7"/>
         </Grid.RenderTransform>
         <Label VerticalAlignment="Top" Height="40" Background="{StaticResource BrushBackground}"
-               Padding="10,0" BorderBrush="{StaticResource BrushTableBoder}" BorderThickness="0,0,0,1"
+               Padding="10,0" BorderBrush="{StaticResource BrushTableBorder}" BorderThickness="0,0,0,1"
                MouseLeftButtonDown="LabTitle_OnMouseLeftButtonDown" Cursor="SizeAll">
             <TextBlock x:Name="TxtTitle">人间失格</TextBlock>
         </Label>
         <StackPanel x:Name="SpWindows" Orientation="Horizontal" Height="40" VerticalAlignment="Top" FlowDirection="RightToLeft" 
                     HorizontalAlignment="Right" Margin="0,0,5,0" ButtonBase.Click="SpWindows_OnClick">
-            <diy:DiyButton Style="{StaticResource BtnWindows}" Icon="{DynamicResource Icon-Remove}" IsClose="True" Tag="Close"/>
+            <diy:DiyButton Style="{StaticResource BtnIcon}" Icon="{DynamicResource Icon-Remove}" IsClose="True" Tag="Close"/>
         </StackPanel>
         <ScrollViewer Margin="0,40,0,0" Style="{StaticResource ForScrollviewer}">
             <Frame x:Name="FrmMain" Navigated="FrmMain_Navigated"/>

@@ -77,6 +77,9 @@
     <Compile Include="Extends\Ucs\UcCard.xaml.cs">
       <DependentUpon>UcCard.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Extends\Ucs\UcDate.xaml.cs">
+      <DependentUpon>UcDate.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Extends\Ucs\UcPagination.xaml.cs">
       <DependentUpon>UcPagination.xaml</DependentUpon>
     </Compile>
@@ -99,11 +102,18 @@
     <Compile Include="View\Index.xaml.cs">
       <DependentUpon>Index.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Window1.xaml.cs">
+      <DependentUpon>Window1.xaml</DependentUpon>
+    </Compile>
     <Page Include="Extends\Ucs\UcAccordion.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Extends\Ucs\UcCard.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Extends\Ucs\UcDate.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -228,6 +238,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\Index.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Window1.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

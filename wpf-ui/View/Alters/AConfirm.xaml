@@ -16,13 +16,13 @@
             <ScaleTransform ScaleX="0.7" ScaleY="0.7"/>
         </Grid.RenderTransform>
         <Label VerticalAlignment="Top" Height="40" Background="{StaticResource BrushBackground}"
-               Padding="10,0" BorderBrush="{StaticResource BrushTableBoder}" BorderThickness="0,0,0,1"
+               Padding="10,0" BorderBrush="{StaticResource BrushTableBorder}" BorderThickness="0,0,0,1"
                MouseLeftButtonDown="LabTitle_OnMouseLeftButtonDown" Cursor="SizeAll">
             <TextBlock x:Name="TxtTitle">
                 人间失格
             </TextBlock>
         </Label>
-        <Label Margin="10,45" VerticalContentAlignment="Top" TextOptions.TextFormattingMode="Display" Padding="0,15">
+        <Label Margin="10,45" VerticalContentAlignment="Top" Padding="0,15">
             <TextBlock x:Name="TxtContent" TextWrapping="Wrap">
                 若能避开猛烈的狂喜，自然不会有悲痛的来袭。
             </TextBlock>

@@ -16,6 +16,7 @@
         <Setter Property="FontFamily" Value="{StaticResource FontFamilyDefault}"/>
         <Setter Property="FontSize" Value="{StaticResource FontSizeDefault}"/>
         <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <Setter Property="TextOptions.TextFormattingMode" Value="Display"/>
     </Style>
 
     <!-- #endregion -->

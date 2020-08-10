@@ -61,7 +61,7 @@ namespace wpf_ui.Extends.DiyControls
 
         #endregion
 
-        #region 关闭按钮
+        #region 标识为关闭按钮
 
         public bool IsClose
         {
@@ -71,6 +71,19 @@ namespace wpf_ui.Extends.DiyControls
 
         public static readonly DependencyProperty IsCloseProperty =
             DependencyProperty.Register("IsClose", typeof(bool), typeof(DiyButton), new PropertyMetadata(false));
+
+        #endregion
+
+        #region 标识为当前选中按钮
+
+        public bool IsSelected
+        {
+            get => (bool)GetValue(IsSelectedProperty);
+            set => SetValue(IsSelectedProperty, value);
+        }
+
+        public static readonly DependencyProperty IsSelectedProperty =
+            DependencyProperty.Register("IsSelected", typeof(bool), typeof(DiyButton), new PropertyMetadata(false));
 
         #endregion
     }

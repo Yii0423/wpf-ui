@@ -316,8 +316,8 @@
 
     <!-- #endregion -->
 
-    <!-- 原始按钮 -->
-    <Style x:Key="BtnWindows" TargetType="{x:Type diy:DiyButton}">
+    <!-- 图标按钮 -->
+    <Style x:Key="BtnIcon" TargetType="{x:Type diy:DiyButton}">
         <Setter Property="Cursor" Value="Hand"/>
         <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
         <Setter Property="BorderThickness" Value="0"/>
@@ -360,5 +360,59 @@
             </Setter.Value>
         </Setter>
     </Style>
+
+    <!-- #region 日期控件用按钮 -->
+
+    <!-- 当前月份的日期 -->
+    <Style x:Key="BtnCurMonth" TargetType="{x:Type diy:DiyButton}">
+        <Setter Property="Cursor" Value="Hand"/>
+        <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="Foreground" Value="Black"/>
+        <Setter Property="Width" Value="36"/>
+        <Setter Property="Height" Value="30"/>
+        <Setter Property="SnapsToDevicePixels" Value="True"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type diy:DiyButton}">
+                    <Grid>
+                        <Border BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}"
+                                CornerRadius="{TemplateBinding CornerRadius}">
+                            <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                        </Border>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsSelected" Value="False"/>
+                                <Condition Property="IsMouseOver" Value="True"/>
+                            </MultiTrigger.Conditions>
+                            <MultiTrigger.Setters>
+                                <Setter Property="Background" Value="{DynamicResource BrushFont}"/>
+                                <Setter Property="Foreground" Value="Black"/>
+                            </MultiTrigger.Setters>
+                        </MultiTrigger>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsSelected" Value="True"/>
+                            </MultiTrigger.Conditions>
+                            <MultiTrigger.Setters>
+                                <Setter Property="Foreground" Value="White"/>
+                                <Setter Property="Background" Value="{DynamicResource BrushDefault}"/>
+                            </MultiTrigger.Setters>
+                        </MultiTrigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- 非当前月份的日期 -->
+    <Style x:Key="BtnOthMonth" BasedOn="{StaticResource BtnCurMonth}" TargetType="{x:Type diy:DiyButton}">
+        <Setter Property="Foreground" Value="{StaticResource BrushCold}"/>
+    </Style>
+
+    <!-- #endregion -->
 
 </ResourceDictionary>

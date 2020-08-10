@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
 
@@ -125,6 +126,33 @@ namespace wpf_ui.Extends.Common
                 RepeatBehavior = RepeatBehavior.Forever,
                 EasingFunction = EasingFunction
             });
+        }
+
+        /// <summary>
+        /// 平移动画
+        /// </summary>
+        /// <param name="frameworkElement">主控件</param>
+        /// <param name="thickness">移动之后的位置(开始默认为控件本身的Margin)</param>
+        /// <param name="time">动画时间</param>
+        /// <param name="animateCompleted">回调</param>
+        /// <param name="isReverse">是否反向移动(从指定位置移动至原始位置)</param>
+        public static void Translation(this FrameworkElement frameworkElement, Thickness thickness, double time = AnimateTime,
+                                            AnimateCompleted animateCompleted = null, bool isReverse = false)
+        {
+            ThicknessAnimation ta = new ThicknessAnimation
+            {
+                From = frameworkElement.Margin,
+                To = thickness,
+                Duration = TimeSpan.FromSeconds(time),
+                EasingFunction = EasingFunction
+            };
+            if (isReverse)
+            {
+                ta.From = thickness;
+                ta.To = frameworkElement.Margin;
+            }
+            ta.Completed += delegate { animateCompleted?.Invoke(); };
+            frameworkElement.BeginAnimation(FrameworkElement.MarginProperty, ta);
         }
     }
 }
