@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
-using System.Runtime.CompilerServices;
 using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Threading;
 using wpf_ui.Extends.Common;
 using wpf_ui.Model;
 
@@ -234,35 +234,8 @@ namespace wpf_ui.View
             };
 
             #endregion
-        }
 
-        /// <summary>
-        /// 测试按钮点击事件
-        /// </summary>
-        private void BtnTest_OnClick(object sender, RoutedEventArgs e)
-        {
-            new Thread(() =>
-            {
-                string str = "";
-                Dispatcher.Invoke(() =>
-                {
-                    str = Alter.Prompt("请输入一些内容：");
-                    if (string.IsNullOrWhiteSpace(str)) return;
-                    BtnTest.IsEnabled = false;
-                    BtnTest.FindParent<Grid>().Loading();
-                });
-                Thread.Sleep(5000);
-                Dispatcher.Invoke(() =>
-                {
-                    BtnTest.FindParent<Grid>().ClearLoading();
-                    BtnTest.IsEnabled = true;
-                    Alter.Open(new MOpen
-                    {
-                        Title = "若能避开猛烈的狂喜，自然不会有悲痛的来袭。",
-                        FixedSize = true
-                    });
-                });
-            }).Start();
+            Txt1.DateTime();
         }
 
         private void BtnTest2_OnClick(object sender, RoutedEventArgs e)
