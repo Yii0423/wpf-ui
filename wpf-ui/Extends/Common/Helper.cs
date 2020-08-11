@@ -105,13 +105,13 @@ namespace wpf_ui.Extends.Common
         /// <returns></returns>
         public static int ToWeekIndex(this DayOfWeek week)
         {
-            return Convert.ToInt32(week.ToString().Replace("Monday", "0")
-                                                  .Replace("Tuesday", "1")
-                                                  .Replace("Wednesday", "2")
-                                                  .Replace("Thursday", "3")
-                                                  .Replace("Friday", "4")
-                                                  .Replace("Saturday", "5")
-                                                  .Replace("Sunday", "6"));
+            return Convert.ToInt32(week.ToString().Replace("Monday", "1")
+                                                  .Replace("Tuesday", "2")
+                                                  .Replace("Wednesday", "3")
+                                                  .Replace("Thursday", "4")
+                                                  .Replace("Friday", "5")
+                                                  .Replace("Saturday", "6")
+                                                  .Replace("Sunday", "0"));
         }
 
         /// <summary>

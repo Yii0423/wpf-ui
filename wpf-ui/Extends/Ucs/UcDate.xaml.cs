@@ -126,7 +126,7 @@ namespace wpf_ui.Extends.Ucs
             //计算本月总天数
             int curMonthDays = DateTime.DaysInMonth(DateTime.Year, DateTime.Month);
             //计算上月总天数
-            int lastMonthDays = DateTime.DaysInMonth(DateTime.Year, DateTime.AddMonths(-1).Month);
+            int lastMonthDays = DateTime.DaysInMonth(DateTime.AddMonths(-1).Year, DateTime.AddMonths(-1).Month);
             //添加上月日期
             for (int i = lastMonthDays - startDay + 1; i <= lastMonthDays; i++)
             {
@@ -134,7 +134,7 @@ namespace wpf_ui.Extends.Ucs
                 {
                     Style = FindResource("BtnOthMonth") as Style,
                     Content = i,
-                    Tag = new DateTime(DateTime.Year, DateTime.AddMonths(-1).Month, i)
+                    Tag = new DateTime(DateTime.AddMonths(-1).Year, DateTime.AddMonths(-1).Month, i)
                 });
             }
             //添加本月日期
@@ -169,7 +169,7 @@ namespace wpf_ui.Extends.Ucs
                 {
                     Style = FindResource("BtnOthMonth") as Style,
                     Content = i,
-                    Tag = new DateTime(DateTime.Year, DateTime.AddMonths(1).Month, i)
+                    Tag = new DateTime(DateTime.AddMonths(1).Year, DateTime.AddMonths(1).Month, i)
                 });
             }
         }
