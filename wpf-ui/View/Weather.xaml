@@ -3,9 +3,8 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-      xmlns:ucs="clr-namespace:wpf_ui.Extends.Ucs"
       mc:Ignorable="d" d:DesignWidth="1600" Background="#FFF6F9FE"
-      >
+      DataContext="{Binding Source={StaticResource Locator},Path=Weather}">
     <Grid>
         <Image VerticalAlignment="Top" Source="/Content/Images/bgs/weather.jpg" RenderOptions.BitmapScalingMode="HighQuality"
                Stretch="Fill" Height="500"/>
@@ -21,11 +20,13 @@
                 </Label>
                 <StackPanel Orientation="Horizontal" Margin="10,45,115,0" Height="100" VerticalAlignment="Top">
                     <Label Content="24" HorizontalAlignment="Left" Margin="0,10,0,0" VerticalAlignment="Top" FontSize="60"
-                   Padding="0" Height="80" VerticalContentAlignment="Bottom" Foreground="White"/>
+                           Padding="0" Height="80" VerticalContentAlignment="Bottom" Foreground="White"/>
                     <Label Content="℃" HorizontalAlignment="Left" Margin="5,10,0,0" VerticalAlignment="Top"
-                   Padding="0,35,0,0" Height="80" Foreground="White"/>
+                           Padding="0,35,0,0" Height="80" Foreground="White"/>
                     <Label Content="雨" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" FontSize="18" 
-                   Height="80" Padding="0,30,0,0" Foreground="White" FontWeight="Bold"/>
+                           Height="80" Padding="0,30,0,0" Foreground="White" FontWeight="Bold"/>
+                    <Label Content="{Binding Weather2.Data.Air.Aqi_Name}" HorizontalAlignment="Left" Margin="10,30,0,0" 
+                           FontSize="14" Height="30" Width="100" Foreground="White" Style="{StaticResource TagDefault}"/>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal" Margin="10,145,115,0" Height="30" VerticalAlignment="Top">
                     <Label Margin="0,0,0,0" Foreground="White">
@@ -67,7 +68,19 @@
                     <Image Source="/Content/Images/weather/雨.png" RenderOptions.BitmapScalingMode="HighQuality"/>
                 </Grid>
             </Grid>
-            <ucs:UcCard Height="150" Margin="10,450,10,0" VerticalAlignment="Top" Title="未来24小时预报"/>
+            <Grid Height="150" Margin="10,450,10,0" VerticalAlignment="Top">
+                <Border Background="{StaticResource BrushPrimary}">
+                    <Border.Effect>
+                        <DropShadowEffect ShadowDepth="1" Opacity="0.1"/>
+                    </Border.Effect>
+                </Border>
+                <Label Content="未来24小时预报" VerticalAlignment="Top" Height="40" VerticalContentAlignment="Center" Padding="10,0,0,0"/>
+                <Grid Margin="0,40,0,0">
+                    <Border Padding="10">
+
+                    </Border>
+                </Grid>
+            </Grid>
             <Grid Height="500" Margin="10,610,10,0" VerticalAlignment="Top">
                 <Border Background="{StaticResource BrushPrimary}">
                     <Border.Effect>
@@ -76,12 +89,24 @@
                 </Border>
                 <Label Content="未来一周预报" VerticalAlignment="Top" Height="40" VerticalContentAlignment="Center" Padding="10,0,0,0"/>
                 <Grid Margin="0,40,0,0">
-                    <Border BorderBrush="{StaticResource BrushBackground}" BorderThickness="0,1,0,0" Padding="10">
+                    <Border Padding="10">
 
                     </Border>
                 </Grid>
             </Grid>
-            <ucs:UcCard Height="200" Margin="10,1120,10,10" VerticalAlignment="Top" Title="生活指数"/>
+            <Grid Height="200" Margin="10,1120,10,10" VerticalAlignment="Top">
+                <Border Background="{StaticResource BrushPrimary}">
+                    <Border.Effect>
+                        <DropShadowEffect ShadowDepth="1" Opacity="0.1"/>
+                    </Border.Effect>
+                </Border>
+                <Label Content="生活指数" VerticalAlignment="Top" Height="40" VerticalContentAlignment="Center" Padding="10,0,0,0"/>
+                <Grid Margin="0,40,0,0">
+                    <Border Padding="10">
+
+                    </Border>
+                </Grid>
+            </Grid>
         </Grid>
     </Grid>
 </Page>
