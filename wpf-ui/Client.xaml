@@ -23,7 +23,7 @@
         <ucs:UcMenuLeft x:Name="MenuLeft" Width="60" HorizontalAlignment="Left" Background="Red"/>
         <!-- 内容区域(Top多1为了显示出阴影) -->
         <ScrollViewer Margin="60,51,0,0" Style="{StaticResource ForScrollviewer}">
-            <Frame x:Name="FrmMain"/>
+            <Frame x:Name="FrmMain" NavigationUIVisibility="Hidden"/>
         </ScrollViewer>
         <!-- 遮罩层 -->
         <Border x:Name="BorderShade" Background="Black" Opacity="0.5" Visibility="Collapsed"/>
