@@ -90,13 +90,22 @@
     </ApplicationDefinition>
     <Compile Include="Extends\Common\Alter.cs" />
     <Compile Include="Extends\Common\Animate.cs" />
+    <Compile Include="Extends\Converters\StringConverters\WeatherImagePathConverters.cs" />
+    <Compile Include="Extends\Converters\StringConverters\WeatherTimeForChineseConverters.cs" />
+    <Compile Include="Extends\Converters\StringConverters\WeatherUpdateTimeConverters.cs" />
     <Compile Include="Extends\DiyControls\DiyRadioButton.cs" />
     <Compile Include="Extends\DiyControls\DiyTable.cs" />
+    <Compile Include="Extends\Ucs\UcForecast24H.xaml.cs">
+      <DependentUpon>UcForecast24H.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Extends\Ucs\UcCard.xaml.cs">
       <DependentUpon>UcCard.xaml</DependentUpon>
     </Compile>
     <Compile Include="Extends\Ucs\UcDate.xaml.cs">
       <DependentUpon>UcDate.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Extends\Ucs\UcForecast1H.xaml.cs">
+      <DependentUpon>UcForecast1H.xaml</DependentUpon>
     </Compile>
     <Compile Include="Extends\Ucs\UcPagination.xaml.cs">
       <DependentUpon>UcPagination.xaml</DependentUpon>
@@ -127,6 +136,10 @@
     <Compile Include="View\Weather.xaml.cs">
       <DependentUpon>Weather.xaml</DependentUpon>
     </Compile>
+    <Page Include="Extends\Ucs\UcForecast24H.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Extends\Ucs\UcAccordion.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -136,6 +149,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Extends\Ucs\UcDate.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Extends\Ucs\UcForecast1H.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -296,9 +313,7 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Extends\Converters\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Resource Include="Content\Images\logo.png" />
   </ItemGroup>

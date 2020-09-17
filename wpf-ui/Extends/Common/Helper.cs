@@ -218,5 +218,23 @@ namespace wpf_ui.Extends.Common
             Put,
             Delete
         }
+
+        /// <summary>
+        /// 字符串转化为DateTime
+        /// </summary>
+        /// <param name="value">字符串</param>
+        /// <returns></returns>
+        public static DateTime? ToDateTime(this string value)
+        {
+            if ((value.Length != 10 || !value.Contains("-")) &&
+                (value.Length != 19 || !value.Contains("-") || !value.Contains(":")))
+            {
+                if (value.Length != 8 && value.Length != 14) return null;
+                if (value.Length >= 8) value = value.Insert(4, "-").Insert(7, "-");
+                if (value.Length == 16) value = value.Insert(10, " ").Insert(13, ":").Insert(16, ":");
+            }
+            System.DateTime.TryParse(value, out DateTime dateTime);
+            return dateTime;
+        }
     }
 }

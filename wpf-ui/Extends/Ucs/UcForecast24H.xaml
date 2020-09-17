@@ -1,0 +1,38 @@
+﻿<UserControl x:Class="wpf_ui.Extends.Ucs.UcForecast24H"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:stringConverters="clr-namespace:wpf_ui.Extends.Converters.StringConverters"
+             Height="400" Width="147.5">
+    <UserControl.Resources>
+        <stringConverters:WeatherImagePathConverters x:Key="WeatherImagePathConverters"/>
+        <stringConverters:WeatherUpdateTimeConverters x:Key="WeatherUpdateTimeConverters"/>
+        <stringConverters:WeatherTimeForChineseConverters x:Key="WeatherTimeForChineseConverters"/>
+    </UserControl.Resources>
+    <Grid>
+        <Label Content="{Binding Time,Converter={StaticResource WeatherTimeForChineseConverters}}" 
+               VerticalAlignment="Top" HorizontalContentAlignment="Center" Height="30"/>
+        <Label Content="{Binding Time,Converter={StaticResource WeatherUpdateTimeConverters},ConverterParameter='MM月dd日'}" 
+               VerticalAlignment="Top" HorizontalContentAlignment="Center" Margin="0,30,0,0" Foreground="#DDD" FontSize="12" Height="27"/>
+        <Label Content="{Binding Day_Weather_Short}" VerticalAlignment="Top" HorizontalContentAlignment="Center" Margin="0,57,0,0" Height="30"/>
+        <Image Height="40" Margin="0,87,0,0" VerticalAlignment="Top" RenderOptions.BitmapScalingMode="HighQuality"
+               Source="{Binding Day_Weather_Short,Converter={StaticResource WeatherImagePathConverters}}"
+               ToolTip="{Binding Day_Weather}"/>
+        <Image Height="40" Margin="0,0,0,57" VerticalAlignment="Bottom" RenderOptions.BitmapScalingMode="HighQuality"
+               Source="{Binding Night_Weather_Short,Converter={StaticResource WeatherImagePathConverters}}"
+               ToolTip="{Binding Night_Weather}"/>
+        <Label Content="{Binding Night_Weather_Short}" VerticalAlignment="Bottom" HorizontalContentAlignment="Center" Margin="0,0,0,27" Height="30"/>
+        <Label VerticalAlignment="Bottom" HorizontalContentAlignment="Center" 
+               Foreground="#DDD" FontSize="12" Height="27">
+            <Label.Content>
+                <TextBlock>
+                    <TextBlock.Text>
+                        <MultiBinding StringFormat="{}{0} {1}级">
+                            <Binding Path="Night_Wind_Direction"/>
+                            <Binding Path="Night_Wind_Power"/>
+                        </MultiBinding>
+                    </TextBlock.Text>
+                </TextBlock>
+            </Label.Content>
+        </Label>
+    </Grid>
+</UserControl>
