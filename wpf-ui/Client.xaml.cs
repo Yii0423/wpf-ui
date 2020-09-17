@@ -6,6 +6,7 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Interop;
 using System.Windows.Media;
+using System.Windows.Navigation;
 using wpf_ui.Extends.Common;
 using wpf_ui.Model;
 
@@ -98,18 +99,10 @@ namespace wpf_ui
             {
                 new MMenuItem
                 {
-                    Title = "Icon-Home", IsTop = true, Url = "Index", ChildItem = new List<MMenuItem>
+                    Title = "Icon-Home", IsTop = true, ChildItem = new List<MMenuItem>
                     {
-                        new MMenuItem {Title = "移动模块"},
-                        new MMenuItem
-                        {
-                            Title = "后台模块", ChildItem = new List<MMenuItem>
-                            {
-                                new MMenuItem {Title = "后台顶部"},
-                                new MMenuItem {Title = "后台左侧"},
-                                new MMenuItem {Title = "后台下方"}
-                            }
-                        }
+                        new MMenuItem {Title = "首页", Url = "Index"},
+                        new MMenuItem {Title = "天气预报", Url = "Weather"}
                     }
                 },
                 new MMenuItem {Title = "Icon-Music", IsTop = true},

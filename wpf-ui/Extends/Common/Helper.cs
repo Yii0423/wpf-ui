@@ -1,4 +1,7 @@
 ﻿using System;
+using System.IO;
+using System.Net;
+using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
@@ -155,6 +158,83 @@ namespace wpf_ui.Extends.Common
                 if (point.X >= 0 && point.X <= ucDate.ActualWidth && point.Y >= 0 && point.Y <= ucDate.ActualHeight) return;
                 popup.IsOpen = false;
             };
+        }
+
+        /// <summary>
+        /// GET请求
+        /// </summary>
+        /// <param name="url">链接</param>
+        /// <param name="param">参数</param>
+        /// <returns></returns>
+        public static string HttpGet(this string url, string param = "")
+        {
+            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url + (param == "" ? "" : "?") + param);
+            request.Method = "GET";
+            request.ContentType = "text/html;charset=UTF-8";
+            HttpWebResponse response = (HttpWebResponse)request.GetResponse();
+            Stream myResponseStream = response.GetResponseStream();
+            if (myResponseStream == null) return "";
+            StreamReader myStreamReader = new StreamReader(myResponseStream, Encoding.GetEncoding("utf-8"));
+            string retString = myStreamReader.ReadToEnd();
+            myStreamReader.Close();
+            myResponseStream.Close();
+            return retString;
+        }
+
+        /// <summary>
+        /// POST/PUT/DELETE请求
+        /// </summary>
+        /// <param name="url">链接</param>
+        /// <param name="postData">参数</param>
+        /// <param name="httpType">Http请求方式(POST/PUT/DELETE)</param>
+        /// <returns></returns>
+        public static string HttpPost(this string url, string postData = "", HttpType httpType = HttpType.Post)
+        {
+            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
+            request.Method = httpType.ToString();
+            request.ContentType = "application/json";
+            Encoding encoding = Encoding.UTF8;
+            byte[] postDatas = encoding.GetBytes(postData);
+            request.ContentLength = postDatas.Length;
+            Stream myRequestStream = request.GetRequestStream();
+            myRequestStream.Write(postDatas, 0, postDatas.Length);
+            myRequestStream.Close();
+            HttpWebResponse response = (HttpWebResponse)request.GetResponse();
+            Stream myResponseStream = response.GetResponseStream();
+            if (myResponseStream == null) return "";
+            StreamReader myStreamReader = new StreamReader(myResponseStream, encoding);
+            string retString = myStreamReader.ReadToEnd();
+            myStreamReader.Close();
+            myResponseStream.Close();
+            return retString;
+        }
+
+        /// <summary>
+        /// Http提交类型
+        /// </summary>
+        public enum HttpType
+        {
+            Post,
+            Put,
+            Delete
+        }
+
+        /// <summary>
+        /// 字符串转化为DateTime
+        /// </summary>
+        /// <param name="value">字符串</param>
+        /// <returns></returns>
+        public static DateTime? ToDateTime(this string value)
+        {
+            if ((value.Length != 10 || !value.Contains("-")) &&
+                (value.Length != 19 || !value.Contains("-") || !value.Contains(":")))
+            {
+                if (value.Length != 8 && value.Length != 14) return null;
+                if (value.Length >= 8) value = value.Insert(4, "-").Insert(7, "-");
+                if (value.Length == 16) value = value.Insert(10, " ").Insert(13, ":").Insert(16, ":");
+            }
+            System.DateTime.TryParse(value, out DateTime dateTime);
+            return dateTime;
         }
     }
 }

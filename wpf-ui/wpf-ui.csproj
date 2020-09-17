@@ -37,9 +37,24 @@
     <ApplicationManifest>app.manifest</ApplicationManifest>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="CommonServiceLocator, Version=2.0.2.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
+      <HintPath>packages\CommonServiceLocator.2.0.2\lib\net45\CommonServiceLocator.dll</HintPath>
+    </Reference>
+    <Reference Include="GalaSoft.MvvmLight, Version=5.4.1.0, Culture=neutral, PublicKeyToken=e7570ab207bcb616, processorArchitecture=MSIL">
+      <HintPath>packages\MvvmLightLibs.5.4.1.1\lib\net45\GalaSoft.MvvmLight.dll</HintPath>
+    </Reference>
+    <Reference Include="GalaSoft.MvvmLight.Extras, Version=5.4.1.0, Culture=neutral, PublicKeyToken=669f0b5e8f868abf, processorArchitecture=MSIL">
+      <HintPath>packages\MvvmLightLibs.5.4.1.1\lib\net45\GalaSoft.MvvmLight.Extras.dll</HintPath>
+    </Reference>
+    <Reference Include="GalaSoft.MvvmLight.Platform, Version=5.4.1.0, Culture=neutral, PublicKeyToken=5f873c45e98af8a1, processorArchitecture=MSIL">
+      <HintPath>packages\MvvmLightLibs.5.4.1.1\lib\net45\GalaSoft.MvvmLight.Platform.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Expression.Drawing, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>Extends\Dlls\Microsoft.Expression.Drawing.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>packages\Newtonsoft.Json.12.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="OxyPlot, Version=2.0.0.0, Culture=neutral, PublicKeyToken=638079a8f0bd61e9, processorArchitecture=MSIL">
       <HintPath>packages\OxyPlot.Core.2.0.0\lib\net45\OxyPlot.dll</HintPath>
@@ -52,6 +67,9 @@
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Printing" />
+    <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>packages\MvvmLightLibs.5.4.1.1\lib\net45\System.Windows.Interactivity.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -72,13 +90,22 @@
     </ApplicationDefinition>
     <Compile Include="Extends\Common\Alter.cs" />
     <Compile Include="Extends\Common\Animate.cs" />
+    <Compile Include="Extends\Converters\StringConverters\WeatherImagePathConverters.cs" />
+    <Compile Include="Extends\Converters\StringConverters\WeatherTimeForChineseConverters.cs" />
+    <Compile Include="Extends\Converters\StringConverters\WeatherUpdateTimeConverters.cs" />
     <Compile Include="Extends\DiyControls\DiyRadioButton.cs" />
     <Compile Include="Extends\DiyControls\DiyTable.cs" />
+    <Compile Include="Extends\Ucs\UcForecast24H.xaml.cs">
+      <DependentUpon>UcForecast24H.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Extends\Ucs\UcCard.xaml.cs">
       <DependentUpon>UcCard.xaml</DependentUpon>
     </Compile>
     <Compile Include="Extends\Ucs\UcDate.xaml.cs">
       <DependentUpon>UcDate.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Extends\Ucs\UcForecast1H.xaml.cs">
+      <DependentUpon>UcForecast1H.xaml</DependentUpon>
     </Compile>
     <Compile Include="Extends\Ucs\UcPagination.xaml.cs">
       <DependentUpon>UcPagination.xaml</DependentUpon>
@@ -90,6 +117,10 @@
     <Compile Include="Model\MOpen.cs" />
     <Compile Include="Model\MTableSort.cs" />
     <Compile Include="Model\MTdConverter.cs" />
+    <Compile Include="Model\MWeather.cs" />
+    <Compile Include="ViewModel\WeatherViewModel.cs" />
+    <Compile Include="ViewModel\MainViewModel.cs" />
+    <Compile Include="ViewModel\ViewModelLocator.cs" />
     <Compile Include="View\Alters\AConfirm.xaml.cs">
       <DependentUpon>AConfirm.xaml</DependentUpon>
     </Compile>
@@ -102,6 +133,13 @@
     <Compile Include="View\Index.xaml.cs">
       <DependentUpon>Index.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\Weather.xaml.cs">
+      <DependentUpon>Weather.xaml</DependentUpon>
+    </Compile>
+    <Page Include="Extends\Ucs\UcForecast24H.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Extends\Ucs\UcAccordion.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -111,6 +149,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Extends\Ucs\UcDate.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Extends\Ucs\UcForecast1H.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -238,6 +280,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\Weather.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -267,10 +313,7 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Extends\Converters\" />
-    <Folder Include="ViewModel\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Resource Include="Content\Images\logo.png" />
   </ItemGroup>
@@ -280,6 +323,31 @@
     <Resource Include="Content\Images\loading\loading1.png" />
     <Resource Include="Content\Images\loading\Loading2.png" />
     <Resource Include="Content\Images\loading\loading3.png" />
+    <Resource Include="Content\Images\bgs\weather.jpg" />
+    <Resource Include="Content\Images\weather\中到大雨.png" />
+    <Resource Include="Content\Images\weather\中雨.png" />
+    <Resource Include="Content\Images\weather\中雪.png" />
+    <Resource Include="Content\Images\weather\冻雨.png" />
+    <Resource Include="Content\Images\weather\多云.png" />
+    <Resource Include="Content\Images\weather\大暴雨.png" />
+    <Resource Include="Content\Images\weather\大雨.png" />
+    <Resource Include="Content\Images\weather\大雪.png" />
+    <Resource Include="Content\Images\weather\小到中雨.png" />
+    <Resource Include="Content\Images\weather\小雨.png" />
+    <Resource Include="Content\Images\weather\小雪.png" />
+    <Resource Include="Content\Images\weather\晴.png" />
+    <Resource Include="Content\Images\weather\暴雨.png" />
+    <Resource Include="Content\Images\weather\暴雪.png" />
+    <Resource Include="Content\Images\weather\沙尘暴.png" />
+    <Resource Include="Content\Images\weather\特大暴雨.png" />
+    <Resource Include="Content\Images\weather\阴.png" />
+    <Resource Include="Content\Images\weather\阵雨.png" />
+    <Resource Include="Content\Images\weather\阵雪.png" />
+    <Resource Include="Content\Images\weather\雨.png" />
+    <Resource Include="Content\Images\weather\雨夹雪.png" />
+    <Resource Include="Content\Images\weather\雷阵雨.png" />
+    <Resource Include="Content\Images\weather\雷阵雨并伴有冰雹.png" />
+    <Resource Include="Content\Images\weather\雾.png" />
     <Content Include="Extends\Dlls\Microsoft.Expression.Drawing.dll" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
