@@ -90,6 +90,7 @@
     </ApplicationDefinition>
     <Compile Include="Extends\Common\Alter.cs" />
     <Compile Include="Extends\Common\Animate.cs" />
+    <Compile Include="Extends\Converters\NumberConverters\WeatherWindDirectionAngleConverters.cs" />
     <Compile Include="Extends\Converters\StringConverters\WeatherImagePathConverters.cs" />
     <Compile Include="Extends\Converters\StringConverters\WeatherTimeForChineseConverters.cs" />
     <Compile Include="Extends\Converters\StringConverters\WeatherUpdateTimeConverters.cs" />

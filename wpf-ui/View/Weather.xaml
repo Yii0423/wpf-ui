@@ -4,10 +4,12 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:converter="clr-namespace:wpf_ui.Extends.Converters.StringConverters"
+      xmlns:converter2="clr-namespace:wpf_ui.Extends.Converters.NumberConverters"
       mc:Ignorable="d" d:DesignWidth="1600" Background="#FFF6F9FE"
       DataContext="{Binding Source={StaticResource Locator},Path=Weather}">
     <Page.Resources>
         <converter:WeatherImagePathConverters x:Key="WeatherImagePathConverters"/>
+        <converter2:WeatherWindDirectionAngleConverters x:Key="WeatherWindDirectionAngleConverters"/>
     </Page.Resources>
     <Grid>
         <Image VerticalAlignment="Top" Source="/Content/Images/bgs/weather.jpg" RenderOptions.BitmapScalingMode="HighQuality"
@@ -45,7 +47,14 @@
                     <Label Margin="0,0,0,0" Foreground="White">
                         <Label.Content>
                             <StackPanel Orientation="Horizontal">
-                                <Path Style="{StaticResource Icon}" Data="{StaticResource Icon-Map-Marker}"/>
+                                <Path Style="{StaticResource Icon}" Data="{StaticResource Icon-Location-Arrow}">
+                                    <Path.RenderTransform>
+                                        <TransformGroup>
+                                            <ScaleTransform ScaleY="-1"/>
+                                            <RotateTransform Angle="{Binding Weather.Data.Observe.Wind_Direction,Converter={StaticResource WeatherWindDirectionAngleConverters}}"/>
+                                        </TransformGroup>
+                                    </Path.RenderTransform>
+                                </Path>
                                 <TextBlock>
                                     <TextBlock.Text>
                                         <MultiBinding StringFormat="{} {0}风 {1}级">
@@ -60,7 +69,7 @@
                     <Label Margin="10,0,0,0" Foreground="White">
                         <Label.Content>
                             <StackPanel Orientation="Horizontal">
-                                <Path Style="{StaticResource Icon}" Data="{StaticResource Icon-Map-Marker}"/>
+                                <Path Style="{StaticResource Icon}" Data="{StaticResource Icon-Tint}"/>
                                 <TextBlock>
                                     <TextBlock.Text>
                                         <MultiBinding StringFormat="{} 湿度 {0}%">
@@ -74,7 +83,7 @@
                     <Label Margin="10,0,0,0" Foreground="White">
                         <Label.Content>
                             <StackPanel Orientation="Horizontal">
-                                <Path Style="{StaticResource Icon}" Data="{StaticResource Icon-Map-Marker}"/>
+                                <Path Style="{StaticResource Icon}" Data="{StaticResource Icon-Adjust}"/>
                                 <TextBlock>
                                     <TextBlock.Text>
                                         <MultiBinding StringFormat="{} 气压 {0}hPa">
@@ -90,7 +99,7 @@
                     <Label Foreground="White">
                         <Label.Content>
                             <StackPanel Orientation="Horizontal">
-                                <Path Style="{StaticResource Icon}" Data="{StaticResource Icon-Map-Marker}"/>
+                                <Path Style="{StaticResource Icon}" Data="{StaticResource Icon-Comment}"/>
                                 <TextBlock>
                                     <TextBlock.Text>
                                         <MultiBinding StringFormat="{} {0}">

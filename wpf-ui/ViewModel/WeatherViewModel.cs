@@ -1,3 +1,4 @@
+using System;
 using System.Threading;
 using GalaSoft.MvvmLight;
 using wpf_ui.Extends.Common;
@@ -59,33 +60,41 @@ namespace wpf_ui.ViewModel
         /// </summary>
         public WeatherViewModel()
         {
-            Province = "浙江";
-            City = "杭州";
+            Province = "北京";
+            City = "";
 
             new Thread(() =>
             {
-                //空气
-                string result = "https://wis.qq.com/weather/common".HttpGet($"source=pc&weather_type=air%7Crise&province={Province}&city={City}");
-                result = result.Replace("\"pm2.5\":", "\"pm2_5\":");
-                result = result.Replace("\"rise\":{", "\"rise\":[");
-                for (int i = 0; i <= 15; i++) result = result.Replace($"\"{i}\":", "");
-                result = result.Replace("}}}", "}]}");
-                WeatherAir = Newtonsoft.Json.JsonConvert.DeserializeObject<MWeather.MWeatherAirResult>(result);
-                //天气
-                result = "https://wis.qq.com/weather/common".HttpGet($"source=pc&weather_type=observe%7Cforecast_1h%7Cforecast_24h%7Cindex%7Calarm%7Climit%7Ctips%7Crise&province={Province}&city={City}");
-                result = result.Replace("\"alarm\":{", "\"alarm\":[");
-                result = result.Replace("},\"forecast_1h\":{", "],\"forecast_1h\":[");
-                result = result.Replace("},\"forecast_24h\":{", "],\"forecast_24h\":[");
-                result = result.Replace("},\"index\":{", "],\"index\":{");
-                result = result.Replace("\"rise\":{", "\"rise\":[");
-                result = result.Replace("},\"tips\":{", "],\"tips\":{");
-                result = result.Replace("\"forecast_1h\":{", "\"forecast_1h\":[");
-                result = result.Replace("\"forecast_24h\":{", "\"forecast_24h\":[");
-                result = result.Replace("},\"observe\":{\"0\"", "],\"observe\":[\"0\"");
-                result = result.Replace("\"observe\":{\"0\"", "\"observe\":[\"0\"");
-                for (int i = 0; i <= 50; i++) result = result.Replace($"\"{i}\":", "");
-                result = result.Replace("}}}", "]}}");
-                Weather = Newtonsoft.Json.JsonConvert.DeserializeObject<MWeather.MWeatherResult>(result);
+                try
+                {
+                    //空气
+                    string result = "https://wis.qq.com/weather/common".HttpGet($"source=pc&weather_type=air%7Crise&province={Province}&city={City}");
+                    result = result.Replace("\"pm2.5\":", "\"pm2_5\":");
+                    result = result.Replace("\"rise\":{", "\"rise\":[");
+                    for (int i = 0; i <= 15; i++) result = result.Replace($"\"{i}\":", "");
+                    result = result.Replace("}}}", "}]}");
+                    WeatherAir = Newtonsoft.Json.JsonConvert.DeserializeObject<MWeather.MWeatherAirResult>(result);
+                    //天气
+                    result = "https://wis.qq.com/weather/common".HttpGet($"source=pc&weather_type=observe%7Cforecast_1h%7Cforecast_24h%7Cindex%7Calarm%7Climit%7Ctips%7Crise&province={Province}&city={City}");
+                    result = result.Replace("\"alarm\":{", "\"alarm\":[");
+                    result = result.Replace("},\"forecast_1h\":{", "],\"forecast_1h\":[");
+                    result = result.Replace("},\"forecast_24h\":{", "],\"forecast_24h\":[");
+                    result = result.Replace("},\"index\":{", "],\"index\":{");
+                    result = result.Replace("\"rise\":{", "\"rise\":[");
+                    result = result.Replace("},\"tips\":{", "],\"tips\":{");
+                    result = result.Replace("\"forecast_1h\":{", "\"forecast_1h\":[");
+                    result = result.Replace("\"forecast_24h\":{", "\"forecast_24h\":[");
+                    result = result.Replace("},\"observe\":{\"0\"", "],\"observe\":[\"0\"");
+                    result = result.Replace("\"observe\":{\"0\"", "\"observe\":[\"0\"");
+                    for (int i = 0; i <= 50; i++) result = result.Replace($"\"{i}\":", "");
+                    result = result.Replace("}}}", "]}}");
+                    Weather = Newtonsoft.Json.JsonConvert.DeserializeObject<MWeather.MWeatherResult>(result);
+                }
+                catch (Exception)
+                {
+                    Province = "";
+                    City = "获取天气信息失败，请稍后重试哦";
+                }
             }).Start();
         }
     }
