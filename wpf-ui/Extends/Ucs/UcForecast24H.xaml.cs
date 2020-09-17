@@ -1,17 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace wpf_ui.Extends.Ucs
 {
@@ -23,6 +12,17 @@ namespace wpf_ui.Extends.Ucs
         public UcForecast24H()
         {
             InitializeComponent();
+        }
+
+        private void TextBoxBase_OnTextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (!(sender is TextBox txtBox) || !txtBox.Text.Trim().Equals("昨天")) return;
+            if (!(txtBox.Parent is Grid grid)) return;
+            foreach (UIElement child in grid.Children)
+            {
+                if (!(child is Label label)) continue;
+                label.Foreground = FindResource("BrushFont") as Brush;
+            }
         }
     }
 }
