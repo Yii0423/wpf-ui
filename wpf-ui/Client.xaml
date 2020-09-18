@@ -7,7 +7,8 @@
         d:DesignHeight="768" d:DesignWidth="1366" MinHeight="768" MinWidth="1366"
         Height="768" Width="1366"
         Title="后台管理程序" WindowStartupLocation="CenterScreen"
-        AllowsTransparency="True" WindowStyle="None" BorderThickness="7">
+        AllowsTransparency="True" WindowStyle="None" BorderThickness="7"
+        Closing="Client_OnClosing">
     <Window.Effect>
         <DropShadowEffect ShadowDepth="1" BlurRadius="6" Direction="270" Opacity="0.8"/>
     </Window.Effect>

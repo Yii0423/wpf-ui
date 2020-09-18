@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Runtime.InteropServices;
 using System.Windows;
 using System.Windows.Controls;
@@ -59,6 +60,14 @@ namespace wpf_ui
         {
             InitData();
             SetFrameWidth();
+        }
+
+        /// <summary>
+        /// 关闭时结束一切子进程
+        /// </summary>
+        private void Client_OnClosing(object sender, CancelEventArgs e)
+        {
+            Environment.Exit(0);
         }
 
         /// <summary>
@@ -170,7 +179,9 @@ namespace wpf_ui
         /// </summary>
         private void MainWindow_StateChanged(object sender, EventArgs e)
         {
-            BorderThickness = WindowState == WindowState.Maximized ? new Thickness(0) : new Thickness(CustomBorderThickness);
+            BorderThickness = WindowState == WindowState.Maximized
+                ? new Thickness(0)
+                : new Thickness(CustomBorderThickness);
         }
 
         /// <summary>
@@ -184,7 +195,8 @@ namespace wpf_ui
             }
             else
             {
-                if (!(e.OriginalSource is Grid) && !(e.OriginalSource is Border) && !(e.OriginalSource is Window)) return;
+                if (!(e.OriginalSource is Grid) && !(e.OriginalSource is Border) &&
+                    !(e.OriginalSource is Window)) return;
                 WindowInteropHelper wih = new WindowInteropHelper(this);
                 Win32.SendMessage(wih.Handle, Win32.WM_NCLBUTTONDOWN, (int)Win32.HitTest.HTCAPTION, 0);
             }
@@ -228,6 +240,7 @@ namespace wpf_ui
                 case Win32.WM_NCHITTEST: // WM_NCHITTEST message
                     return WmNcHitTest(lParam, ref handled);
             }
+
             return IntPtr.Zero;
         }
 
@@ -244,41 +257,56 @@ namespace wpf_ui
             handled = true;
             if (Math.Abs(_mousePoint.Y - Top) <= CornerWidth
                 && Math.Abs(_mousePoint.X - Left) <= CornerWidth)
-            { // Top-Left
+            {
+                // Top-Left
                 return new IntPtr((int)Win32.HitTest.HTTOPLEFT);
             }
 
             if (Math.Abs(ActualHeight + Top - _mousePoint.Y) <= CornerWidth
                 && Math.Abs(_mousePoint.X - Left) <= CornerWidth)
-            { // Bottom-Left
+            {
+                // Bottom-Left
                 return new IntPtr((int)Win32.HitTest.HTBOTTOMLEFT);
             }
+
             if (Math.Abs(_mousePoint.Y - Top) <= CornerWidth
                 && Math.Abs(ActualWidth + Left - _mousePoint.X) <= CornerWidth)
-            { // Top-Right
+            {
+                // Top-Right
                 return new IntPtr((int)Win32.HitTest.HTTOPRIGHT);
             }
+
             if (Math.Abs(ActualWidth + Left - _mousePoint.X) <= CornerWidth
                 && Math.Abs(ActualHeight + Top - _mousePoint.Y) <= CornerWidth)
-            { // Bottom-Right
+            {
+                // Bottom-Right
                 return new IntPtr((int)Win32.HitTest.HTBOTTOMRIGHT);
             }
+
             if (Math.Abs(_mousePoint.X - Left) <= CustomBorderThickness)
-            { // Left
+            {
+                // Left
                 return new IntPtr((int)Win32.HitTest.HTLEFT);
             }
+
             if (Math.Abs(ActualWidth + Left - _mousePoint.X) <= CustomBorderThickness)
-            { // Right
+            {
+                // Right
                 return new IntPtr((int)Win32.HitTest.HTRIGHT);
             }
+
             if (Math.Abs(_mousePoint.Y - Top) <= CustomBorderThickness)
-            { // Top
+            {
+                // Top
                 return new IntPtr((int)Win32.HitTest.HTTOP);
             }
+
             if (Math.Abs(ActualHeight + Top - _mousePoint.Y) <= CustomBorderThickness)
-            { // Bottom
+            {
+                // Bottom
                 return new IntPtr((int)Win32.HitTest.HTBOTTOM);
             }
+
             handled = false;
             return IntPtr.Zero;
         }
@@ -308,9 +336,9 @@ namespace wpf_ui
             // Convert working area
             Win32.RECT workingArea = monitorInfo.rcWork;
             Point dpiIndependentSize = matrix.Transform(new Point(
-                                            workingArea.Right - workingArea.Left,
-                                            workingArea.Bottom - workingArea.Top
-                                        ));
+                workingArea.Right - workingArea.Left,
+                workingArea.Bottom - workingArea.Top
+            ));
 
             // Convert minimum size
             Point dpiIndenpendentTrackingSize = matrix.Transform(new Point(MinWidth, MinHeight));

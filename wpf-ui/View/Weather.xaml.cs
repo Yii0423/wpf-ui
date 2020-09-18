@@ -22,6 +22,7 @@ namespace wpf_ui.View
         {
             if (!(SpForecast1H.DataContext is List<MWeather.MWeatherResultDataForecast1H> mWeatherResultDataForecast1Hs)
             ) return;
+            SpForecast1H.Children.Clear();
             mWeatherResultDataForecast1Hs.OrderBy(m => m.Update_Time.ToDateTime()).ToList().ForEach(m =>
             {
                 SpForecast1H.Children.Add(new UcForecast1H { DataContext = m });
@@ -32,10 +33,21 @@ namespace wpf_ui.View
         {
             if (!(SpForecast24H.DataContext is List<MWeather.MWeatherResultDataForecast24H> mWeatherResultDataForecast24Hs)
             ) return;
+            SpForecast24H.Children.Clear();
             mWeatherResultDataForecast24Hs.OrderBy(m => m.Time.ToDateTime()).ToList().ForEach(m =>
             {
                 SpForecast24H.Children.Add(new UcForecast24H { DataContext = m });
             });
+        }
+
+        private void BtnProvince_OnClick(object sender, RoutedEventArgs e)
+        {
+            PopupProvince.IsOpen = true;
+        }
+
+        private void BtnCity_OnClick(object sender, RoutedEventArgs e)
+        {
+            PopupCity.IsOpen = true;
         }
     }
 }

@@ -114,6 +114,7 @@
     <Compile Include="Extends\Ucs\UcTab.xaml.cs">
       <DependentUpon>UcTab.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Model\MAddress.cs" />
     <Compile Include="Model\MMenuItem.cs" />
     <Compile Include="Model\MOpen.cs" />
     <Compile Include="Model\MTableSort.cs" />

@@ -3,6 +3,7 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:diy="clr-namespace:wpf_ui.Extends.DiyControls"
       xmlns:converter="clr-namespace:wpf_ui.Extends.Converters.StringConverters"
       xmlns:converter2="clr-namespace:wpf_ui.Extends.Converters.NumberConverters"
       mc:Ignorable="d" d:DesignWidth="1600" Background="#FFF6F9FE"
@@ -20,14 +21,56 @@
                     <Label.Content>
                         <StackPanel Orientation="Horizontal">
                             <Path Style="{StaticResource Icon}" Data="{StaticResource Icon-Map-Marker}"/>
-                            <TextBlock>
-                                <TextBlock.Text>
-                                    <MultiBinding StringFormat="{} {0} {1}">
-                                        <Binding Path="Province"/>
-                                        <Binding Path="City"/>
-                                    </MultiBinding>
-                                </TextBlock.Text>
-                            </TextBlock>
+                            <diy:DiyButton x:Name="BtnProvince" Style="{StaticResource BtnPrimary}" Content="{Binding Province}"
+                                           Margin="5,0,0,0" Background="Transparent" BorderThickness="0" Foreground="White"
+                                           Click="BtnProvince_OnClick"/>
+                            <Popup x:Name="PopupProvince" Placement="Bottom" PlacementTarget="{Binding ElementName=BtnProvince}"
+                                   AllowsTransparency="True" StaysOpen="False">
+                                <diy:DiyPopup ShowPlace="Bottom" Background="White">
+                                    <ListView ItemsSource="{Binding Provinces}" ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                                              BorderThickness="0">
+                                        <ListView.ItemTemplate>
+                                            <DataTemplate>
+                                                <diy:DiyButton Style="{StaticResource BtnHyperlink}" Content="{Binding Name}" Margin="2.5"
+                                                               Command="{Binding DataContext.LoadChildAddresses, 
+                                                                                 RelativeSource={RelativeSource Mode=FindAncestor,
+                                                                                 AncestorType={x:Type Page}}}"
+                                                               CommandParameter="{Binding Id}"/>
+                                            </DataTemplate>
+                                        </ListView.ItemTemplate>
+                                        <ListView.ItemsPanel>
+                                            <ItemsPanelTemplate>
+                                                <WrapPanel MaxWidth="280"/>
+                                            </ItemsPanelTemplate>
+                                        </ListView.ItemsPanel>
+                                    </ListView>
+                                </diy:DiyPopup>
+                            </Popup>
+                            <diy:DiyButton x:Name="BtnCity" Style="{StaticResource BtnPrimary}" Content="{Binding City}" 
+                                           Margin="5,0,0,0" Background="Transparent" BorderThickness="0" Foreground="White"
+                                           Click="BtnCity_OnClick"/>
+                            <Popup x:Name="PopupCity" Placement="Bottom" PlacementTarget="{Binding ElementName=BtnCity}"
+                                   AllowsTransparency="True" StaysOpen="False">
+                                <diy:DiyPopup ShowPlace="Bottom" Background="White">
+                                    <ListView ItemsSource="{Binding Cities}" ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                                              BorderThickness="0">
+                                        <ListView.ItemTemplate>
+                                            <DataTemplate>
+                                                <diy:DiyButton Style="{StaticResource BtnHyperlink}" Content="{Binding Name}" Margin="2.5"
+                                                               Command="{Binding DataContext.CityForWeather, 
+                                                                                 RelativeSource={RelativeSource Mode=FindAncestor,
+                                                                                 AncestorType={x:Type Page}}}"
+                                                               CommandParameter="{Binding Id}"/>
+                                            </DataTemplate>
+                                        </ListView.ItemTemplate>
+                                        <ListView.ItemsPanel>
+                                            <ItemsPanelTemplate>
+                                                <WrapPanel MaxWidth="280"/>
+                                            </ItemsPanelTemplate>
+                                        </ListView.ItemsPanel>
+                                    </ListView>
+                                </diy:DiyPopup>
+                            </Popup>
                         </StackPanel>
                     </Label.Content>
                 </Label>
@@ -47,7 +90,7 @@
                     <Label Margin="0,0,0,0" Foreground="White">
                         <Label.Content>
                             <StackPanel Orientation="Horizontal">
-                                <Path Style="{StaticResource Icon}" Data="{StaticResource Icon-Location-Arrow}">
+                                <Path Style="{StaticResource Icon}" Data="{StaticResource Icon-Location-Arrow}" Margin="0,4,0,0">
                                     <Path.RenderTransform>
                                         <TransformGroup>
                                             <ScaleTransform ScaleY="-1"/>

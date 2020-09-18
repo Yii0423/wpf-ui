@@ -28,7 +28,7 @@
                                 <DropShadowEffect ShadowDepth="0" BlurRadius="3" Color="Black" Opacity="0.8"/>
                             </StackPanel.Effect>
                             <Border MinWidth="12" MinHeight="12" Background="{TemplateBinding Background}" CornerRadius="{TemplateBinding CornerRadius}">
-                                <ScrollViewer MaxWidth="300" MaxHeight="200" Style="{DynamicResource ForScrollviewer}">
+                                <ScrollViewer MaxWidth="300" MaxHeight="250" Style="{DynamicResource ForScrollviewer}">
                                     <ContentPresenter Margin="5" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" 
                                                   VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
                                 </ScrollViewer>
@@ -40,7 +40,7 @@
                                 <DropShadowEffect ShadowDepth="0" BlurRadius="3" Color="Black" Opacity="0.8"/>
                             </StackPanel.Effect>
                             <Border MinWidth="12" MinHeight="12" Background="{TemplateBinding Background}" CornerRadius="{TemplateBinding CornerRadius}">
-                                <ScrollViewer MaxWidth="300" MaxHeight="200" Style="{DynamicResource ForScrollviewer}">
+                                <ScrollViewer MaxWidth="300" MaxHeight="250" Style="{DynamicResource ForScrollviewer}">
                                     <ContentPresenter Margin="5" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" 
                                                       VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
                                 </ScrollViewer>
@@ -53,7 +53,7 @@
                             </StackPanel.Effect>
                             <Path Fill="{TemplateBinding Background}" Data="M 6,0 L 0,5 6,10 6,0" Margin="0,5,0,0"/>
                             <Border MinWidth="12" MinHeight="12" Background="{TemplateBinding Background}" CornerRadius="{TemplateBinding CornerRadius}">
-                                <ScrollViewer MaxWidth="300" MaxHeight="200" Style="{DynamicResource ForScrollviewer}">
+                                <ScrollViewer MaxWidth="300" MaxHeight="250" Style="{DynamicResource ForScrollviewer}">
                                     <ContentPresenter Margin="5" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" 
                                                       VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
                                 </ScrollViewer>
@@ -65,7 +65,7 @@
                             </StackPanel.Effect>
                             <Path Fill="{TemplateBinding Background}" Data="M 0,6 L 5,0 10,6 0,6" Margin="5,0,0,0"/>
                             <Border MinWidth="12" MinHeight="12" Background="{TemplateBinding Background}" CornerRadius="{TemplateBinding CornerRadius}">
-                                <ScrollViewer MaxWidth="300" MaxHeight="200" Style="{DynamicResource ForScrollviewer}">
+                                <ScrollViewer MaxWidth="300" MaxHeight="250" Style="{DynamicResource ForScrollviewer}">
                                     <ContentPresenter Margin="5" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" 
                                                       VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
                                 </ScrollViewer>
