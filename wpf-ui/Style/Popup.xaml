@@ -19,6 +19,7 @@
         <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
         <Setter Property="SnapsToDevicePixels" Value="True"/>
         <Setter Property="UseLayoutRounding" Value="True"/>
+        <Setter Property="Padding" Value="5"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type diy:DiyPopup}">
@@ -29,8 +30,9 @@
                             </StackPanel.Effect>
                             <Border MinWidth="12" MinHeight="12" Background="{TemplateBinding Background}" CornerRadius="{TemplateBinding CornerRadius}">
                                 <ScrollViewer MaxWidth="300" MaxHeight="250" Style="{DynamicResource ForScrollviewer}">
-                                    <ContentPresenter Margin="5" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" 
-                                                  VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                                    <ContentPresenter Margin="{TemplateBinding Padding}" 
+                                                      HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" 
+                                                      VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
                                 </ScrollViewer>
                             </Border>
                             <Path Fill="{TemplateBinding Background}" Data="M 0,0 L 10,0 5,6 0,0" Margin="5,0,0,0"/>
@@ -41,7 +43,8 @@
                             </StackPanel.Effect>
                             <Border MinWidth="12" MinHeight="12" Background="{TemplateBinding Background}" CornerRadius="{TemplateBinding CornerRadius}">
                                 <ScrollViewer MaxWidth="300" MaxHeight="250" Style="{DynamicResource ForScrollviewer}">
-                                    <ContentPresenter Margin="5" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" 
+                                    <ContentPresenter Margin="{TemplateBinding Padding}" 
+                                                      HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" 
                                                       VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
                                 </ScrollViewer>
                             </Border>
@@ -54,7 +57,8 @@
                             <Path Fill="{TemplateBinding Background}" Data="M 6,0 L 0,5 6,10 6,0" Margin="0,5,0,0"/>
                             <Border MinWidth="12" MinHeight="12" Background="{TemplateBinding Background}" CornerRadius="{TemplateBinding CornerRadius}">
                                 <ScrollViewer MaxWidth="300" MaxHeight="250" Style="{DynamicResource ForScrollviewer}">
-                                    <ContentPresenter Margin="5" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" 
+                                    <ContentPresenter Margin="{TemplateBinding Padding}" 
+                                                      HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" 
                                                       VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
                                 </ScrollViewer>
                             </Border>
@@ -66,7 +70,8 @@
                             <Path Fill="{TemplateBinding Background}" Data="M 0,6 L 5,0 10,6 0,6" Margin="5,0,0,0"/>
                             <Border MinWidth="12" MinHeight="12" Background="{TemplateBinding Background}" CornerRadius="{TemplateBinding CornerRadius}">
                                 <ScrollViewer MaxWidth="300" MaxHeight="250" Style="{DynamicResource ForScrollviewer}">
-                                    <ContentPresenter Margin="5" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" 
+                                    <ContentPresenter Margin="{TemplateBinding Padding}" 
+                                                      HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" 
                                                       VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
                                 </ScrollViewer>
                             </Border>

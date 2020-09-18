@@ -84,6 +84,39 @@ namespace wpf_ui.ViewModel
             set => Set("Weather", ref _weather, value);
         }
 
+        private string _tip;
+
+        /// <summary>
+        /// 提示
+        /// </summary>
+        public string Tip
+        {
+            get => _tip;
+            set => Set("Tip", ref _tip, value);
+        }
+
+        private bool _popup1IsOpen;
+
+        /// <summary>
+        /// 省份Popup开关
+        /// </summary>
+        public bool Popup1IsOpen
+        {
+            get => _popup1IsOpen;
+            set => Set("Popup1IsOpen", ref _popup1IsOpen, value);
+        }
+
+        private bool _popup2IsOpen;
+
+        /// <summary>
+        /// 市级Popup开关
+        /// </summary>
+        public bool Popup2IsOpen
+        {
+            get => _popup2IsOpen;
+            set => Set("Popup2IsOpen", ref _popup2IsOpen, value);
+        }
+
         /// <summary>
         /// 构造方法
         /// </summary>
@@ -136,6 +169,8 @@ namespace wpf_ui.ViewModel
                     for (int i = 0; i <= 50; i++) result = result.Replace($"\"{i}\":", "");
                     result = result.Replace("}}}", "]}}");
                     Weather = Newtonsoft.Json.JsonConvert.DeserializeObject<MWeather.MWeatherResult>(result);
+                    Tip = Weather.Data.Tips.Observe.FirstOrDefault();
+                    _tipIndex = 0;
                 }
                 catch (Exception)
                 {
@@ -156,6 +191,27 @@ namespace wpf_ui.ViewModel
             return Newtonsoft.Json.JsonConvert.DeserializeObject<List<MAddress>>(result);
         }
 
+        private RelayCommand<string> _openPopup;
+
+        public RelayCommand<string> OpenPopup
+        {
+            get
+            {
+                return _openPopup ?? (_openPopup = new RelayCommand<string>(index =>
+                {
+                    switch (index)
+                    {
+                        case "1":
+                            Popup1IsOpen = true;
+                            break;
+                        case "2":
+                            Popup2IsOpen = true;
+                            break;
+                    }
+                }));
+            }
+        }
+
         private RelayCommand<int> _loadChildAddresses;
 
         public RelayCommand<int> LoadChildAddresses
@@ -169,6 +225,7 @@ namespace wpf_ui.ViewModel
                     Cities = GetAddresses(id);
                     if (Cities == null || !Cities.Any()) return;
                     City = Cities.First().Name;
+                    Popup1IsOpen = false;
                 }));
             }
         }
@@ -182,6 +239,24 @@ namespace wpf_ui.ViewModel
                 return _cityForWeather ?? (_cityForWeather = new RelayCommand<int>(id =>
                 {
                     City = Cities.FirstOrDefault(m => m.Id == id)?.Name;
+                    Popup2IsOpen = false;
+                }));
+            }
+        }
+
+        private int _tipIndex;
+        private RelayCommand _changeTips;
+
+        public RelayCommand ChangeTips
+        {
+            get
+            {
+                return _changeTips ?? (_changeTips = new RelayCommand(() =>
+                {
+                    _tipIndex++;
+                    List<string> tips = Weather.Data.Tips.Observe;
+                    if (_tipIndex >= tips.Count) _tipIndex = 0;
+                    Tip = tips[_tipIndex];
                 }));
             }
         }

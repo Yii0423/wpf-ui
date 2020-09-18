@@ -90,7 +90,9 @@
     </ApplicationDefinition>
     <Compile Include="Extends\Common\Alter.cs" />
     <Compile Include="Extends\Common\Animate.cs" />
+    <Compile Include="Extends\Converters\NumberConverters\WeatherAqiColorConverters.cs" />
     <Compile Include="Extends\Converters\NumberConverters\WeatherWindDirectionAngleConverters.cs" />
+    <Compile Include="Extends\Converters\StringConverters\WeatherAlarmColorConverters.cs" />
     <Compile Include="Extends\Converters\StringConverters\WeatherImagePathConverters.cs" />
     <Compile Include="Extends\Converters\StringConverters\WeatherTimeForChineseConverters.cs" />
     <Compile Include="Extends\Converters\StringConverters\WeatherUpdateTimeConverters.cs" />
@@ -107,6 +109,9 @@
     </Compile>
     <Compile Include="Extends\Ucs\UcForecast1H.xaml.cs">
       <DependentUpon>UcForecast1H.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Extends\Ucs\UcLifeIndex.xaml.cs">
+      <DependentUpon>UcLifeIndex.xaml</DependentUpon>
     </Compile>
     <Compile Include="Extends\Ucs\UcPagination.xaml.cs">
       <DependentUpon>UcPagination.xaml</DependentUpon>
@@ -155,6 +160,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Extends\Ucs\UcForecast1H.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Extends\Ucs\UcLifeIndex.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -350,6 +359,28 @@
     <Resource Include="Content\Images\weather\雷阵雨.png" />
     <Resource Include="Content\Images\weather\雷阵雨并伴有冰雹.png" />
     <Resource Include="Content\Images\weather\雾.png" />
+    <Resource Include="Content\Images\indexes\穿衣.png" />
+    <Resource Include="Content\Images\indexes\空调开启.png" />
+    <Resource Include="Content\Images\indexes\中暑.png" />
+    <Resource Include="Content\Images\indexes\交通.png" />
+    <Resource Include="Content\Images\indexes\化妆.png" />
+    <Resource Include="Content\Images\indexes\太阳镜.png" />
+    <Resource Include="Content\Images\indexes\心情.png" />
+    <Resource Include="Content\Images\indexes\感冒.png" />
+    <Resource Include="Content\Images\indexes\旅游.png" />
+    <Resource Include="Content\Images\indexes\晨练.png" />
+    <Resource Include="Content\Images\indexes\晾晒.png" />
+    <Resource Include="Content\Images\indexes\洗车.png" />
+    <Resource Include="Content\Images\indexes\空气污染扩散条件.png" />
+    <Resource Include="Content\Images\indexes\紫外线强度.png" />
+    <Resource Include="Content\Images\indexes\舒适度.png" />
+    <Resource Include="Content\Images\indexes\路况.png" />
+    <Resource Include="Content\Images\indexes\过敏.png" />
+    <Resource Include="Content\Images\indexes\运动.png" />
+    <Resource Include="Content\Images\indexes\钓鱼.png" />
+    <Resource Include="Content\Images\indexes\防晒.png" />
+    <Resource Include="Content\Images\indexes\雨伞.png" />
+    <Resource Include="Content\Images\indexes\风寒.png" />
     <Content Include="Extends\Dlls\Microsoft.Expression.Drawing.dll" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

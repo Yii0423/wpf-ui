@@ -13,23 +13,23 @@ namespace wpf_ui.Extends.Converters.NumberConverters
             switch ((Model.MWeather.WindDirection)value)
             {
                 case MWeather.WindDirection.北:
-                    return -45;
+                    return -45 + 180;
                 case MWeather.WindDirection.东北:
-                    return 0;
+                    return 0 + 180;
                 case MWeather.WindDirection.东:
-                    return 45;
+                    return 45 + 180;
                 case MWeather.WindDirection.东南:
-                    return 90;
+                    return 90 + 180;
                 case MWeather.WindDirection.南:
-                    return 135;
+                    return 135 + 180;
                 case MWeather.WindDirection.西南:
-                    return 180;
+                    return 180 + 180;
                 case MWeather.WindDirection.西:
-                    return 225;
+                    return 225 + 180;
                 case MWeather.WindDirection.西北:
-                    return 270;
+                    return 270 + 180;
                 default:
-                    return -45;
+                    return -45 + 180;
             }
         }
 

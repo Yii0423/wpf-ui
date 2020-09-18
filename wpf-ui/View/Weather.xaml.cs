@@ -2,7 +2,9 @@
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
 using wpf_ui.Extends.Common;
+using wpf_ui.Extends.DiyControls;
 using wpf_ui.Extends.Ucs;
 using wpf_ui.Model;
 
@@ -40,14 +42,16 @@ namespace wpf_ui.View
             });
         }
 
-        private void BtnProvince_OnClick(object sender, RoutedEventArgs e)
+        private void BtnAqi_OnClick(object sender, RoutedEventArgs e)
         {
-            PopupProvince.IsOpen = true;
+            PopupAqi.IsOpen = true;
         }
 
-        private void BtnCity_OnClick(object sender, RoutedEventArgs e)
+        private void AlarmButtonBase_OnClick(object sender, RoutedEventArgs e)
         {
-            PopupCity.IsOpen = true;
+            if (!(sender is DiyButton diyButton) || !(diyButton.FindChild<Popup>() is Popup popup)) return;
+            popup.PlacementTarget = diyButton;
+            popup.IsOpen = true;
         }
     }
 }
