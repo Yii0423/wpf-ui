@@ -31,7 +31,7 @@ namespace wpf_ui.Extends.Common
         public static void Msg(object content, FrameworkElement frameworkElement = null, double time = 3)
         {
             if (string.IsNullOrWhiteSpace(content.ToStringEx())) return;
-            if (frameworkElement == null) frameworkElement = Client.MainWindow;
+            if (frameworkElement == null) frameworkElement = Application.Current.MainWindow;
             Grid parentGrid = frameworkElement.FindChild<Grid>();
             if (parentGrid == null) return;
             if (_msgLabel != null) parentGrid.Children.Remove(_msgLabel);

@@ -7,7 +7,6 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Interop;
 using System.Windows.Media;
-using System.Windows.Navigation;
 using wpf_ui.Extends.Common;
 using wpf_ui.Model;
 
@@ -18,11 +17,6 @@ namespace wpf_ui
     /// </summary>
     public partial class Client : Window
     {
-        /// <summary>
-        /// 主窗体
-        /// </summary>
-        public static Window MainWindow;
-
         /// <summary>
         /// 遮罩层
         /// </summary>
@@ -75,8 +69,6 @@ namespace wpf_ui
         /// </summary>
         private void InitData()
         {
-            //主窗体赋值
-            MainWindow = this;
             //遮罩赋值
             MainShade = BorderShade;
             //设置Frame的Z-Index(避免遮挡菜单)

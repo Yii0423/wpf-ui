@@ -1,5 +1,4 @@
 ﻿using System.ComponentModel;
-using System.Security.Policy;
 using System.Windows;
 using System.Windows.Input;
 using wpf_ui.Extends.Common;
@@ -30,7 +29,7 @@ namespace wpf_ui.View.Alters
         {
             InitializeComponent();
             //设定父窗体
-            Owner = Client.MainWindow;
+            Owner = Application.Current.MainWindow;
         }
 
         /// <summary>

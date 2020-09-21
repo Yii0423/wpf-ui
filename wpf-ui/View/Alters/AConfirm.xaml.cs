@@ -36,7 +36,7 @@ namespace wpf_ui.View.Alters
         {
             InitializeComponent();
             //设定父窗体
-            Owner = Client.MainWindow;
+            Owner = Application.Current.MainWindow;
         }
 
         /// <summary>

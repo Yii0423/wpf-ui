@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using GalaSoft.MvvmLight.Command;
+using GalaSoft.MvvmLight.Messaging;
 using wpf_ui.Extends.Common;
 using wpf_ui.Model;
 
@@ -143,6 +144,7 @@ namespace wpf_ui.ViewModel
         /// </summary>
         private void LoadWeather()
         {
+            Messenger.Default.Send("");
             new Thread(() =>
             {
                 try
