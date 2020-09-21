@@ -191,13 +191,11 @@ namespace wpf_ui.ViewModel
             return Newtonsoft.Json.JsonConvert.DeserializeObject<List<MAddress>>(result);
         }
 
-        private RelayCommand<string> _openPopup;
-
         public RelayCommand<string> OpenPopup
         {
             get
             {
-                return _openPopup ?? (_openPopup = new RelayCommand<string>(index =>
+                return new RelayCommand<string>(index =>
                 {
                     switch (index)
                     {
@@ -208,56 +206,50 @@ namespace wpf_ui.ViewModel
                             Popup2IsOpen = true;
                             break;
                     }
-                }));
+                });
             }
         }
-
-        private RelayCommand<int> _loadChildAddresses;
 
         public RelayCommand<int> LoadChildAddresses
         {
             get
             {
-                return _loadChildAddresses ?? (_loadChildAddresses = new RelayCommand<int>(id =>
-                {
-                    Province = Provinces.FirstOrDefault(m => m.Id == id)?.Name;
-                    if (string.IsNullOrWhiteSpace(Province)) return;
-                    Cities = GetAddresses(id);
-                    if (Cities == null || !Cities.Any()) return;
-                    City = Cities.First().Name;
-                    Popup1IsOpen = false;
-                }));
+                return new RelayCommand<int>(id =>
+               {
+                   Province = Provinces.FirstOrDefault(m => m.Id == id)?.Name;
+                   if (string.IsNullOrWhiteSpace(Province)) return;
+                   Cities = GetAddresses(id);
+                   if (Cities == null || !Cities.Any()) return;
+                   City = Cities.First().Name;
+                   Popup1IsOpen = false;
+               });
             }
         }
-
-        private RelayCommand<int> _cityForWeather;
 
         public RelayCommand<int> CityForWeather
         {
             get
             {
-                return _cityForWeather ?? (_cityForWeather = new RelayCommand<int>(id =>
-                {
-                    City = Cities.FirstOrDefault(m => m.Id == id)?.Name;
-                    Popup2IsOpen = false;
-                }));
+                return new RelayCommand<int>(id =>
+               {
+                   City = Cities.FirstOrDefault(m => m.Id == id)?.Name;
+                   Popup2IsOpen = false;
+               });
             }
         }
 
         private int _tipIndex;
-        private RelayCommand _changeTips;
-
         public RelayCommand ChangeTips
         {
             get
             {
-                return _changeTips ?? (_changeTips = new RelayCommand(() =>
+                return new RelayCommand(() =>
                 {
                     _tipIndex++;
                     List<string> tips = Weather.Data.Tips.Observe;
                     if (_tipIndex >= tips.Count) _tipIndex = 0;
                     Tip = tips[_tipIndex];
-                }));
+                });
             }
         }
     }
