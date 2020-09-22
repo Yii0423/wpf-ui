@@ -15,7 +15,7 @@ namespace wpf_ui.ViewModel
     /// </summary>
     public class WeatherViewModel : ViewModelBase
     {
-        private string _province = "浙江";
+        private string _province;
 
         /// <summary>
         /// 省
@@ -26,7 +26,7 @@ namespace wpf_ui.ViewModel
             set => Set("Province", ref _province, value);
         }
 
-        private string _city = "杭州";
+        private string _city;
 
         /// <summary>
         /// 市

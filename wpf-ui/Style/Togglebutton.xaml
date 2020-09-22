@@ -66,13 +66,13 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type CheckBox}">
-                    <StackPanel Orientation="Horizontal">
+                    <StackPanel Orientation="Horizontal" Background="Transparent">
                         <Border x:Name="bd" BorderThickness="1" Background="Transparent" Width="18" Height="18" BorderBrush="{StaticResource BrushCold}">
                             <Grid>
                                 <Path x:Name="path" Style="{DynamicResource Icon}" Data="{DynamicResource Icon-Ok}" Visibility="Collapsed"
-                                  Fill="{StaticResource BrushCold}"/>
+                                      Fill="{StaticResource BrushCold}"/>
                                 <Path x:Name="path2" Style="{DynamicResource Icon}" Data="{DynamicResource Icon-Stop}" Visibility="Collapsed"
-                                  Fill="{StaticResource BrushCold}"/>
+                                      Fill="{StaticResource BrushCold}"/>
                             </Grid>
                         </Border>
                         <ContentPresenter VerticalAlignment="Center" Margin="3,0,0,0"/>
@@ -83,8 +83,8 @@
                                 <Condition Property="IsChecked" Value="True"/>
                             </MultiTrigger.Conditions>
                             <MultiTrigger.Setters>
-                                <Setter TargetName="bd" Property="BorderBrush" Value="{StaticResource BrushChecked}"/>
-                                <Setter TargetName="path" Property="Fill" Value="{StaticResource BrushChecked}"/>
+                                <!--<Setter TargetName="bd" Property="BorderBrush" Value="{StaticResource BrushChecked}"/>
+                                <Setter TargetName="path" Property="Fill" Value="{StaticResource BrushChecked}"/>-->
                                 <Setter TargetName="path" Property="Visibility" Value="Visible"/>
                             </MultiTrigger.Setters>
                         </MultiTrigger>
@@ -93,7 +93,7 @@
                                 <Condition Property="IsChecked" Value="{x:Null}"/>
                             </MultiTrigger.Conditions>
                             <MultiTrigger.Setters>
-                                <Setter TargetName="bd" Property="BorderBrush" Value="{StaticResource BrushChecked}"/>
+                                <!--<Setter TargetName="bd" Property="BorderBrush" Value="{StaticResource BrushChecked}"/>-->
                                 <Setter TargetName="path2" Property="Visibility" Value="Visible"/>
                             </MultiTrigger.Setters>
                         </MultiTrigger>
@@ -102,7 +102,7 @@
                                 <Condition Property="IsMouseOver" Value="True"/>
                             </MultiTrigger.Conditions>
                             <MultiTrigger.Setters>
-                                <Setter TargetName="bd" Property="BorderBrush" Value="{StaticResource BrushChecked}"/>
+                                <Setter TargetName="bd" Property="Opacity" Value="0.8"/>
                             </MultiTrigger.Setters>
                         </MultiTrigger>
                     </ControlTemplate.Triggers>

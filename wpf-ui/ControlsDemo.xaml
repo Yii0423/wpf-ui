@@ -1,0 +1,18 @@
+﻿<Window xmlns:diy="clr-namespace:wpf_ui.Extends.DiyControls"  x:Class="wpf_ui.ControlsDemo"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" Title="Window1" Height="450" Width="800"
+        WindowStartupLocation="CenterScreen" Loaded="Window1_OnLoaded">
+    <Grid>
+        <diy:DiyMultiCombobox x:Name="MultiCombobox1" Margin="10,10,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="250"
+                              Style="{StaticResource MultiCombobox}"/>
+        <diy:DiyProgressbar HorizontalAlignment="Left" Height="60" Margin="10,45,0,0" VerticalAlignment="Top" Width="60"
+                            Value="66" Style="{StaticResource PbCircular}" CircularWeight="10" ShowMode="In"/>
+        <CheckBox Content="置顶" HorizontalAlignment="Left" Margin="265,10,0,0" VerticalAlignment="Top" Height="30"
+                  Style="{StaticResource CkbSpecial}"/>
+        <CheckBox HorizontalAlignment="Left" Margin="325,10,0,0" VerticalAlignment="Top" Height="30"
+                  Style="{StaticResource CkbOnOff}"/>
+    </Grid>
+</Window>

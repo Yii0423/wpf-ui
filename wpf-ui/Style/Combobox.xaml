@@ -113,21 +113,108 @@
                             <ColumnDefinition Width="3*" MaxWidth="30"/>
                         </Grid.ColumnDefinitions>
                         <diy:DiyTextbox Text="{TemplateBinding Text}" Style="{DynamicResource TbDefault}" BorderThickness="0"/>
-                        <Border x:Name="bd1" BorderThickness="1,1,0,1" BorderBrush="{StaticResource BrushCold}"/>
+                        <Border Grid.Column="0" x:Name="bd1" BorderThickness="1,1,0,1" BorderBrush="{StaticResource BrushCold}"/>
                         <Border x:Name="bd2" Grid.Column="1" BorderThickness="0,1,1,1" BorderBrush="{StaticResource BrushCold}">
                             <ToggleButton ClickMode="Press" Style="{StaticResource TgbPrimary}" 
                                           IsChecked="{Binding Path=IsDropDownOpen, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}"/>
                         </Border>
-                        <Popup x:Name="Popup" IsOpen="{TemplateBinding IsDropDownOpen}" Placement="Bottom" Focusable="False" 
+                        <Popup Grid.Column="0" x:Name="Popup" IsOpen="{TemplateBinding IsDropDownOpen}" Placement="Bottom" Focusable="False" 
                                AllowsTransparency="True" PopupAnimation="Fade">
                             <Border x:Name="DropDown" MaxHeight="{TemplateBinding MaxDropDownHeight}" MinWidth="{TemplateBinding ActualWidth}" SnapsToDevicePixels="True">
                                 <Border.Effect>
                                     <DropShadowEffect ShadowDepth="0" BlurRadius="3" Color="Black" Opacity="0.8"/>
                                 </Border.Effect>
                                 <ScrollViewer Margin="1,3,1,1" Style="{DynamicResource ForScrollviewer}" MaxHeight="{TemplateBinding MaxDropDownHeight}" 
-                                              SnapsToDevicePixels="True" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" CanContentScroll="True">
+                                              CanContentScroll="True">
                                     <!-- StackPanel 用于显示子级，方法是将 IsItemsHost 设置为 True -->
                                     <StackPanel IsItemsHost="True" KeyboardNavigation.DirectionalNavigation="Contained" Background="White"/>
+                                </ScrollViewer>
+                            </Border>
+                        </Popup>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsMouseOver" Value="True"/>
+                            </MultiTrigger.Conditions>
+                            <MultiTrigger.Setters>
+                                <Setter TargetName="bd1" Property="BorderBrush" Value="{DynamicResource BrushChecked}"/>
+                                <Setter TargetName="bd2" Property="BorderBrush" Value="{DynamicResource BrushChecked}"/>
+                            </MultiTrigger.Setters>
+                        </MultiTrigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- 多选下拉框 -->
+    <Style x:Key="MultiCombobox" TargetType="{x:Type diy:DiyMultiCombobox}">
+        <Setter Property="Cursor" Value="Hand"/>
+        <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+        <Setter Property="SnapsToDevicePixels" Value="True"/>
+        <Setter Property="Height" Value="30"/>
+        <Setter Property="MaxDropDownHeight" Value="300"/>
+        <Setter Property="ItemContainerStyle">
+            <Setter.Value>
+                <!-- ListBoxItem -->
+                <Style TargetType="ListBoxItem">
+                    <Setter Property="MinHeight" Value="30"/>
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="{x:Type ListBoxItem}">
+                                <Border x:Name="border" Background="Transparent" Cursor="Hand" Padding="5,0,0,0">
+                                    <CheckBox Height="30" IsChecked="{Binding Path=IsSelected,RelativeSource={RelativeSource TemplatedParent},Mode=TwoWay}">
+                                        <ContentPresenter ContentSource="{Binding Source}" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5,0,0,0"/>
+                                    </CheckBox>
+                                </Border>
+                                <ControlTemplate.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Foreground" Value="{StaticResource BrushPrimary}"/>
+                                        <Setter TargetName="border" Property="Background" Value="{StaticResource BrushChecked}"/>
+                                    </Trigger>
+                                    <Trigger Property="IsEnabled" Value="False">
+                                        <Setter Property="Foreground" Value="Gray"/>
+                                        <Setter Property="HorizontalAlignment" Value="Center"/>
+                                    </Trigger>
+                                </ControlTemplate.Triggers>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="Template">
+            <Setter.Value>
+                <!-- ComboBox -->
+                <ControlTemplate TargetType="{x:Type diy:DiyMultiCombobox}">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="7*"/>
+                            <ColumnDefinition Width="3*" MaxWidth="30"/>
+                        </Grid.ColumnDefinitions>
+                        <diy:DiyTextbox Text="{TemplateBinding Text}" Style="{DynamicResource TbDefault}" BorderThickness="0"
+                                        IsHitTestVisible="False"/>
+                        <Border Grid.Column="0" x:Name="bd1" BorderThickness="1,1,0,1" BorderBrush="{StaticResource BrushCold}"/>
+                        <Border x:Name="bd2" Grid.Column="1" BorderThickness="0,1,1,1" BorderBrush="{StaticResource BrushCold}">
+                            <ToggleButton ClickMode="Release" Style="{StaticResource TgbPrimary}" 
+                                          IsChecked="{Binding Path=IsDropDownOpen, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}"/>
+                        </Border>
+                        <Popup Grid.Column="0" x:Name="Popup" IsOpen="{TemplateBinding IsDropDownOpen}" Placement="Bottom" Focusable="False" 
+                               AllowsTransparency="True" PopupAnimation="Fade">
+                            <Border x:Name="DropDown" MaxHeight="{TemplateBinding MaxDropDownHeight}" MinWidth="{TemplateBinding ActualWidth}" 
+                                    SnapsToDevicePixels="True">
+                                <Border.Effect>
+                                    <DropShadowEffect ShadowDepth="0" BlurRadius="3" Color="Black" Opacity="0.8"/>
+                                </Border.Effect>
+                                <ScrollViewer Margin="1,3,1,1" Style="{DynamicResource ForScrollviewer}" MaxHeight="{TemplateBinding MaxDropDownHeight}" 
+                                              CanContentScroll="True">
+                                    <!-- StackPanel 用于显示子级，方法是将 IsItemsHost 设置为 True -->
+                                    <ListBox x:Name="PART_ListBox" SelectionMode="Multiple" BorderThickness="0"
+                                             ItemsSource="{Binding ItemsSource,RelativeSource={RelativeSource TemplatedParent}}"
+                                             DisplayMemberPath="Name" SelectedValuePath="Id"
+                                             ItemContainerStyle="{TemplateBinding ItemContainerStyle}"
+                                             MaxHeight="{TemplateBinding MaxDropDownHeight}"/>
                                 </ScrollViewer>
                             </Border>
                         </Popup>

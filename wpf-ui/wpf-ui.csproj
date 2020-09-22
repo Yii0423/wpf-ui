@@ -96,6 +96,7 @@
     <Compile Include="Extends\Converters\StringConverters\WeatherImagePathConverters.cs" />
     <Compile Include="Extends\Converters\StringConverters\WeatherTimeForChineseConverters.cs" />
     <Compile Include="Extends\Converters\StringConverters\WeatherUpdateTimeConverters.cs" />
+    <Compile Include="Extends\DiyControls\DiyMultiCombobox.cs" />
     <Compile Include="Extends\DiyControls\DiyRadioButton.cs" />
     <Compile Include="Extends\DiyControls\DiyTable.cs" />
     <Compile Include="Extends\Ucs\UcForecast24H.xaml.cs">
@@ -142,6 +143,9 @@
     </Compile>
     <Compile Include="View\Weather.xaml.cs">
       <DependentUpon>Weather.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ControlsDemo.xaml.cs">
+      <DependentUpon>ControlsDemo.xaml</DependentUpon>
     </Compile>
     <Page Include="Extends\Ucs\UcForecast24H.xaml">
       <SubType>Designer</SubType>
@@ -292,6 +296,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\Weather.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ControlsDemo.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
