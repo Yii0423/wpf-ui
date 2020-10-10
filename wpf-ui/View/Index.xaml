@@ -37,8 +37,8 @@
                             <diy:Td>
                                 <StackPanel Orientation="Horizontal">
                                     <Label Content="v1.4.0 pro"/>
-                                    <Button Content="日志" Style="{StaticResource BtnHyperlink}"/>
-                                    <Button Content="检查更新" Style="{StaticResource BtnHyperlink}"/>
+                                    <Button x:Name="BtnControlsDemo" Content="点击打开控件演示Demo" Style="{StaticResource BtnHyperlink}"
+                                            Click="BtnControlsDemo_OnClick"/>
                                 </StackPanel>
                             </diy:Td>
                         </diy:Tr>

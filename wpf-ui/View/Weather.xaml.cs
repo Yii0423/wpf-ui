@@ -3,6 +3,7 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
+using System.Windows.Input;
 using wpf_ui.Extends.Common;
 using wpf_ui.Extends.DiyControls;
 using wpf_ui.Extends.Ucs;
@@ -52,6 +53,23 @@ namespace wpf_ui.View
             if (!(sender is DiyButton diyButton) || !(diyButton.FindChild<Popup>() is Popup popup)) return;
             popup.PlacementTarget = diyButton;
             popup.IsOpen = true;
+        }
+
+        private void SpForecast1H_OnMouseWheel(object sender, MouseWheelEventArgs e)
+        {
+            if (!((sender as StackPanel)?.Parent is ScrollViewer scrollViewer)
+                || scrollViewer.VerticalScrollBarVisibility == ScrollBarVisibility.Visible) return;
+            scrollViewer.ScrollToVerticalOffset(scrollViewer.HorizontalOffset + 100);
+            if (e.Delta > 0)
+            {
+                scrollViewer.LineLeft();
+                scrollViewer.LineLeft();
+            }
+            else
+            {
+                scrollViewer.LineRight();
+                scrollViewer.LineRight();
+            }
         }
     }
 }

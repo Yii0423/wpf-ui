@@ -304,5 +304,11 @@ namespace wpf_ui.View
 我的故事还是关于你呀
 我的故事还是关于你呀");
         }
+
+        private void BtnControlsDemo_OnClick(object sender, RoutedEventArgs e)
+        {
+            ControlsDemo controlsDemo = new ControlsDemo();
+            controlsDemo.ShowDialog();
+        }
     }
 }

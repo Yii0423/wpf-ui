@@ -309,7 +309,8 @@
                     <ScrollViewer VerticalScrollBarVisibility="Hidden" Style="{StaticResource ForScrollviewer}" Padding="0,0,0,10">
                         <StackPanel x:Name="SpForecast1H" Orientation="Horizontal"
                                     DataContext="{Binding Weather.Data.Forecast_1H}" 
-                                    DataContextChanged="SpForecast1H_OnDataContextChanged"/>
+                                    DataContextChanged="SpForecast1H_OnDataContextChanged"
+                                    MouseWheel="SpForecast1H_OnMouseWheel"/>
                     </ScrollViewer>
                 </Grid>
             </Grid>
@@ -320,13 +321,11 @@
                     </Border.Effect>
                 </Border>
                 <Label Content="未来一周预报" VerticalAlignment="Top" Height="40" VerticalContentAlignment="Center" Padding="10,0,0,0"/>
-                <Grid Margin="0,40,0,0">
-                    <ScrollViewer VerticalScrollBarVisibility="Hidden" Style="{StaticResource ForScrollviewer}" Padding="0,0,0,10">
-                        <StackPanel x:Name="SpForecast24H" Orientation="Horizontal"
-                                    DataContext="{Binding Weather.Data.Forecast_24H}" 
-                                    DataContextChanged="SpForecast24H_OnDataContextChanged"/>
-                    </ScrollViewer>
-                </Grid>
+                <Border Margin="0,40,0,0" Padding="0,0,0,10">
+                    <StackPanel x:Name="SpForecast24H" Orientation="Horizontal"
+                                DataContext="{Binding Weather.Data.Forecast_24H}" 
+                                DataContextChanged="SpForecast24H_OnDataContextChanged"/>
+                </Border>
             </Grid>
             <Grid Height="200" Margin="10,1070,10,10" VerticalAlignment="Top">
                 <Border Background="{StaticResource BrushPrimary}">
@@ -337,7 +336,7 @@
                 <Label Content="生活指数" VerticalAlignment="Top" Height="40" VerticalContentAlignment="Center" Padding="10,0,0,0"/>
                 <Grid Margin="0,40,0,0">
                     <ScrollViewer VerticalScrollBarVisibility="Hidden" Style="{StaticResource ForScrollviewer}" Padding="0,0,0,10">
-                        <StackPanel Orientation="Horizontal">
+                        <StackPanel Orientation="Horizontal" MouseWheel="SpForecast1H_OnMouseWheel">
                             <Ucs:UcLifeIndex DataContext="{Binding Weather.Data.Index.Airconditioner}"/>
                             <Ucs:UcLifeIndex DataContext="{Binding Weather.Data.Index.Allergy}"/>
                             <Ucs:UcLifeIndex DataContext="{Binding Weather.Data.Index.Carwash}"/>
